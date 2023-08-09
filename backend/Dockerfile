@@ -1,7 +1,10 @@
+# Dockerfile
+
+# pull the official docker image
 FROM python:3.11
 
 # set work directory
-WORKDIR /app
+WORKDIR /backend
 
 # set env variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -13,4 +16,3 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . .
-
