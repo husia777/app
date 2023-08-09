@@ -1,13 +1,13 @@
 version: "3"
 services:
-  postgres:
-    image: postgres:14.7-alpine
-    ports:
-      - "5433:5433"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - ./.env.dev
+  # postgres:
+  #   image: postgres:14.7-alpine
+  #   ports:
+  #     - "5433:5433"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data/
+  #   env_file:
+  #     - ./.env.dev
 
   nginx:
     build: ./nginx
@@ -17,13 +17,9 @@ services:
       - app
   api:
     build: .
-    depends_on:
-      - postgres
-    command: uvicorn main:app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
     ports:
       - 8000:8000
-    env_file:
-      - ./.env.dev
-
-volumes:
-  postgres_data:
+    
+# volumes:
+#   postgres_data:
