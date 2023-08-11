@@ -1,3 +1,19 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { store } from "./Store/store";
 
-export const App: FunctionComponent = () => <div>App</div>;
+function App() {
+	return (
+		<Provider store={store}>
+			<BrowserRouter>
+				<Routes>
+					{/* <Route element={<MainLayout/>} path="/" /> */}
+					<Route />
+					<Route />
+				</Routes>
+			</BrowserRouter>
+		</Provider>
+	);
+}
+export default App
