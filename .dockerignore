@@ -9,3 +9,4 @@ venvz
 /.idea
 /venv
 /__pycache__
+node_modules
