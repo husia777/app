@@ -4,12 +4,13 @@ path;
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
 	mode: "development",
-	entry: "./frontend/src/app/index.tsx",
+	entry: "./src/app/index.tsx",
 	output: {
+		path: "/home/husein/Desktop/app/frontend/src",
 		filename: "index.js",
 	},
 	resolve: {
-		extensions: [".js", ".jsx", ".ts", ".tsx"],
+		extensions: [".js", ".jsx", ".tsx", ".ts", ".html", ".scss"],
 	},
 	module: {
 		rules: [

@@ -7,12 +7,17 @@
 	"plugins": ["@typescript-eslint", "react-hooks"],
 	"extends": [
 		"plugin:react/recommended",
-		"plugin:@typescript-eslint/recommended"
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/eslint-recommended"
 	],
 	"rules": {
+		"no-undef": "off",
+		"no-unused-vars": "off",
 		"react-hooks/rules-of-hooks": "error",
 		"react-hooks/exhaustive-deps": "warn",
 		"react/prop-types": "off",
+		"@typescript-eslint/no-unused-vars": "off",
 		"@typescript-eslint/no-var-requires": 0
 	},
 	"settings": {

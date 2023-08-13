@@ -4,7 +4,7 @@
 FROM python:3.11
 
 # set work directory
-WORKDIR /backend
+WORKDIR /app
 
 # set env variables
 ENV PYTHONDONTWRITEBYTECODE 1
