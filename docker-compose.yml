@@ -11,7 +11,6 @@ services:
       - 8000:8000
     volumes:
       - ./backend:/app
-    mem_limit: 300m
 
   frontend:
     hostname: frontend
@@ -23,7 +22,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    mem_limit: 300m
 
   nginx:
     hostname: nginx
@@ -32,9 +30,8 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - 81:80
+      - 80:80
     depends_on:
       - api
     volumes:
       - ./nginx:/etc/nginx/conf.d
-    mem_limit: 200m
