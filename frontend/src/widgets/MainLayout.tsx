@@ -1,6 +1,11 @@
 import React from "react";
 const MainLayout = () => {
-	return <h1>Hi</h1>;
+	return (
+		<div>
+			<h1 className="Main">Hi</h1>
+			<img src="../../../art/84523ec08abfd5e288df30534621b6ca.jpg" />
+		</div>
+	);
 };
 
 export { MainLayout };
