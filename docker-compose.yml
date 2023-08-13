@@ -22,7 +22,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-
   nginx:
     hostname: nginx
     container_name: nginx
