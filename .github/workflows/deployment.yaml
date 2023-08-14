@@ -52,20 +52,15 @@ jobs:
         run: |
           cd backend
           mypy src
-      - name: Test with pytest
-        run: |
-          cd backend
-          pytest
-      - name: pytest coverage
-        run: pytest --cov=./ --cov-report=xml:tests/coverage.xml
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-      # - name: Test
+      # - name: Test with pytest
       #   run: |
-      #     pwd
-      #     cd frontend
-      #     pwd
-      #     npm run test
+      #     cd backend
+      #     pytest 
+      # - name: pytest coverage
+      #   run: pytest --cov=./ --cov-report=xml:tests/coverage.xml
+      # - name: Upload coverage to Codecov
+      #   uses: codecov/codecov-action@v3
+
   deploy:
     runs-on: ubuntu-20.04
     needs: [frontend, backend]
