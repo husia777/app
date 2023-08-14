@@ -6,11 +6,12 @@ jobs:
     steps:
       - name: Get repository code
         uses: actions/checkout@v3
-      - name: Cache dependencies
+      - name: Cache NPM dependencies # (2)
         uses: actions/cache@v3
+        id: cache-primes
         with:
-          path: ~/.npm
-          key: node-modules-${{ hashFiles('**/package-lock.json') }}
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
         run: |
           cd frontend 
@@ -36,15 +37,12 @@ jobs:
     steps:
       - name: Get repository code
         uses: actions/checkout@v3
-      # - name: Cache dependencies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: ~/backend/venv
-      #     key: venv-${{ hashFiles('**/backend/venv') }}
+
       - name: Set up Python 3.11
         uses: actions/setup-python@v3
         with:
           python-version: "3.11"
+          cache: "pip"
       - name: Install dependencies
         run: |
           cd backend
@@ -52,14 +50,16 @@ jobs:
           pip install -r requirements.txt
       - name: Lint
         run: |
-          pip install black pylint mypy
-          black $(git ls-files '*.py')
-          pylint  $(git ls-files '*.py')
-          mypy  $(git ls-files '*.py')
+          cd backend
+          pylint src
       - name: Test with pytest
         run: |
+          cd backend
           pytest
-
+      - name: pytest coverage
+        run: pytest --cov=./ --cov-report=xml:tests/coverage.xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
       # - name: Test
       #   run: |
       #     pwd
