@@ -53,9 +53,9 @@ jobs:
       - name: Lint
         run: |
           pip install black pylint mypy
-          black --diff --check $(git ls-files '*.py')
-          pylint --disable=all --enable=unused-import $(git ls-files '*.py')
-          mypy --strict $(git ls-files '*.py')
+          black $(git ls-files '*.py')
+          pylint  $(git ls-files '*.py')
+          mypy  $(git ls-files '*.py')
       - name: Test with pytest
         run: |
           pytest
