@@ -4,8 +4,11 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"build": "react-scripts build ",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"lint": "npx eslint ./src"
 	},
 	"keywords": [],
 	"author": "",
