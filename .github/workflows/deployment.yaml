@@ -27,14 +27,38 @@ jobs:
       #     pwd
       #     npm run test
 
-      - name: Build application
-        run: |
-          cd frontend
-          npm run build -y
+      # - name: Build application
+      #   run: |
+      #     cd frontend
+      #     npm run build -y
   backend:
     runs-on: ubuntu-20.04
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/venv
+          key: venv-${{ hashFiles('**/venv') }}
+      - name: Install dependencies
+        run: |
+          cd backend: 
+          source venv/bin/activate 
+          pip install -r requirements.txt
+      - name: Lint application
+        run: |
+          cd backend:
+
+      # - name: Test
+      #   run: |
+      #     pwd
+      #     cd frontend
+      #     pwd
+      #     npm run test
   deploy:
     runs-on: ubuntu-20.04
+    needs: [frontend, backend]
     steps:
       - name: clone files to server
         uses: appleboy/scp-action@master
@@ -43,7 +67,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           source: "*"
-          target: "todo"
+          target: "app"
           strip_components: 1
       - name: run docker-compose
         uses: appleboy/ssh-action@master
