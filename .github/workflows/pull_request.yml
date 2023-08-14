@@ -1,5 +1,5 @@
 name: Print Pull Request Context
-on: workflow_dispatch
+on: [workflow_dispatch, push]
 jobs:
   print:
     runs-on: ubuntu-22.04
