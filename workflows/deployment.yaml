@@ -1,8 +1,24 @@
 name: Build and deploy action
 on: [push]
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-22.04
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: |
+          cd frontend 
+          npm ci
+      # - name: Test
+      #   run: |
+      #     pwd
+      #     cd frontend
+      #     pwd
+      #     npm run test
+  lint:
+    runs-on: ubuntu-22.04
+    needs: test
     steps:
       - name: Get repository code
         uses: actions/checkout@v3
@@ -15,13 +31,10 @@ jobs:
           cd frontend
           npm run lint
 
-      # - name: Test
-      #   run: |
-      #     pwd
-      #     cd frontend
-      #     pwd
-      #     npm run test
-
+  build:
+    runs-on: ubuntu-22.04
+    needs: lint
+    steps:
       - name: Build application
         run: |
           cd frontend
