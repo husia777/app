@@ -51,7 +51,7 @@ jobs:
       - name: Lint
         run: |
           cd backend
-          pylint src
+          mypy src
       - name: Test with pytest
         run: |
           cd backend

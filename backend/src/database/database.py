@@ -1,14 +1,14 @@
 
-import datetime
+from datetime import datetime
 from sqlalchemy import JSON, TIMESTAMP, Integer, String
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.ext.asyncio import create_async_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase, mapped_column
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.orm import DeclarativeBase, mapped_column
 from config import SQLALCHEMY_DATABASE_URL
 
 
-engine = create_async_engine(SQLALCHEMY_DATABASE_URL, echo=True, future=True)
-AsyncSessionLocal = sessionmaker(
+engine = create_async_engine(str(SQLALCHEMY_DATABASE_URL), echo=True)
+AsyncSessionLocal = async_sessionmaker(
     engine, class_=AsyncSession, expire_on_commit=False)
 
 # Базовая настройка
@@ -18,12 +18,12 @@ class Base(DeclarativeBase):
     pass
 
 
-async def get_session() -> AsyncSession:
+async def get_session():
     session = AsyncSession()
     try:
         yield session
     finally:
-        session.close()
+        await session.close()
 
 
 class User(Base):
