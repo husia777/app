@@ -39,7 +39,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/venv
+          path: ~/backend/venv
           key: venv-${{ hashFiles('**/venv') }}
       - name: Install dependencies
         run: |
