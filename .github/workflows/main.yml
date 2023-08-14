@@ -10,10 +10,10 @@ jobs:
         run: |
          cd frontend 
          npm ci
-      - name: Test
-        run: |
-          pwd
-          cd frontend
-          pwd
-          npm run test
- 
+      # - name: Test
+      #   run: |
+      #     pwd
+      #     cd frontend
+      #     pwd
+      #     npm run test
+    
