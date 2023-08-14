@@ -36,11 +36,11 @@ jobs:
     steps:
       - name: Get repository code
         uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/backend/venv
-          key: venv-${{ hashFiles('**/backend/venv') }}
+      # - name: Cache dependencies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: ~/backend/venv
+      #     key: venv-${{ hashFiles('**/backend/venv') }}
       - name: Set up Python 3.11
         uses: actions/setup-python@v3
         with:
