@@ -17,9 +17,9 @@ jobs:
           cd frontend
           pwd
           cd ..
-          cd ..
           pwd
-          cd .. pwd 
+          cd .. 
+          pwd 
           npm ci
       - name: Lint application
         run: |
