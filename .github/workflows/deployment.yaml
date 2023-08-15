@@ -55,7 +55,7 @@ jobs:
       # - name: Test with pytest
       #   run: |
       #     cd backend
-      #     pytest 
+      #     pytest
       # - name: pytest coverage
       #   run: pytest --cov=./ --cov-report=xml:tests/coverage.xml
       # - name: Upload coverage to Codecov
@@ -71,8 +71,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "*"
-          target: "app"
+          source: "./*"
+          target: "./app"
           strip_components: 1
       - name: run docker-compose
         uses: appleboy/scp-action@v0.1.4
