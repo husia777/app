@@ -81,6 +81,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: 22
-          script: |
-            git pull
-            docker compose up -d
+        run: |
+          cd app
+          git pull
+          docker compose up --build
