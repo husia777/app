@@ -80,6 +80,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          run: |
+          script: |
             git pull
             docker compose up -d
