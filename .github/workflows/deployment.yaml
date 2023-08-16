@@ -82,4 +82,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd app
-            docker compose up --build
+            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose up -d
