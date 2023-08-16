@@ -65,15 +65,15 @@ jobs:
     runs-on: ubuntu-20.04
     needs: [frontend, backend]
     steps:
-      - name: clone files to server
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          source: "*"
-          target: "app"
-          strip_components: 1
+      # - name: clone files to server
+      #   uses: appleboy/scp-action@v0.1.4
+      #   with:
+      #     host: ${{ secrets.HOST }}
+      #     username: ${{ secrets.SSH_USERNAME }}
+      #     password: ${{ secrets.SSH_PASSWORD }}
+      #     source: "*"
+      #     target: "app"
+      #     strip_components: 1
       - name: run app
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -82,4 +82,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
             cd app
-            echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose up -d
+            docker compose up --build
