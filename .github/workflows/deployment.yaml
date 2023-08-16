@@ -81,5 +81,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
+            pwd
             cd app
+            pwd
             echo ${{ secrets.SSH_PASSWORD }} | docker-compose up -d
