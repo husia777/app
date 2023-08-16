@@ -82,4 +82,4 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           run: |
             git pull
-            docker-compose up -d
+            docker compose up -d
