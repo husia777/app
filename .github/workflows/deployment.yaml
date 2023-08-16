@@ -71,15 +71,14 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "./*"
-          target: "./app"
+          source: "."
+          target: "app"
           strip_components: 1
-      - name: run docker-compose
+      - name: copy file via ssh password
         uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd app
             echo ${{ secrets.SSH_PASSWORD }} | sudo -S docker-compose up -d
