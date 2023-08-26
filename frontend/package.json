@@ -4,15 +4,10 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"pre start": "npx webpack",
-		"start": "react-scripts start",
-		"pre_build": "npx webpack",
-		"build": "react-scripts build",
-		"pre_test": "npx webpack",
+		"start": "webpack-dev-server --mode development",
+		"build": "webpack-dev-server --mode development",
 		"test": "react-scripts test",
-		"pre eject": "npx webpack",
 		"eject": "react-scripts eject",
-		"pre lint": "npx webpack",
 		"lint": "npx eslint ./src"
 	},
 	"keywords": [],
@@ -53,7 +48,9 @@
 	"dependencies": {
 		"-": "^0.0.1",
 		"@reduxjs/toolkit": "^1.9.5",
+		"@types/node-sass": "^4.11.3",
 		"compose-function": "^3.0.3",
+		"css-modules-typescript-loader": "^4.0.1",
 		"normalize.css": "^8.0.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",

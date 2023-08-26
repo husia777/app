@@ -12,6 +12,7 @@
 		"plugin:@typescript-eslint/eslint-recommended"
 	],
 	"rules": {
+		"no-useless-escape": "off",
 		"no-undef": "off",
 		"no-unused-vars": "off",
 		"react-hooks/rules-of-hooks": "error",

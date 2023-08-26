@@ -1,0 +1,27 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+}
+.active {
+	text-decoration: underline;
+	color: white;
+}
+.header__logo {
+	margin-top: 15px;
+	margin-left: 15px;
+	&:hover {
+		cursor: pointer;
+	}
+}
+.header__navlink {
+	text-decoration: none;
+	margin-left: 10px;
+	font-size: 1.5rem;
+	&:last-child {
+		margin-right: 10px;
+	}
+}
+.header__button {
+	margin-right: 100px;
+	background-color: red;
+}
