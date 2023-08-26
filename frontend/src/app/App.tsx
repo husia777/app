@@ -2,7 +2,6 @@ import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./Store/store";
 import { RouterProvider } from "react-router";
-import { MainLayout } from "../widgets";
 import { appRouter } from "./app-route";
 function App() {
 	return (
