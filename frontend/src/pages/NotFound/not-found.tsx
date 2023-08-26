@@ -6,7 +6,7 @@ export const NotFound = () => {
 			<img
 				className={styles.logo}
 				src={"../../assets/img/404.png"}
-				alt="not-found background img"
+				alt="not found background img"
 			/>
 		</div>
 	);
