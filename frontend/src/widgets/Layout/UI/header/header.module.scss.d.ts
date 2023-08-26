@@ -3,7 +3,6 @@
 interface CssExports {
   'active': string;
   'header': string;
-  'header__button': string;
   'header__logo': string;
   'header__navlink': string;
 }

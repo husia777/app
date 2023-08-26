@@ -3,6 +3,7 @@ import styles from "./header.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../../../assets/logo/logo.png";
 import { Button } from "../../../../shared/ui";
+
 export const Header: React.FC = () => {
 	const navigate = useNavigate();
 	const handleClick = () => {
@@ -17,7 +18,7 @@ export const Header: React.FC = () => {
 				alt=""
 			/>
 			<nav>
-				<NavLink  className={styles.header__navlink} to="/">
+				<NavLink className={styles.header__navlink} to="/">
 					Main
 				</NavLink>
 				<NavLink className={styles.header__navlink} to="/about">
@@ -26,7 +27,11 @@ export const Header: React.FC = () => {
 				<NavLink className={styles.header__navlink} to="/me">
 					Me
 				</NavLink>
-				<Button  className={styles.header__button} content="Регистрация" />
+				<Button
+
+					
+					content="Регистрация"
+				/>
 			</nav>
 		</header>
 	);
