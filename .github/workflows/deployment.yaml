@@ -1,88 +1,88 @@
-name: Build and deploy action
-on: [push]
-jobs:
-  frontend:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Get repository code
-        uses: actions/checkout@v3
-      - name: Cache NPM dependencies # (2)
-        uses: actions/cache@v3
-        id: cache-primes
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-      - name: Install dependencies
-        run: |
-          cd frontend 
-          npm ci
-      - name: Lint application
-        run: |
-          cd frontend
-          npm run lint
+# name: Build and deploy action
+# on: [push]
+# jobs:
+#   frontend:
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - name: Get repository code
+#         uses: actions/checkout@v3
+#       - name: Cache NPM dependencies # (2)
+#         uses: actions/cache@v3
+#         id: cache-primes
+#         with:
+#           path: node_modules
+#           key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+#       - name: Install dependencies
+#         run: |
+#           cd frontend 
+#           npm ci
+#       - name: Lint application
+#         run: |
+#           cd frontend
+#           npm run lint
 
-      # - name: Test
-      #   run: |
-      #     pwd
-      #     cd frontend
-      #     pwd
-      #     npm run test
+#       # - name: Test
+#       #   run: |
+#       #     pwd
+#       #     cd frontend
+#       #     pwd
+#       #     npm run test
 
-      # - name: Build application
-      #   run: |
-      #     cd frontend
-      #     npm run build -y
-  backend:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Get repository code
-        uses: actions/checkout@v3
+#       # - name: Build application
+#       #   run: |
+#       #     cd frontend
+#       #     npm run build -y
+#   backend:
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - name: Get repository code
+#         uses: actions/checkout@v3
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v3
-        with:
-          python-version: "3.11"
-          cache: "pip"
-      - name: Install dependencies
-        run: |
-          cd backend
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Lint
-        run: |
-          cd backend
-          mypy src
-      # - name: Test with pytest
-      #   run: |
-      #     cd backend
-      #     pytest
-      # - name: pytest coverage
-      #   run: pytest --cov=./ --cov-report=xml:tests/coverage.xml
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v3
+#       - name: Set up Python 3.11
+#         uses: actions/setup-python@v3
+#         with:
+#           python-version: "3.11"
+#           cache: "pip"
+#       - name: Install dependencies
+#         run: |
+#           cd backend
+#           python -m pip install --upgrade pip
+#           pip install -r requirements.txt
+#       - name: Lint
+#         run: |
+#           cd backend
+#           mypy src
+#       # - name: Test with pytest
+#       #   run: |
+#       #     cd backend
+#       #     pytest
+#       # - name: pytest coverage
+#       #   run: pytest --cov=./ --cov-report=xml:tests/coverage.xml
+#       # - name: Upload coverage to Codecov
+#       #   uses: codecov/codecov-action@v3
 
-  deploy:
-    runs-on: ubuntu-20.04
-    needs: [frontend, backend]
-    steps:
-      # - name: clone files to server
-      #   uses: appleboy/scp-action@v0.1.4
-      #   with:
-      #     host: ${{ secrets.HOST }}
-      #     username: ${{ secrets.SSH_USERNAME }}
-      #     password: ${{ secrets.SSH_PASSWORD }}
-      #     source: "*"
-      #     target: "app"
-      #     strip_components: 1
-      - name: run app
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: 22
-          script: |
-            cd app
-            git pull 
-            docker-compose down 
-            docker-compose up --build -d
+#   deploy:
+#     runs-on: ubuntu-20.04
+#     needs: [frontend, backend]
+#     steps:
+#       # - name: clone files to server
+#       #   uses: appleboy/scp-action@v0.1.4
+#       #   with:
+#       #     host: ${{ secrets.HOST }}
+#       #     username: ${{ secrets.SSH_USERNAME }}
+#       #     password: ${{ secrets.SSH_PASSWORD }}
+#       #     source: "*"
+#       #     target: "app"
+#       #     strip_components: 1
+#       - name: run app
+#         uses: appleboy/ssh-action@v1.0.0
+#         with:
+#           host: ${{ secrets.HOST }}
+#           username: ${{ secrets.SSH_USERNAME }}
+#           password: ${{ secrets.SSH_PASSWORD }}
+#           port: 22
+#           script: |
+#             cd app
+#             git pull 
+#             docker-compose down 
+#             docker-compose up --build -d

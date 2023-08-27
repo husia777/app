@@ -27,11 +27,7 @@ export const Header: React.FC = () => {
 				<NavLink className={styles.header__navlink} to="/me">
 					Me
 				</NavLink>
-				<Button
-
-					
-					content="Регистрация"
-				/>
+				<Button onClick={() => navigate("/login")} content="Регистрация" />
 			</nav>
 		</header>
 	);
