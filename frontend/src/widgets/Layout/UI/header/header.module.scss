@@ -1,3 +1,4 @@
+@import "../../../../shared//ui/button/button.module.scss";
 .header {
 	display: flex;
 	justify-content: space-between;
@@ -7,6 +8,8 @@
 	color: white;
 }
 .header__logo {
+	width: 3rem;
+	height: 3rem;
 	margin-top: 15px;
 	margin-left: 15px;
 	&:hover {
@@ -15,10 +18,20 @@
 }
 .header__navlink {
 	text-decoration: none;
-	margin-left: 10px;
+	margin-left: 2rem;
 	font-size: 1.5rem;
-	&:last-child {
-		margin-right: 10px;
-	}
 }
 
+.header__button {
+	@extend .button;
+	margin: 2rem;
+	font-size: 1.1rem;
+	&:hover {
+		background-color: #1a62ff;
+		cursor: pointer;
+	}
+	&:active {
+		scale: 1.1;
+		transition: 1ms;
+	}
+}

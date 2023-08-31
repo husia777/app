@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./header.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../../../assets/logo/logo.png";
+import logo from "../../../../assets/logo/logo.jpg";
 import { Button } from "../../../../shared/ui";
-
+import cx from "classnames";
 export const Header: React.FC = () => {
 	const navigate = useNavigate();
 	const handleClick = () => {
@@ -27,7 +27,12 @@ export const Header: React.FC = () => {
 				<NavLink className={styles.header__navlink} to="/me">
 					Me
 				</NavLink>
-				<Button onClick={() => navigate("/login")} content="Регистрация" />
+				<Button
+					type="button"
+					onClick={() => navigate("/login")}
+					className={cx(styles.header__button, styles.header__navlink)}
+					content="Регистрация"
+				/>
 			</nav>
 		</header>
 	);

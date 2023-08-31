@@ -2,7 +2,9 @@
 // Please do not change this file!
 interface CssExports {
   'active': string;
+  'button': string;
   'header': string;
+  'header__button': string;
   'header__logo': string;
   'header__navlink': string;
 }

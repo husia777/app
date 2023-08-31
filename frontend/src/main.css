@@ -1,0 +1,180 @@
+/*!*******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/app/style/index.scss ***!
+  \*******************************************************************************************************************/
+body {
+  background-color: rgb(255, 255, 255);
+}
+/*!******************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/widgets/Layout/UI/footer/footer.module.scss ***!
+  \******************************************************************************************************************************************/
+.KLHJNScMNSxmJBuFauYK {
+  background-color: #07122b;
+  margin-top: 4.375rem;
+  padding-top: 10rem;
+  padding-bottom: 1rem;
+  flex-shrink: 0;
+}
+/*!******************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/widgets/Layout/UI/header/header.module.scss ***!
+  \******************************************************************************************************************************************/
+.hM1jfwOmO79yk_SSv6GN, .x7odNH43BDpviSMC571R {
+  background-color: #407bff;
+  display: inline-block;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  padding: 1.1rem;
+  border: none;
+  font-size: 1rem;
+}
+
+.u4vXXMfn9K0ALPh7nlHE {
+  display: flex;
+  justify-content: space-between;
+}
+
+.RktFjYOp9QB6xxujUYXE {
+  text-decoration: underline;
+  color: white;
+}
+
+.cvUn_1cu8F2I5Q12NozM {
+  margin-top: 15px;
+  margin-left: 15px;
+}
+.cvUn_1cu8F2I5Q12NozM:hover {
+  cursor: pointer;
+}
+
+.EEQEVJ7EeU5SGreqoU0y {
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+.x7odNH43BDpviSMC571R {
+  margin: 10px;
+  font-size: 1.1rem;
+}
+/*!***********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/RootPage/root-page.module.scss ***!
+  \***********************************************************************************************************************************/
+.QZoFZLBs166Rn6NWFoaR {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+/*!***********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/NotFound/not-found.module.scss ***!
+  \***********************************************************************************************************************************/
+.HdRhh5bNqZbELIefYiqC {
+  display: block;
+}
+
+.CyJKbppQgTYFFPiV_AU_ {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100%;
+  background: url(/8e2d7c466b9a296199ef.png);
+}
+/*!***********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/MainPage/main-page.module.scss ***!
+  \***********************************************************************************************************************************/
+.dJ2zTJ3pvrM3qQ4Kz3kA {
+  color: black;
+  flex: 1 0 auto;
+}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/pages/LoginPage/login-page.module.scss ***!
+  \*************************************************************************************************************************************/
+.GSCTUOHCfeYgzV7sq264 {
+  color: red;
+  font-size: 0, 5rem;
+  text-align: left;
+}
+
+.H6G14OkF4ubU1mSR02V5 {
+  margin-bottom: 20px;
+}
+/*!*******************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/features/auth/login/ui/login-form/login-form.module.scss ***!
+  \*******************************************************************************************************************************************************/
+.DNicS1wKTu2Dheonn6zK {
+  background-color: #407bff;
+  display: inline-block;
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  padding: 1.1rem;
+  border: none;
+  font-size: 1rem;
+}
+
+.hmLLhoPw4YZ1U8yP1SiW, body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.DNicS1wKTu2Dheonn6zK {
+  margin-top: 20px;
+  background-color: #1244af;
+}
+
+body {
+  text-align: center;
+}
+
+.NrJUSoHz9BPb2rZ_ixes {
+  background-color: #407bff;
+  display: inline-block;
+  margin-top: 300px;
+  border-radius: 20px;
+  padding: 120px;
+}
+
+label {
+  display: inline-block;
+  color: white;
+  margin-right: 10px;
+}
+
+input {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: none;
+}
+
+.CJMq43DWFvwIh0xXu3nv {
+  color: white;
+  font-family: sans-serif;
+  font-size: 35px;
+  font-weight: 600;
+  padding: 15px 20px;
+}

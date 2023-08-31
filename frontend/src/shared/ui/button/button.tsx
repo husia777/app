@@ -1,10 +1,18 @@
 import React from "react";
-import styles from "./button.module.scss";
 interface IButton {
-	onClick: () => void;
+	onClick?: () => void;
 	content: string;
 	className?: string;
+	type?: "button" | "submit" | "reset" | undefined;
 }
 export const Button: React.FC<IButton> = (props) => {
-	return <button onClick={props.onClick} className={styles.button}>{props.content}</button>;
+	return (
+		<button
+			type={props.type}
+			onClick={props.onClick}
+			className={props.className}
+		>
+			{props.content}
+		</button>
+	);
 };

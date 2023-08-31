@@ -1,4 +1,4 @@
-#!/home/husein/Desktop/pet_project/app/venv/bin/python3.11
+#!/home/husein/Desktop/app/backend/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys
