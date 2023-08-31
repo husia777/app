@@ -1,5 +1,5 @@
 const path = require("path");
-var BUILD_DIR = path.resolve(__dirname, "src/");
+var BUILD_DIR = path.resolve(__dirname, "./build/");
 var APP_DIR = path.resolve(__dirname, "src/app");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
 	mode: "development",
 	entry: APP_DIR + "/index.tsx",
 	output: {
-		publicPath: "/",
+		publicPath: "./build/",
 		path: BUILD_DIR,
 		filename: "index.js",
 	},
