@@ -1,6 +1,7 @@
 const path = require("path");
 var BUILD_DIR = path.resolve(__dirname, "build/");
 var APP_DIR = path.resolve(__dirname, "src/app");
+console.log(APP_DIR)
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
 	performance: {
@@ -16,7 +17,7 @@ module.exports = {
 		compress: true,
 		port: 3000,
 	},
-	mode: "development",
+	mode: "production",
 	entry: APP_DIR + "/index.tsx",
 	output: {
 		publicPath: BUILD_DIR,
