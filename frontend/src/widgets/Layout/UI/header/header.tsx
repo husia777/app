@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./header.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../../../0f3f44cdf875b2c829be.jpg";
+import logo from "../../../../assets/logo/logo.jpg";
 import { Button } from "../../../../shared/ui";
 import cx from "classnames";
 export const Header: React.FC = () => {
