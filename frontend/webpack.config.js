@@ -1,12 +1,16 @@
 const path = require("path");
-var BUILD_DIR = path.resolve(__dirname, "./build/");
+var BUILD_DIR = path.resolve(__dirname, "build/");
 var APP_DIR = path.resolve(__dirname, "src/app");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
+	performance: {
+		maxEntrypointSize: 512000,
+		maxAssetSize: 512000,
+	},
 	devServer: {
 		historyApiFallback: true,
 		static: {
-			directory: path.join(__dirname, "src"),
+			directory: path.join(__dirname, "build"),
 			watch: true,
 		},
 		compress: true,
@@ -15,7 +19,7 @@ module.exports = {
 	mode: "development",
 	entry: APP_DIR + "/index.tsx",
 	output: {
-		publicPath: "./build/",
+		publicPath: BUILD_DIR,
 		path: BUILD_DIR,
 		filename: "index.js",
 	},
