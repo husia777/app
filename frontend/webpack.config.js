@@ -1,9 +1,10 @@
 const path = require("path");
 var BUILD_DIR = path.resolve(__dirname, "build/");
 var APP_DIR = path.resolve(__dirname, "src/app");
-console.log(APP_DIR)
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-module.exports = {
+const { merge } = require("webpack-merge");
+const common = require("./webpack.config.js");
+module.exports = merge(common, {
 	performance: {
 		maxEntrypointSize: 512000,
 		maxAssetSize: 512000,
@@ -11,7 +12,7 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true,
 		static: {
-			directory: path.join(__dirname, "build"),
+			directory: BUILD_DIR,
 			watch: true,
 		},
 		compress: true,
@@ -58,7 +59,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: "./public/index.html",
-			favicon: "./build/favicon.ico",
+			favicon: "./src/assets/icon/favicon.ico",
 		}),
 	],
-};
+});

@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack-dev-server --mode production",
+		"start": "webpack-dev-server --open --config=webpack.config.js",
 		"build": "webpack --mode production",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
