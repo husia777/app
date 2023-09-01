@@ -13,7 +13,7 @@ module.exports = merge(common, {
 	devServer: {
 		historyApiFallback: true,
 		static: {
-			directory: BUILD_DIR,
+			directory: '../build',
 			watch: true,
 		},
 		compress: true,
@@ -22,7 +22,7 @@ module.exports = merge(common, {
 	mode: "production",
 	entry: APP_DIR + "/index.tsx",
 	output: {
-		publicPath: BUILD_DIR,
+		publicPath: '/',
 		path: BUILD_DIR,
 		filename: "index.js",
 	},
