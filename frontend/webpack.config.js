@@ -1,5 +1,5 @@
 const path = require("path");
-var BUILD_DIR = path.resolve(__dirname, "../build/");
+var BUILD_DIR = path.resolve(__dirname, "src/build");
 console.log(BUILD_DIR)
 var APP_DIR = path.resolve(__dirname, "src/app");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
