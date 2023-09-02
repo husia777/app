@@ -43,7 +43,7 @@ def run_migrations_offline() -> None:
 
     """
     context.configure(
-        url=settings.sqlalchemy_database_url,
+        url=settings.sqlalchemy_database_urlurl(https://huseinnaimov.com/4bb1da333905a14fc4f5.png) no-repeat center,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},

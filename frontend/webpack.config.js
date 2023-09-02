@@ -11,6 +11,7 @@ module.exports = merge(common, {
 		maxAssetSize: 512000,
 	},
 	devServer: {
+		watchFiles: ['./build/'],
 		historyApiFallback: true,
 		static: {
 			directory: './build/',
