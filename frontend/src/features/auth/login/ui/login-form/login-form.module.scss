@@ -22,12 +22,31 @@ body {
 }
 .form-wrapper {
 	background-color: #407bff;
-	width: 30%;
-	padding: 9%;
+	width: 80%;
+	padding: 5%;
 	height: 40%;
 	display: inline-block;
-	margin-top: 5%;
+	margin: 5%;
+	margin-top: 40%;
 	border-radius: 20px;
+	@media (min-width: 768px) {
+		width: 40%;
+		padding: 10%;
+		height: 40%;
+		display: inline-block;
+		margin: 20%;
+		margin-bottom: 20px;
+		border-radius: 20px;
+	}
+	@media (min-width: 1400px) {
+		width: 30%;
+		padding: 10%;
+		height: 40%;
+		display: inline-block;
+		margin: 5%;
+		margin-bottom: 20px;
+		border-radius: 20px;
+	}
 }
 .form {
 	color: red;

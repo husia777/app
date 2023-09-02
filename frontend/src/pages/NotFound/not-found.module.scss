@@ -1,26 +1,22 @@
 .not-found {
-	display: block;
+	// display: block;
 	color: red;
 }
 
 .background {
-	background: url("../../assets/img/404-mobile.png") no-repeat;
-	width: 400px;
-	height: 340px;
-	margin: 0 auto;
+	background: url("../../assets/img/404-mobile.png") no-repeat center center;
+	width: 100%;
+	height: 360px;
 	@media (min-width: 768px) {
-		background: url("../../assets/img/404-tablets.png") no-repeat;
+		background: url("../../assets/img/404-tablets.png") no-repeat center center;
 		width: 768px;
-		height: 768px;
-	}
-	@media (min-width: 1024px) {
-		background: url("../../assets/img/404-min-laptop.png") no-repeat;
-		width: 1024px;
+		margin: 0 auto;
 		height: 1024px;
 	}
 	@media (min-width: 1400px) {
-		background: url("../../assets/img/404-laptop.png") no-repeat;
-		width: 1200px;
-		height: 1200px;
+		background: url("../../assets/img/404-laptop.png") no-repeat center center;
+		width: 100%;
+		height: 1000px;
+		margin: 0 auto;
 	}
 }

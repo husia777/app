@@ -10,7 +10,8 @@ from src.config import settings
 
 
 engine = create_async_engine(
-    settings.sqlalchemy_database_url, class_=AsyncSession, echo=True)
+    settings.sqlalchemy_database_url, echo=True, future=True, poolclass=NullPool,
+)
 AsyncSessionLocal = async_sessionmaker(
     engine, class_=AsyncSession, expire_on_commit=False)
 
@@ -24,6 +25,7 @@ class Base(DeclarativeBase):
 async def get_session() -> AsyncSession:
     async with AsyncSessionLocal() as session:
         yield session
+
 
 class User(Base):
     __tablename__ = 'users'
