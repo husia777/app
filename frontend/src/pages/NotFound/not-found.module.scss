@@ -4,19 +4,24 @@
 }
 
 .background {
-	background: url("../../assets/img/404-mobile.png") no-repeat center center;
+	background: url("../../assets/img/404-mobile.png") no-repeat;
+	background-position: center center;
 	width: 100%;
 	height: 360px;
 	margin: 0 auto;
 
 	@media (min-width: 768px) {
-		background: url("../../assets/img/404-tablets.png") no-repeat center center;
+		background: url("../../assets/img/404-tablets.png") no-repeat;
+		background-position: center center;
+
 		width: 768px;
 		margin: 0 auto;
 		height: 1024px;
 	}
 	@media (min-width: 1400px) {
-		background: url("../../assets/img/404-laptop.png") no-repeat center center;
+		background: url("../../assets/img/404-laptop.png") no-repeat;
+		background-position: center center;
+
 		width: 100%;
 		height: 920px;
 		margin: 0 auto;
