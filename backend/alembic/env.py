@@ -2,6 +2,7 @@ import asyncio
 from logging.config import fileConfig
 from src.config import settings
 from src.database.database import Base
+from src.auth.models import User, RefreshToken
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
@@ -43,7 +44,7 @@ def run_migrations_offline() -> None:
 
     """
     context.configure(
-        url=settings.sqlalchemy_database_urlurl(https://huseinnaimov.com/4bb1da333905a14fc4f5.png) no-repeat center,
+        url=settings.sqlalchemy_database_url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
