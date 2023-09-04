@@ -1,7 +1,6 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, Response
 from auth.schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin
 from auth.service import AuthService, get_current_user
-from fastapi.responses import Response
 from starlette.status import HTTP_204_NO_CONTENT
 router = APIRouter(
     prefix='',
@@ -18,12 +17,21 @@ async def sign_up(
 
 
 @router.post('/login/')
-async def sign_in(
-        auth_data: UserLogin = Depends(),
-        auth_service: AuthService = Depends()):
-    return await auth_service.authenticate_user(
+async def sign_in(response: Response,
+                  auth_data: UserLogin,
+                  auth_service: AuthService = Depends()):
+    data = await auth_service.authenticate_user(
         auth_data.username,
         auth_data.password)
+    refresh_token = data.get('refresh_token')
+    response.set_cookie(
+        key='refreshToken',
+        value=f"Bearer {refresh_token}", httponly=True,
+        secure=True,
+        max_age=30 * 24 * 60 * 60,
+
+    )
+    return data
 
 
 @router.get("/logout/")

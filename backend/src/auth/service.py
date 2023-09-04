@@ -4,7 +4,7 @@ from database.database import get_session
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.security import OAuth2PasswordBearer
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Response
 from fastapi.encoders import jsonable_encoder
 
 from auth import schemas, models
@@ -106,9 +106,9 @@ class AuthService:
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail='Пароли не совпадают',
                 headers={'WWW-Authenticate': 'Bearer'})
-        if  check_username.scalar():
+        if check_username.scalar():
             raise exception('Пользователь с таким логином  уже существует')
-        if  check_email.scalar():
+        if check_email.scalar():
             raise exception('Пользователь с таким email  уже существует')
 
         user = models.User(
@@ -137,6 +137,8 @@ class AuthService:
         refresh_token_check = await self.session.execute(
             select(models.RefreshToken).where(models.RefreshToken.user_id == user.id))
 
+
+
         if refresh_token_check.first():
             await self.session.execute(delete(models.RefreshToken).where(models.RefreshToken.user_id == user.id))
             await self.session.commit()
@@ -149,10 +151,6 @@ class AuthService:
         refresh_token_db_data = models.RefreshToken(**refresh_token_dict)
         self.session.add(refresh_token_db_data)
         await self.session.commit()
-        print()
-        print()
-        print()
-        print()
 
         return {
             "access_token": access_token,
@@ -161,7 +159,7 @@ class AuthService:
             "message": "Авторизация прошла успешно",
             "status": status.HTTP_200_OK
         }
-
+ 
     async def change_user(self, data_user: schemas.UserUpdate, user: schemas.User) -> schemas.BaseUser:
         user = await self.session.execute(select(models.User).where(models.User.username == user.username))
         user = user.scalar()
