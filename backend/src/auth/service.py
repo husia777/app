@@ -3,20 +3,26 @@ from config import settings
 from database.database import get_session
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi.security import OAuth2PasswordBearer
-from fastapi import Depends, HTTPException, status, Response
-from fastapi.encoders import jsonable_encoder
-
+from fastapi import Depends, HTTPException, status, Response, Header
 from auth import schemas, models
 from passlib.hash import bcrypt
 from jose import jwt, JWTError
 from pydantic import ValidationError
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl='/login/')
+
+async def api_key_header(authorization: str = Header(...)) -> str:
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(
+            status_code=401, detail="Invalid authorization header")
+    token = authorization.split(" ")[1]
+    return token
 
 
-def get_current_user(token: str = Depends(oauth2_scheme)) -> schemas.User:
-    return AuthService.verify_token(token)
+async def get_current_user(token: str = Depends(api_key_header), session: AsyncSession = Depends(get_session)) -> schemas.User:
+    token_data = AuthService.verify_token(token)
+    user = await session.execute(select(models.User).where(models.User.id == int(token_data)))
+    user = user.scalar()
+    return user
 
 
 class AuthService:
@@ -32,30 +38,6 @@ class AuthService:
         return bcrypt.hash(password)
 
     @classmethod
-    def verify_token(cls, token: str) -> schemas.User:
-
-        exception = HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            headers={'WWW-Authenticate': 'Bearer'},
-            detail='Не удалось подтвердить учетные данные')
-        try:  	# Достаем данные из токена
-            payload = jwt.decode(
-                token,
-                settings.jwt_secret,
-                algorithms=[settings.jwt_algorithm])
-        except JWTError:
-            raise exception from None
-
-        user_data = payload.get('sub')
-
-        try:
-            user = schemas.User.model_validate(user_data)
-        except ValidationError:
-            raise exception from None
-
-        return user
-
-    @classmethod
     def create_refresh_token(cls, user: models.User):
         user_data = schemas.User.model_validate(user)
         now = datetime.utcnow()
@@ -63,7 +45,7 @@ class AuthService:
             'iat': now,
             'nbf': now,
             'exp': now + timedelta(seconds=settings.jwt_expires_s),
-            'sub': str(user_data.id),
+            'sub': user_data.id,
         }
 
         encoded_jwt = jwt.encode(
@@ -92,6 +74,26 @@ class AuthService:
     def get_new_access_token(cls, token: str):
         token_data = cls.verify_token(token)
         return cls.create_token(token_data)
+
+    @classmethod
+    def verify_token(cls, token):
+
+        exception = HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            headers={'WWW-Authenticate': 'Bearer'},
+            detail='Не удалось подтвердить учетные данные')
+        print(111111111111111111111111111111111111111)
+
+        try:  	# Достаем данные из токена
+            payload = jwt.decode(
+                token,
+                settings.jwt_secret,
+                algorithms=[settings.jwt_algorithm])
+        except JWTError:
+            raise exception from None
+        user_data = payload.get('sub')
+
+        return user_data
 
     async def register_new_user(self, user_data: schemas.UserCreate,) -> schemas.BaseUser:
         def exception(detail):
@@ -137,8 +139,6 @@ class AuthService:
         refresh_token_check = await self.session.execute(
             select(models.RefreshToken).where(models.RefreshToken.user_id == user.id))
 
-
-
         if refresh_token_check.first():
             await self.session.execute(delete(models.RefreshToken).where(models.RefreshToken.user_id == user.id))
             await self.session.commit()
@@ -151,15 +151,14 @@ class AuthService:
         refresh_token_db_data = models.RefreshToken(**refresh_token_dict)
         self.session.add(refresh_token_db_data)
         await self.session.commit()
-
         return {
             "access_token": access_token,
-            "token_type": "Bearer",
+            "token_type": "bearer",
             "refresh_token": refresh_token,
             "message": "Авторизация прошла успешно",
             "status": status.HTTP_200_OK
         }
- 
+
     async def change_user(self, data_user: schemas.UserUpdate, user: schemas.User) -> schemas.BaseUser:
         user = await self.session.execute(select(models.User).where(models.User.username == user.username))
         user = user.scalar()
