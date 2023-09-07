@@ -1,1 +1,2 @@
-export {RegisterForm} from './register/ui/register-form'
+export { RegisterForm } from "./register";
+export { LoginForm } from "./login";
