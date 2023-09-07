@@ -82,7 +82,6 @@ class AuthService:
             status_code=status.HTTP_401_UNAUTHORIZED,
             headers={'WWW-Authenticate': 'Bearer'},
             detail='Не удалось подтвердить учетные данные')
-        print(111111111111111111111111111111111111111)
 
         try:  	# Достаем данные из токена
             payload = jwt.decode(

@@ -4,28 +4,30 @@
 	justify-content: space-between;
 }
 .active {
-	text-decoration: underline;
-	color: white;
+	border-bottom: #1a62ff;
 }
 .header__logo {
 	width: 3rem;
 	height: 3rem;
-	margin-top: 15px;
-	margin-left: 15px;
+	margin-top: 2%;
+	margin-left: 2%;
 	&:hover {
 		cursor: pointer;
 	}
 }
 .header__navlink {
 	text-decoration: none;
-	margin-left: 2rem;
+	margin-left: 32px;
 	font-size: 1.5rem;
 }
 
 .header__button {
 	@extend .button;
-	margin: 2rem;
+	margin: 1rem 1rem 0 2rem;
 	font-size: 1.1rem;
+	&:last-child {
+		margin: 1rem 1rem 0 1rem;
+	}
 	&:hover {
 		background-color: #1a62ff;
 		cursor: pointer;
@@ -33,5 +35,8 @@
 	&:active {
 		scale: 1.1;
 		transition: 1ms;
+	}
+	&-color-white {
+		@extend .header__button;
 	}
 }

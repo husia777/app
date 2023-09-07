@@ -30,6 +30,15 @@ export const Header: React.FC = () => {
 				<Button
 					type="button"
 					onClick={() => navigate("/login")}
+					className={cx(
+						styles["header__button-color-white"],
+						styles.header__navlink
+					)}
+					content="Вход"
+				/>
+				<Button
+					type="button"
+					onClick={() => navigate("/register")}
 					className={cx(styles.header__button, styles.header__navlink)}
 					content="Регистрация"
 				/>
