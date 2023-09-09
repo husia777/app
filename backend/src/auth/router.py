@@ -7,7 +7,7 @@ router = APIRouter(
 )
 
 
-@router.post('/signup/', response_model=BaseUser, status_code=status.HTTP_201_CREATED)
+@router.post('/register/', response_model=BaseUser, status_code=status.HTTP_201_CREATED)
 async def sign_up(
         user_data: UserCreate,
         auth_service: AuthService = Depends(),

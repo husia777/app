@@ -13,17 +13,6 @@ class TokenData(BaseModel):
 class UserUpdate(BaseUser):
     password: str
     name: str
-    surname: str
-
-
-class BaseUser(BaseUser):
-    username: str
-    model_config = ConfigDict(from_attributes=True)
-
-
-class UserUpdate(BaseUser):
-    password: str
-    name: str
 
 
 class UserCreate(BaseUser):

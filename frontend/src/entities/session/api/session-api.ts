@@ -1,4 +1,4 @@
-import { $api } from "shared/ui/api";
+import { $api } from "../../../shared/ui/api";
 import { AxiosResponse } from "axios";
 import { AuthResponse } from "../model/types";
 
@@ -9,8 +9,18 @@ export class AuthService {
 	): Promise<AxiosResponse> {
 		return $api.post<AuthResponse>("/login", { username, password });
 	}
-	static async registration(username: string, password: string) {
-		return $api.post("/registration", { username, password });
+	static async registration(
+		username: string,
+		email: string,
+		password: string,
+		password_repeat: string
+	): Promise<AxiosResponse> {
+		return $api.post<AuthResponse>("/register", {
+			username,
+			email,
+			password,
+			password_repeat,
+		});
 	}
 
 	static async logout() {

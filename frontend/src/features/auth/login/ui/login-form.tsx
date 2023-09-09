@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import { Button } from "../../../../shared/ui";
+import { loginThunk } from "../models/login-thunk";
 import styles from "./login-form.modules.scss";
-type FormValues = {
-	username: string;
-	email: string;
-	password: string;
-};
-const onSubmit: SubmitHandler<FormValues> = (data: FormValues) => {
-	console.log(data);
-};
-const onClick = () => {
-	console.log();
-};
+import { LoginParams } from "../models/login-thunk";
+import { useAppDispatch } from "../../../../app/Store/redux-hook";
+
 export const LoginForm: React.FC = () => {
-	const form = useForm<FormValues>();
+	const form = useForm<LoginParams>();
+
 	const { register, handleSubmit, formState, watch, reset, trigger } = form;
+
+	const { isSubmitSuccessful } = formState;
+	const dispatch = useAppDispatch();
+	const onSubmit: SubmitHandler<LoginParams> = (data: LoginParams) => {
+		dispatch(loginThunk(data));
+	};
+	useEffect(() => {
+		if (isSubmitSuccessful) {
+			reset();
+		}
+	}, [isSubmitSuccessful, reset]);
 
 	return (
 		<div className={styles.form}>
@@ -34,23 +39,6 @@ export const LoginForm: React.FC = () => {
 						/>
 					</div>
 					<div className="form-control">
-						<label htmlFor="email">Почта</label>
-						<input
-							type="text"
-							id="email"
-							placeholder="Введите  E-mail"
-							{...register("email", {
-								required: { value: true, message: "Поле E-mail обязательно" },
-								pattern: {
-									value:
-										true &&
-										/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-									message: "Вы ввели неверный формат электронной почты",
-								},
-							})}
-						/>
-					</div>
-					<div className="form-control">
 						<label htmlFor="password">Пароль</label>
 						<input
 							type="password"
@@ -61,7 +49,7 @@ export const LoginForm: React.FC = () => {
 							})}
 						/>
 					</div>
-					<Button content="Зарегистрироваться" className={styles.button} />
+					<Button content="Войти" className={styles.button} />
 				</form>
 			</div>
 		</div>
