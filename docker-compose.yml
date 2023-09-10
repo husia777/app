@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:14.6-alpine
     env_file:
-      - ./backend/.env.backend
+      - ./backend/.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
