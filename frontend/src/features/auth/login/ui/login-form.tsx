@@ -16,6 +16,7 @@ export const LoginForm: React.FC = () => {
 	const onSubmit: SubmitHandler<LoginParams> = (data: LoginParams) => {
 		dispatch(loginThunk(data));
 	};
+
 	useEffect(() => {
 		if (isSubmitSuccessful) {
 			reset();
@@ -26,6 +27,7 @@ export const LoginForm: React.FC = () => {
 		<div className={styles.form}>
 			<div className={styles["form-wrapper"]}>
 				<div className={styles.title}>Добро пожаловать</div>
+				{/* <h1>{userData}</h1> */}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="form-control">
 						<label htmlFor="username">Логин</label>

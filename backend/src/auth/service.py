@@ -151,9 +151,9 @@ class AuthService:
         self.session.add(refresh_token_db_data)
         await self.session.commit()
         return {
-            "access_token": access_token,
+            "accessToken": access_token,
             "token_type": "bearer",
-            "refresh_token": refresh_token,
+            "refreshToken": refresh_token,
             "message": "Авторизация прошла успешно",
             "status": status.HTTP_200_OK
         }

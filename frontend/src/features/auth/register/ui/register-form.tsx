@@ -13,7 +13,6 @@ export const RegisterForm: React.FC = () => {
 	const { isSubmitSuccessful } = formState;
 	const dispatch = useAppDispatch();
 	const onSubmit: SubmitHandler<RegisterParams> = (data: RegisterParams) => {
-		console.log(data)
 		dispatch(registerThunk(data));
 	};
 	useEffect(() => {

@@ -22,11 +22,11 @@ async def sign_in(response: Response,
     data = await auth_service.authenticate_user(
         auth_data.username,
         auth_data.password)
-    refresh_token = data.get('refresh_token')
-    access_token = data.get('access_token')
+    refresh_token = data.get('refreshToken')
+    access_token = data.get('accessToken')
     response.set_cookie(
         key='refreshToken',
-        value=f"Bearer {refresh_token}", httponly=True,
+        value= refresh_token, httponly=True,
         secure=True,
         max_age=30 * 24 * 60 * 60,
     )

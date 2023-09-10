@@ -1,20 +1,23 @@
 const path = require("path");
 var BUILD_DIR = path.resolve(__dirname, "./build/");
-console.log(BUILD_DIR)
+console.log(BUILD_DIR);
 var APP_DIR = path.resolve(__dirname, "src/app");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.config.js");
+const webpack = require("webpack");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 module.exports = merge(common, {
 	performance: {
 		maxEntrypointSize: 512000,
 		maxAssetSize: 512000,
 	},
 	devServer: {
-		watchFiles: ['./build/'],
+		watchFiles: ["./build/"],
 		historyApiFallback: true,
 		static: {
-			directory: './build/',
+			directory: "./build/",
 			watch: true,
 		},
 		compress: true,
@@ -23,7 +26,7 @@ module.exports = merge(common, {
 	mode: "production",
 	entry: APP_DIR + "/index.tsx",
 	output: {
-		publicPath: '/',
+		publicPath: "/",
 		path: BUILD_DIR,
 		filename: "index.js",
 	},
@@ -59,6 +62,9 @@ module.exports = merge(common, {
 		],
 	},
 	plugins: [
+		new webpack.DefinePlugin({
+			"process.env": JSON.stringify(dotenv.config().parsed),
+		}),
 		new HtmlWebpackPlugin({
 			template: "./public/index.html",
 			favicon: "./src/assets/icon/favicon.ico",

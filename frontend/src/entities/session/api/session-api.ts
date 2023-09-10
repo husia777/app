@@ -6,8 +6,18 @@ export class AuthService {
 	static async login(
 		username: string,
 		password: string
-	): Promise<AxiosResponse> {
-		return $api.post<AuthResponse>("/login", { username, password });
+	): Promise<AxiosResponse<AuthResponse>> {
+		const data = await $api.post<AuthResponse>("/login", {
+			username,
+			password,
+		});
+		if (data.status === 200) {
+			localStorage.setItem("accessToken", data.data.accessToken);
+			localStorage.setItem("refreshToken", data.data.refreshToken);
+		}
+		
+
+		return data;
 	}
 	static async registration(
 		username: string,
