@@ -33,7 +33,7 @@ export const sessionSlice = createSlice({
 			loginThunk.fulfilled,
 			(state: SessionSliceState, { payload }) => {
 				state.isAuthorized = true;
-				localStorage.setItem("isAuthenticated", "true");
+				// localStorage.setItem("isAuthenticated", "true");
 				if (state.isAuthorized) {
 					state.refreshToken = payload.data.refreshToken;
 					state.accessToken = payload.data.accessToken;

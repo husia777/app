@@ -14,7 +14,7 @@ type GuestGuardProps = {
 };
 
 function GuestGuard({ children }: GuestGuardProps) {
-	const isAuthorized = useAppSelector(selectIsAuthorized)
+	const isAuthorized = useAppSelector(selectIsAuthorized);
 
 	if (!isAuthorized) return <Navigate to="/login" />;
 

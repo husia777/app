@@ -5,11 +5,13 @@ import { loginThunk } from "../models/login-thunk";
 import styles from "./login-form.modules.scss";
 import { LoginParams } from "../models/login-thunk";
 import { useAppDispatch } from "../../../../app/Store/redux-hook";
+import { useNavigate } from "react-router";
 
 export const LoginForm: React.FC = () => {
 	const form = useForm<LoginParams>();
 
 	const { register, handleSubmit, formState, watch, reset, trigger } = form;
+	const navigate = useNavigate();
 
 	const { isSubmitSuccessful } = formState;
 	const dispatch = useAppDispatch();
@@ -27,7 +29,6 @@ export const LoginForm: React.FC = () => {
 		<div className={styles.form}>
 			<div className={styles["form-wrapper"]}>
 				<div className={styles.title}>Добро пожаловать</div>
-				{/* <h1>{userData}</h1> */}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="form-control">
 						<label htmlFor="username">Логин</label>
