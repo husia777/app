@@ -11,6 +11,7 @@ import {
 import { selectIsAuthorized } from "../../../../entities/session/model/auth-selectors";
 import { clearSessionData } from "../../../../entities/session/model/sessionSlice";
 import { Logout } from "../../../../features/auth/logout/ui/logout-button/logout-button";
+import { ProfileButton } from "../../../../features/user/profile/ui/profile-button";
 export const Header: React.FC = () => {
 	const navigate = useNavigate();
 	const handleClick = () => {
@@ -55,12 +56,18 @@ export const Header: React.FC = () => {
 						content="Вход"
 					/>
 				)}
-				{isAuthorized || <Button
-					type="button"
-					onClick={() => navigate("/register")}
-					className={cx(styles.header__button, styles.header__navlink)}
-					content="Регистрация"
-				/>}
+				{isAuthorized ? (
+					<ProfileButton
+						className={cx(styles.header__button, styles.header__navlink)}
+					/>
+				) : (
+					<Button
+						type="button"
+						onClick={() => navigate("/register")}
+						className={cx(styles.header__button, styles.header__navlink)}
+						content="Регистрация"
+					/>
+				)}
 			</nav>
 		</header>
 	);
