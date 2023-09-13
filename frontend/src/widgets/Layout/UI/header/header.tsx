@@ -11,7 +11,7 @@ import {
 import { selectIsAuthorized } from "../../../../entities/session/model/auth-selectors";
 import { clearSessionData } from "../../../../entities/session/model/sessionSlice";
 import { Logout } from "../../../../features/auth/logout/ui/logout-button/logout-button";
-import { ProfileButton } from "../../../../features/user/profile/ui/profile-button";
+import { ProfileButton } from "../../../../entities/user/ui/Button/profile-button";
 export const Header: React.FC = () => {
 	const navigate = useNavigate();
 	const handleClick = () => {
@@ -30,13 +30,13 @@ export const Header: React.FC = () => {
 			/>
 			<nav>
 				<NavLink className={styles.header__navlink} to="/">
-					Main
+					Статьи
 				</NavLink>
 				<NavLink className={styles.header__navlink} to="/about">
-					About
+					Вакансии
 				</NavLink>
 				<NavLink className={styles.header__navlink} to="/me">
-					Me
+					Курсы
 				</NavLink>
 				{isAuthorized ? (
 					<Logout
@@ -58,6 +58,9 @@ export const Header: React.FC = () => {
 				)}
 				{isAuthorized ? (
 					<ProfileButton
+						onClick={() => {
+							navigate("/profile");
+						}}
 						className={cx(styles.header__button, styles.header__navlink)}
 					/>
 				) : (

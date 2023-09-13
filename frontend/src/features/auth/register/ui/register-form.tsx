@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../../../shared/ui";
 import styles from "./register-form.module.scss";
 import { registerThunk, RegisterParams } from "../models/register-thunk";

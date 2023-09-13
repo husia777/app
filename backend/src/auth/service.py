@@ -8,9 +8,10 @@ from auth import schemas, models
 from passlib.hash import bcrypt
 from jose import jwt, JWTError
 from pydantic import ValidationError
+from typing import Annotated
 
 
-async def api_key_header(authorization: str = Header(...)) -> str:
+async def get_api_key_header(authorization: Annotated[str | None, Header(...)]  ) -> str:
     if not authorization.startswith("Bearer "):
         raise HTTPException(
             status_code=401, detail="Invalid authorization header")
@@ -18,7 +19,7 @@ async def api_key_header(authorization: str = Header(...)) -> str:
     return token
 
 
-async def get_current_user(token: str = Depends(api_key_header), session: AsyncSession = Depends(get_session)) -> schemas.User:
+async def get_current_user(token: str = Depends(get_api_key_header), session: AsyncSession = Depends(get_session)) -> schemas.User:
     token_data = AuthService.verify_token(token)
     user = await session.execute(select(models.User).where(models.User.id == int(token_data)))
     user = user.scalar()

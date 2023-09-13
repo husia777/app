@@ -1,5 +1,4 @@
 //Валидация полей формы
-import { $api } from "shared/ui/api";
 import { loginThunk } from "../../../features/auth/login/models/login-thunk";
 import { createSlice } from "@reduxjs/toolkit";
 export interface SessionSliceState {

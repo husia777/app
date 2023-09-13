@@ -8,7 +8,9 @@ import { LoginPage } from "../pages/LoginPage";
 import { useAppSelector } from "./Store/redux-hook";
 import { selectIsAuthorized } from "../entities/session/model/auth-selectors";
 import { useAuth } from "../features/auth/hooks/use-auth";
-
+import { ProfilePage } from "../pages/ProfilePage/profile-page";
+import { profileLoader } from "../features/user/profile/ui/Profile/profile";
+import { UserService } from "../entities/user/api/user-api";
 type GuestGuardProps = {
 	children: ReactElement;
 };
@@ -35,6 +37,17 @@ export const appRouter = createBrowserRouter([
 			},
 			{ path: "register", element: <RegisterPage /> },
 			{ path: "login", element: <LoginPage /> },
+			{
+				path: "profile",
+				element: (
+					<GuestGuard>
+						<ProfilePage />
+					</GuestGuard>
+				),
+				loader: () => {
+					return UserService.getCurrentUser();
+				},
+			},
 			{
 				path: "*",
 				element: <NotFound />,
