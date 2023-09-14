@@ -2,6 +2,8 @@
 .header {
 	display: flex;
 	justify-content: space-between;
+	padding-bottom: 2%;
+	border-bottom: 1px solid rgb(206, 206, 206);
 }
 .active {
 	border-bottom: #1a62ff;
