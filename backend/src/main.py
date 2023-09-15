@@ -7,9 +7,11 @@ app = FastAPI()
 app.include_router(router=auth_router)
 origins = {
     "http://localhost",
+    "http://localhost",
     "http://localhost:3000",
     "http://huseinnaimov.com",
     "https://huseinnaimov.com"
+    "https://huseinnaimov.com:3000"
 }
 
 app.add_middleware(
