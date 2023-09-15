@@ -22,10 +22,10 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    command: uvicorn src.main:app --host 0.0.0.0  --port 8080 --ssl-certfile=./0.0.0.0.crt --ssl-keyfile=./0.0.0.0.key 
+    command: uvicorn src.main:app --host 0.0.0.0  --port 443 --ssl-certfile=./0.0.0.0.crt --ssl-keyfile=./0.0.0.0.key 
     # command: ls 
     ports:
-      - 8080:8080
+      - 443:443
     volumes:
       - ./backend:/app
 
@@ -46,7 +46,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     ports:
-      - 81:81
+      - 80:80
       - 443:443
     depends_on:
       - api
