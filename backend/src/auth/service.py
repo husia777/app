@@ -1,17 +1,18 @@
 from datetime import datetime, timedelta
-from config import settings
-from database.database import get_session
+from ..config import settings
+from ..database.database import get_session
+# from database.database import get_session
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends, HTTPException, status, Response, Header
-from auth import schemas, models
+from ..auth import schemas, models
 from passlib.hash import bcrypt
 from jose import jwt, JWTError
 from pydantic import ValidationError
 from typing import Annotated
 
 
-async def get_api_key_header(authorization: Annotated[str | None, Header(...)]  ) -> str:
+async def get_api_key_header(authorization: Annotated[str | None, Header(...)]) -> str:
     if not authorization.startswith("Bearer "):
         raise HTTPException(
             status_code=401, detail="Invalid authorization header")

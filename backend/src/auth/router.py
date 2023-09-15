@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, status, Response
-from auth.schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin
-from auth.service import AuthService, get_current_user
+from .schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin
+
+from .service import AuthService, get_current_user
 router = APIRouter(
     prefix='',
     tags=['core'],
@@ -26,7 +27,7 @@ async def sign_in(response: Response,
     access_token = data.get('accessToken')
     response.set_cookie(
         key='refreshToken',
-        value= refresh_token, httponly=True,
+        value=refresh_token, httponly=True,
         secure=True,
         max_age=30 * 24 * 60 * 60,
     )
