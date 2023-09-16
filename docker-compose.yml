@@ -34,8 +34,6 @@ services:
   frontend:
     hostname: frontend
     container_name: frontend
-    depends_on:                                                                                                                     
-      - api
     build:
       context: ./frontend
       dockerfile: Dockerfile
@@ -59,5 +57,5 @@ services:
   #   volumes:
   #     - ./certs:/etc/letsencrypt
   #   command: certonly --webroot --webroot-path=/var/www/html --email huseinnaimov@bk.ru --agree-tos --no-eff-email --staging -d huseinnaimov.com
-volumes:
-  postgres_data:
+# volumes:
+#   postgres_data:
