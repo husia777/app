@@ -8,7 +8,7 @@ const $api = axios.create({
 	baseURL: API_LOCALHOST_URL,
 	headers: {
 
-		"Access-Control-Allow-Credentials": true,
+		// "Access-Control-Allow-Credentials": true,
 	},
 });
 
