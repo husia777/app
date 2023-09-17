@@ -5,7 +5,7 @@ app = FastAPI(root_path="/api")
 
 
 app.include_router(router=auth_router)
-origins = {
+origins = [
     "http://localhost",
     "http://localhost:3000",
     "http://huseinnaimov.com",
@@ -13,11 +13,11 @@ origins = {
     "http://huseinnaimov.com/api/login/",
     "https://huseinnaimov.com/api/login",
 
-}
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
