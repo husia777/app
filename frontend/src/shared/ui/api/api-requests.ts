@@ -1,7 +1,7 @@
 import axios from "axios";
 import { config } from "dotenv";
 
-export const API_LOCALHOST_URL = `https://huseinnaimov.com/api`;
+export const API_LOCALHOST_URL = `https://huseinnaimov.com`;
 
 const $api = axios.create({
 	withCredentials: true,
