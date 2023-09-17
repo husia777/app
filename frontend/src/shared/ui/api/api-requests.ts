@@ -7,7 +7,7 @@ const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
 	headers: {
-		"Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Origin": "https://huseinnaimov.com",
 		"Access-Control-Allow-Credentials": true,
 	},
 });
