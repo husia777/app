@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 from .auth.router import router as auth_router
 app = FastAPI(root_path="/api")
 
@@ -14,12 +15,15 @@ origins = [
     "https://huseinnaimov.com/api/login",
 
 ]
+middleware = [
+    Middleware(CORSMiddleware,
+               allow_origins=origins,
+               allow_credentials=True,
+               allow_methods=["*"],
+               allow_headers=["*"],
+               expose_headers=["*"])
+]
 
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-    expose_headers=["*"]
+    middleware
 )
