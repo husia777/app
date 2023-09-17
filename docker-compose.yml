@@ -1,35 +1,35 @@
 version: "3.6"
 
 services:
-  # postgres:
-  #   image: postgres:14.6-alpine
-  #   env_file:
-  #     - ./backend/src/.env
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
-  #     start_period: 10s
-  #   restart: unless-stopped
-  #   ports:
-  #     - "5433:5432"
-  # api:
-  #   hostname: api
-  #   container_name: "api"
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile
-  #   command: uvicorn src.main:app --host 0.0.0.0  --port 8080
-  #   # command: uvicorn src.main:app --host 0.0.0.0  --port 443 --ssl-certfile=./0.0.0.0.crt --ssl-keyfile=./0.0.0.0.key 
-  #   # command: ls 
-  #   ports:
-  #     # - 443:443
-  #     - 8080:8080
-  #   volumes:
-  #     - ./backend:/app
+  postgres:
+    image: postgres:14.6-alpine
+    env_file:
+      - ./backend/src/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+  api:
+    hostname: api
+    container_name: "api"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: uvicorn src.main:app --host 0.0.0.0  --port 8080
+    # command: uvicorn src.main:app --host 0.0.0.0  --port 443 --ssl-certfile=./0.0.0.0.crt --ssl-keyfile=./0.0.0.0.key 
+    # command: ls 
+    ports:
+      # - 443:443
+      - 8080:8080
+    volumes:
+      - ./backend:/app
 
   frontend:
     hostname: frontend
