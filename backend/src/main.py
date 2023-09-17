@@ -24,6 +24,4 @@ middleware = [
                expose_headers=["*"])
 ]
 
-app.add_middleware(
-    middleware
-)
+app.middleware_stack.add_middleware(middleware)
