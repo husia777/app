@@ -49,9 +49,7 @@ services:
       - 80:80
 
 
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ./certs:/etc/nginx/certs
+    
   # certbot:
   #   image: certbot/certbot
   #   volumes:
