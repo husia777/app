@@ -2,10 +2,7 @@ from fastapi import APIRouter, Depends, status, Response
 from .schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin
 
 from .service import AuthService, get_current_user
-router = APIRouter(
-    prefix='',
-    tags=['core'],
-)
+router = APIRouter()
 
 
 @router.post('/register/', response_model=BaseUser, status_code=status.HTTP_201_CREATED)
