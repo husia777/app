@@ -9,12 +9,15 @@ origins = {
     "http://localhost",
     "http://localhost:3000",
     "http://huseinnaimov.com",
-    "https://huseinnaimov.com"
+    "https://huseinnaimov.com",
+    "http://huseinnaimov.com/api/login/",
+    "https://huseinnaimov.com/api/login",
+
 }
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://huseinnaimov.com"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
