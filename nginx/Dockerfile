@@ -2,9 +2,11 @@ FROM nginx:1.21-alpine
  
 RUN rm /etc/nginx/conf.d/default.conf
 COPY ./nginx.conf /etc/nginx/conf.d/nginx.conf
-RUN apk add --no-cache
-RUN apk update && \
-    apk install -y certbot
+RUN apk add --update python3 py3-pip
+RUN apk add certbot
+RUN pip install certbot-nginx
+
+
 RUN mkdir -p /var/www/letsencrypt
 
 RUN certbot certonly --standalone -d huseinnaimov.com --agree-tos --email huseinnaimov@bk.ru --non-interactive --no-eff-email 
