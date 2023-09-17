@@ -2,10 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from .auth.router import router as auth_router
-app = FastAPI(root_path="/api")
 
-
-app.include_router(router=auth_router)
 origins = [
     "http://localhost",
     "http://localhost:3000",
@@ -24,4 +21,7 @@ middleware = [
                expose_headers=["*"])
 ]
 
-app.middleware_stack.add_middleware(middleware)
+
+app = FastAPI(root_path="/api", middleware=middleware)
+
+app.include_router(router=auth_router)
