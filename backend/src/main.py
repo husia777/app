@@ -16,7 +16,7 @@ origins = [
 ]
 middleware = [
     Middleware(CORSMiddleware,
-               allow_origins=["https://huseinnaimov.com/api/login"],
+               allow_origins=origins,
                allow_credentials=True,  
                allow_methods=["*"],
                allow_headers=["*"],
