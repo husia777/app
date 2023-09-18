@@ -5,9 +5,7 @@ app = FastAPI()
 
 
 app.include_router(router=auth_router)
-origins = [
-    "*"
-]
+origins = ["http://huseinnaimov.com"] 
 
 app.add_middleware(
     CORSMiddleware,
