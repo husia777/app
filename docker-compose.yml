@@ -38,15 +38,16 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
-  nginx:
-    hostname: nginx
-    container_name: nginx-front
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
+      - "80:80"
+      # - "3000:3000"
+  # nginx:
+  #   hostname: nginx
+  #   container_name: nginx-front
+  #   build:
+  #     context: ./nginx
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 80:80
       # - 443:443
 
 volumes:
