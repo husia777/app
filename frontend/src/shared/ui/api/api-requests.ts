@@ -1,7 +1,7 @@
 import axios from "axios";
 import { config } from "dotenv";
 
-export const API_LOCALHOST_URL = `http://localhost:8080/api`;
+export const API_LOCALHOST_URL = `http://localhost:8080/`;
 
 const $api = axios.create({
 	withCredentials: true,
