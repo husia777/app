@@ -8,6 +8,8 @@ origins = [
     "http://localhost:3000",
     "http://huseinnaimov.com",
     "https://huseinnaimov.com",
+    "https://huseinnaimov.com:8080",
+    "http://huseinnaimov.com:8080",
     "http://huseinnaimov.com/api/login/",
     "https://huseinnaimov.com/api/login",
 
