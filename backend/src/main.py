@@ -15,7 +15,7 @@ origins = [
 middleware = [
     Middleware(CORSMiddleware,
                allow_origins=origins,
-               allow_credentials=True,
+               allow_credentials=True,  # Здесь установите True
                allow_methods=["*"],
                allow_headers=["*"],
                expose_headers=["*"])
