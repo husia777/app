@@ -9,6 +9,9 @@ origins = {
     "http://localhost",
     "http://localhost:3000",
     "http://huseinnaimov.com",
+    "http://huseinnaimov.com/api",
+    "http://huseinnaimov.com:8080/api",
+    "http://huseinnaimov.com:8080",
     "https://huseinnaimov.com"
 }
 
