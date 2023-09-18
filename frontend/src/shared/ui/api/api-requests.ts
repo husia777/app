@@ -9,7 +9,7 @@ const $api = axios.create({
 	headers: {
 		// "Access-Control-Allow-Origin": "http://huseinnaimov.com",
 		// "Origin": "http://huseinnaimov.com",
-		// "Access-Control-Allow-Credentials": true,
+		"Access-Control-Allow-Credentials": true,
 	},
 });
 
