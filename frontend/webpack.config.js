@@ -21,7 +21,7 @@ module.exports = merge(common, {
 			watch: true,
 		},
 		compress: true,
-		port: 80,
+		port: 3000,
 	},
 	mode: "production",
 	entry: APP_DIR + "/index.tsx",
