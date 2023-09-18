@@ -16,4 +16,4 @@ RUN pip install -r requirements.txt
 # copy project
 COPY . .
 
-
+RUN alembic upgrade head
