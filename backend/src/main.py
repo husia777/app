@@ -5,14 +5,14 @@ app = FastAPI()
 
 
 app.include_router(router=auth_router)
-origins = ["http://huseinnaimov.com"] 
+origins = ["http://huseinnaimov.com"]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     # allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-    
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://huseinnaimov.com"],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+    allow_headers=["Origin", "X-Requested-With", "Content-Type", "Accept"],
 
+
+)
