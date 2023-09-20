@@ -11,6 +11,10 @@ export class AuthService {
 			username,
 			password,
 		});
+		if (data.status === 200) {
+			localStorage.setItem("accessToken", data.data.accessToken);
+			localStorage.setItem("refreshToken", data.data.refreshToken);
+		}
 
 		return data;
 	}
@@ -36,8 +40,3 @@ export class AuthService {
 		return $api.get("/logout");
 	}
 }
-
-// if (data.status === 200) {
-// 	localStorage.setItem("accessToken", data.data.accessToken);
-// 	localStorage.setItem("refreshToken", data.data.refreshToken);
-// }
