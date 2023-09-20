@@ -15,7 +15,6 @@ export class AuthService {
 			localStorage.setItem("accessToken", data.data.accessToken);
 			localStorage.setItem("refreshToken", data.data.refreshToken);
 		}
-		
 
 		return data;
 	}
@@ -31,6 +30,10 @@ export class AuthService {
 			password,
 			password_repeat,
 		});
+	}
+
+	static async refreshToken(token: string) {
+		return $api.post<string>("/refresh", { token });
 	}
 
 	static async logout() {
