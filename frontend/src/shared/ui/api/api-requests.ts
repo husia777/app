@@ -31,8 +31,7 @@ $api.interceptors.response.use(async (response) => {
 		const refreshToken = localStorage.getItem("refreshToken");
 
 		if (refreshToken) {
-			const accessToken = await dispatch(refreshThunk(refreshToken));
-			localStorage.setItem("accessToken", refreshToken);
+			dispatch(refreshThunk(refreshToken));
 		}
 	}
 	return response;

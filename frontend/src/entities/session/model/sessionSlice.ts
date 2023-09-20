@@ -1,5 +1,6 @@
 //Валидация полей формы
 import { loginThunk } from "../../../features/auth/login/models/login-thunk";
+import { refreshThunk } from "../../../features/auth_refresh/models/refresh-thunk";
 import { createSlice } from "@reduxjs/toolkit";
 export interface SessionSliceState {
 	isAuthorized: boolean;
@@ -28,17 +29,24 @@ export const sessionSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(
-			loginThunk.fulfilled,
-			(state: SessionSliceState, { payload }) => {
-				state.isAuthorized = true;
-				// localStorage.setItem("isAuthenticated", "true");
-				if (state.isAuthorized) {
-					state.refreshToken = payload.data.refreshToken;
-					state.accessToken = payload.data.accessToken;
+		builder
+			.addCase(
+				loginThunk.fulfilled,
+				(state: SessionSliceState, { payload }) => {
+					state.isAuthorized = true;
+					// localStorage.setItem("isAuthenticated", "true");
+					if (state.isAuthorized) {
+						state.refreshToken = payload.data.refreshToken;
+						state.accessToken = payload.data.accessToken;
+					}
 				}
-			}
-		);
+			)
+			.addCase(
+				refreshThunk.fulfilled,
+				(state: SessionSliceState, { payload }) => {
+					localStorage.setItem("accessToken", payload.data);
+				}
+			);
 	},
 });
 
