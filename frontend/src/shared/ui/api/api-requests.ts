@@ -24,7 +24,7 @@ $api.interceptors.request.use(async (config) => {
 	return config;
 });
 $api.interceptors.response.use(async (response) => {
-	const { status } = response;
+	const { status, config } = response;
 	const dispatch = useAppDispatch();
 
 	if (status === 401) {
@@ -34,6 +34,11 @@ $api.interceptors.response.use(async (response) => {
 			dispatch(refreshThunk(refreshToken));
 		}
 	}
+	const token = localStorage.getItem("accessToken");
+	if (token) {
+		config.headers.Authorization = `Bearer ${token}`;
+	}
+
 	return response;
 });
 export { $api };
