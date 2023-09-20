@@ -7,7 +7,6 @@ import { RegisterPage } from "../pages/RegisterPage";
 import { LoginPage } from "../pages/LoginPage";
 import { useAppSelector } from "./Store/redux-hook";
 import { selectIsAuthorized } from "../entities/session/model/auth-selectors";
-import { useAuth } from "../features/auth/hooks/use-auth";
 import { ProfilePage } from "../pages/ProfilePage/profile-page";
 import { profileLoader } from "../features/user/profile/ui/Profile/profile";
 import { UserService } from "../entities/user/api/user-api";

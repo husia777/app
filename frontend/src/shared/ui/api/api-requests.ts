@@ -1,10 +1,14 @@
-import { useAppDispatch } from "../../../app/Store/redux-hook";
+import { useAppDispatch, useAppSelector } from "../../../app/Store/redux-hook";
 import axios from "axios";
 import { config } from "dotenv";
 import { refreshThunk } from "../../../features/auth_refresh/models/refresh-thunk";
+import {
+	selectAccessToken,
+	selectRefreshToken,
+} from "../../../entities/session/model/auth-selectors";
 export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
 // export const API_LOCALHOST_URL = `http://huseinnaimov.com/api/`;
-
+// export const API_LOCALHOST_URL = `http://huseinnaimov.com/api/`;
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
@@ -16,7 +20,7 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use(async (config) => {
-	const token = localStorage.getItem("accessToken");
+	const token = useAppSelector(selectAccessToken);
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
 	}
@@ -28,13 +32,13 @@ $api.interceptors.response.use(async (response) => {
 	const dispatch = useAppDispatch();
 
 	if (status === 401) {
-		const refreshToken = localStorage.getItem("refreshToken");
+		const refreshToken = useAppSelector(selectRefreshToken);
 
 		if (refreshToken) {
 			dispatch(refreshThunk(refreshToken));
 		}
 	}
-	const token = localStorage.getItem("accessToken");
+	const token = useAppSelector(selectAccessToken);
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
 	}
