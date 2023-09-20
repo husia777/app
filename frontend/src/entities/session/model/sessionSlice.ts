@@ -44,7 +44,7 @@ export const sessionSlice = createSlice({
 			.addCase(
 				refreshThunk.fulfilled,
 				(state: SessionSliceState, { payload }) => {
-					localStorage.setItem("accessToken", payload.data);
+					state.accessToken = payload.data;
 				}
 			);
 	},
