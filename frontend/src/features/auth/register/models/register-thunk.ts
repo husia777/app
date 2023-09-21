@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthService } from "../../../../entities/session";
-import { RootState } from "app/Store/rootReducer";
+import { RootState } from "../../../../app/Store/rootReducer";
 export interface RegisterParams {
 	username: string;
 	email: string;

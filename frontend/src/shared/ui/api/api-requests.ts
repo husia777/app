@@ -7,14 +7,11 @@ import {
 	selectRefreshToken,
 } from "../../../entities/session/model/auth-selectors";
 export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
-// export const API_LOCALHOST_URL = `http://huseinnaimov.com/api/`;
-// export const API_LOCALHOST_URL = `http://huseinnaimov.com/api/`;
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
 	headers: {
 		"Access-Control-Allow-Origin": "http://huseinnaimov.com",
-		// "Origin": "http://huseinnaimov.com",
 		"Access-Control-Allow-Credentials": true,
 	},
 });
