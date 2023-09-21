@@ -1,5 +1,5 @@
 import { loginThunk } from "../../../features/auth/login/models/login-thunk";
-import { refreshThunk } from "../../../features/auth_refresh/models/refresh-thunk";
+import { refreshThunk } from "../../../features/auth/auth_refresh/models/refresh-thunk";
 import { createSlice } from "@reduxjs/toolkit";
 export interface SessionSliceState {
 	isAuthorized: boolean;

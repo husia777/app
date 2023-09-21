@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../../app/Store/redux-hook";
 import axios from "axios";
 import { config } from "dotenv";
-import { refreshThunk } from "../../../features/auth_refresh/models/refresh-thunk";
+import { refreshThunk } from "../../../features/auth/auth_refresh/models/refresh-thunk";
 import {
 	selectAccessToken,
 	selectRefreshToken,
