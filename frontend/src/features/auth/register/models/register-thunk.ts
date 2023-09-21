@@ -18,5 +18,5 @@ export const registerThunk = createAsyncThunk<
 		body.password,
 		body.password_repeat
 	);
-	console.log(data)
+	console.log(data);
 });

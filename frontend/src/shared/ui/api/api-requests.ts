@@ -1,29 +1,30 @@
-import { useAppDispatch, useAppSelector } from "../../../app/Store/redux-hook";
 import axios from "axios";
 import { config } from "dotenv";
-import { refreshThunk } from "../../../features/auth/auth_refresh/models/refresh-thunk";
-import {
-	selectAccessToken,
-	selectRefreshToken,
-} from "../../../entities/session/model/auth-selectors";
+
 export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
+// export const API_LOCALHOST_URL = `http://huseinnaimov.com/api/`;
+
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
 	headers: {
 		"Access-Control-Allow-Origin": "http://huseinnaimov.com",
+		// "Origin": "http://huseinnaimov.com",
 		"Access-Control-Allow-Credentials": true,
 	},
 });
 
 $api.interceptors.request.use((config) => {
-	const token = useAppSelector(selectAccessToken);
+	const token = localStorage.getItem("accessToken");
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
 	}
 
 	return config;
 });
+
+export { $api };
+
 // $api.interceptors.response.use(async (response) => {
 // 	const { status, config } = response;
 // 	const dispatch = useAppDispatch();
@@ -42,4 +43,3 @@ $api.interceptors.request.use((config) => {
 
 // 	return response;
 // });
-export { $api };

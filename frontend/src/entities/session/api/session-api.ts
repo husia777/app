@@ -34,7 +34,6 @@ export class AuthService {
 	static async refreshToken(token: string) {
 		return $api.post<string>("/refresh", { token });
 	}
-
 	static async logout() {
 		return $api.get("/logout");
 	}
