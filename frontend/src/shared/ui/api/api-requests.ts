@@ -26,23 +26,40 @@ $api.interceptors.request.use((config) => {
 	return config;
 });
 
-export { $api };
+axios.interceptors.response.use(
+	function (response) {
+		return response;
+	},
+	async function (error) {
+		const dispatch = useAppDispatch();
 
-$api.interceptors.response.use(async (response) => {
-	const { status, config } = response;
-	const dispatch = useAppDispatch();
-
-	if (status === 401) {
-		const refreshToken = useAppSelector(selectRefreshToken);
-
-		if (refreshToken) {
-			dispatch(refreshThunk(refreshToken));
+		const originalRequest = error.config;
+		if (error.response.status === 401) {
+			const refreshToken = useAppSelector(selectRefreshToken);
+			if (refreshToken) {
+				dispatch(refreshThunk(refreshToken));
+			}
+			return Promise.reject(error);
 		}
 	}
-	const token = useAppSelector(selectAccessToken);
-	if (token) {
-		config.headers.Authorization = `Bearer ${token}`;
-	}
+);
+export { $api };
 
-	return response;
-});
+// $api.interceptors.response.use((response) => {
+// 	const { status, config } = response;
+// 	const dispatch = useAppDispatch();
+
+// 	if (status === 401) {
+// 		const refreshToken = useAppSelector(selectRefreshToken);
+
+// 		if (refreshToken) {
+// 			dispatch(refreshThunk(refreshToken));
+// 		}
+// 	}
+// 	const token = useAppSelector(selectAccessToken);
+// 	if (token) {
+// 		config.headers.Authorization = `Bearer ${token}`;
+// 	}
+
+// 	return response;
+// });
