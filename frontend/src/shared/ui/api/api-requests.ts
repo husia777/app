@@ -16,7 +16,7 @@ const $api = axios.create({
 	},
 });
 
-$api.interceptors.request.use(async (config) => {
+$api.interceptors.request.use((config) => {
 	const token = useAppSelector(selectAccessToken);
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
