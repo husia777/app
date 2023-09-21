@@ -31,7 +31,6 @@ export class AuthService {
 			password_repeat,
 		});
 	}
-
 	static async refreshToken(token: string) {
 		return $api.post<string>("/refresh", { token });
 	}
