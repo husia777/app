@@ -4,13 +4,17 @@ import { Button } from "../../../../shared/ui";
 import styles from "./register-form.module.scss";
 import { registerThunk, RegisterParams } from "../models/register-thunk";
 import { useAppDispatch } from "../../../../app/Store/redux-hook";
+import { registerFormSchema } from "../models/register-form-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export const RegisterForm: React.FC = () => {
-	const form = useForm<RegisterParams>();
+	const form = useForm<RegisterParams>({
+		resolver: zodResolver(registerFormSchema),
+	});
 
 	const { register, handleSubmit, formState, watch, reset, trigger } = form;
 
-	const { isSubmitSuccessful } = formState;
+	const { isSubmitSuccessful, errors, isValid } = formState;
 	const dispatch = useAppDispatch();
 	const onSubmit: SubmitHandler<RegisterParams> = (data: RegisterParams) => {
 		dispatch(registerThunk(data));
@@ -35,6 +39,9 @@ export const RegisterForm: React.FC = () => {
 								required: { value: true, message: "Поле логин обязательно" },
 							})}
 						/>
+						{errors.username && (
+							<p className="error">{errors.username.message}</p>
+						)}
 					</div>
 					<div className="form-control">
 						<label htmlFor="email">Почта</label>
@@ -52,6 +59,7 @@ export const RegisterForm: React.FC = () => {
 								},
 							})}
 						/>
+						{errors.email && <p className="error">{errors.email.message}</p>}
 					</div>
 					<div className="form-control">
 						<label htmlFor="password">Пароль</label>
@@ -63,6 +71,9 @@ export const RegisterForm: React.FC = () => {
 								required: { value: true, message: "Поле пароль обязательно" },
 							})}
 						/>
+						{errors.password && (
+							<p className="error">{errors.password.message}</p>
+						)}
 					</div>
 					<div className="form-control">
 						<label htmlFor="password_repeat">Пароль</label>
@@ -74,9 +85,12 @@ export const RegisterForm: React.FC = () => {
 								required: { value: true, message: "Поле пароль обязательно" },
 							})}
 						/>
+						{errors.password && (
+							<p className="error">{errors.password.message}</p>
+						)}
 					</div>
 					<Button
-						disabled={false}
+						disabled={!isValid}
 						content="Зарегистрироваться"
 						className={styles.button}
 					/>
