@@ -10,8 +10,7 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 module.exports = merge(common, {
 	performance: {
-		maxEntrypointSize: 512000,
-		maxAssetSize: 512000,
+		hints: false,
 	},
 	devServer: {
 		watchFiles: ["./build/"],

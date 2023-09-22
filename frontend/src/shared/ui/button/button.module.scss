@@ -6,6 +6,9 @@
 	text-align: center;
 	padding: 0.6rem;
 	border: none;
+	&:disabled {
+		background-color: gray;
+	}
 	font-size: 1rem;
 	@media (min-width: 768px) {
 		padding: 1rem;

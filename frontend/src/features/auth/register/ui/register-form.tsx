@@ -75,7 +75,11 @@ export const RegisterForm: React.FC = () => {
 							})}
 						/>
 					</div>
-					<Button content="Зарегистрироваться" className={styles.button} />
+					<Button
+						disabled={false}
+						content="Зарегистрироваться"
+						className={styles.button}
+					/>
 				</form>
 			</div>
 		</div>

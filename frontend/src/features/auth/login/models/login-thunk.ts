@@ -1,6 +1,6 @@
 export interface LoginParams {
 	password: string;
-	username: string;
+	email: string;
 }
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthService } from "../../../../entities/session";
@@ -13,5 +13,5 @@ export const loginThunk = createAsyncThunk<
 	LoginParams,
 	{ state: RootState }
 >("auth/login", async (body: LoginParams) => {
-	return AuthService.login(body.username, body.password);
+	return AuthService.login(body.email, body.password);
 });

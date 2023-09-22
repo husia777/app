@@ -54,6 +54,7 @@ export const Header: React.FC = () => {
 							styles.header__navlink
 						)}
 						content="Вход"
+						disabled={false}
 					/>
 				)}
 				{isAuthorized ? (
@@ -69,6 +70,7 @@ export const Header: React.FC = () => {
 						onClick={() => navigate("/register")}
 						className={cx(styles.header__button, styles.header__navlink)}
 						content="Регистрация"
+						disabled={false}
 					/>
 				)}
 			</nav>
