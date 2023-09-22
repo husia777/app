@@ -35,9 +35,9 @@ axios.interceptors.response.use(
 
 		const originalRequest = error.config;
 		if (error.response.status === 401) {
-			const refreshToken = useAppSelector(selectRefreshToken);
-			if (refreshToken) {
-				dispatch(refreshThunk(refreshToken));
+			const accessToken = useAppSelector(selectAccessToken);
+			if (accessToken) {
+				dispatch(refreshThunk(accessToken));
 			}
 			return Promise.reject(error);
 		}
