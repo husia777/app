@@ -44,21 +44,21 @@ $api.interceptors.request.use((config) => {
 // );
 // export { $api };
 
-// $api.interceptors.response.use((response) => {
-// 	const { status, config } = response;
-// 	const dispatch = useAppDispatch();
+$api.interceptors.response.use((response) => {
+	const { status, config } = response;
+	const dispatch = useAppDispatch();
 
-// 	if (status === 401) {
-// 		const refreshToken = useAppSelector(selectRefreshToken);
+	if (status === 401) {
+		const refreshToken = useAppSelector(selectRefreshToken);
 
-// 		if (refreshToken) {
-// 			dispatch(refreshThunk(refreshToken));
-// 		}
-// 	}
-// 	const token = useAppSelector(selectAccessToken);
-// 	if (token) {
-// 		config.headers.Authorization = `Bearer ${token}`;
-// 	}
+		if (refreshToken) {
+			dispatch(refreshThunk(refreshToken));
+		}
+	}
+	const token = useAppSelector(selectAccessToken);
+	if (token) {
+		config.headers.Authorization = `Bearer ${token}`;
+	}
 
-// 	return response;
-// });
+	return response;
+});
