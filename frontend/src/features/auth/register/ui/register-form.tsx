@@ -99,7 +99,7 @@ export const RegisterForm: React.FC = () => {
 						)}
 					</div>
 					<Button
-						onClick={() => trigger()}
+						// onClick={() => trigger()}
 						disabled={!isValid}
 						content="Зарегистрироваться"
 						className={styles.button}
