@@ -42,7 +42,6 @@ $api.interceptors.request.use((config) => {
 // 		}
 // 	}
 // );
-// export { $api };
 
 $api.interceptors.response.use((response) => {
 	const { status, config } = response;
@@ -62,3 +61,5 @@ $api.interceptors.response.use((response) => {
 
 	return response;
 });
+
+export { $api };
