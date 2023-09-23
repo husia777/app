@@ -5,16 +5,19 @@ export const registerFormSchema = z
 		email: z.string().email("Неверный формат почты"),
 		username: z
 			.string()
-			.min(6, "Длина имени пользователя должна быть больше 6"),
+			.min(
+				5,
+				"Длина имени пользователя должна  состоять  из 6 и более символов"
+			),
 		password: z
 			.string()
-			.min(8, "Пароль должен состоять  более чем из 8 символов"),
+			.min(7, "Пароль должен состоять  из 8 и более символов"),
 		password_repeat: z
 			.string()
-			.min(8, "Пароль должен состоять  более чем из 8 символов"),
+			.min(7, "Пароль должен состоять  из 8 и более символов"),
 	})
 	.required()
 	.refine((data) => data.password === data.password_repeat, {
-		message: "Passwords must match",
+		message: "Пароли не совпадают",
 		path: ["password_repeat"],
 	});

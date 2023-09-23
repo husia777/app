@@ -5,6 +5,6 @@ export const loginFormSchema = z
 		email: z.string().email("Неверный формат почты"),
 		password: z
 			.string()
-			.min(8, "Пароль должен состоять  более чем из 8 символов"),
+			.min(7, "Пароль должен состоять  из 8 и более символов"),
 	})
 	.required();
