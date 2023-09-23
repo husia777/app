@@ -33,7 +33,6 @@ $api.interceptors.response.use(
 	async function (error) {
 		const dispatch = useAppDispatch();
 
-		const originalRequest = error.config;
 		if (error.response.status === 401) {
 			const accessToken = useAppSelector(selectAccessToken);
 			if (accessToken) {
