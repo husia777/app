@@ -8,8 +8,6 @@ import {
 import { refreshThunk } from "../../../features/auth/auth_refresh/models/refresh-thunk";
 export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
 
-const dispatch = useAppDispatch();
-
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
@@ -34,6 +32,7 @@ $api.interceptors.response.use(
 		if (error.response && error.response.status === 401) {
 			try {
 				const refreshToken = useAppSelector(selectRefreshToken);
+				const dispatch = useAppDispatch();
 
 				if (refreshToken) {
 					dispatch(refreshThunk(refreshToken));
