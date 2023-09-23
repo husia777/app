@@ -15,7 +15,7 @@ export const Logout: React.FC<ILogout> = (props) => {
 	};
 	return (
 		<Button
-			disabled={true}
+			disabled={false}
 			content="Выйти"
 			className={props.className}
 			onClick={handleLogout}

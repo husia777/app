@@ -8,6 +8,6 @@ interface ProfileButton {
 }
 export const ProfileButton: React.FC<ProfileButton> = (props) => {
 	return (
-		<Button onClick={props.onClick} disabled={true} className={cx(styles["profile-button"], props.className)} content="Личный кабинет" />
+		<Button onClick={props.onClick} disabled={false} className={cx(styles["profile-button"], props.className)} content="Личный кабинет" />
 	);
 };
