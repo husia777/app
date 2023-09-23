@@ -47,8 +47,6 @@ async def get_new_access_token(token: Token, auth_service: AuthService = Depends
     new_access_token = await auth_service.create_token(refresh_data.dict())
     return {
         "access_token": new_access_token,
-        "token_type": "Bearer",
-        "status": status.HTTP_200_OK
     }
 
 
