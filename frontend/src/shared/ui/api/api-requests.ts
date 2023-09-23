@@ -26,7 +26,7 @@ $api.interceptors.request.use((config) => {
 	return config;
 });
 
-axios.interceptors.response.use(
+$api.interceptors.response.use(
 	function (response) {
 		return response;
 	},
