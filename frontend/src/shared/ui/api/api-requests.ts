@@ -26,23 +26,23 @@ $api.interceptors.request.use((config) => {
 	return config;
 });
 
-$api.interceptors.response.use(
-	function (response) {
-		return response;
-	},
-	async function (error) {
-		const dispatch = useAppDispatch();
+// $api.interceptors.response.use(
+// 	function (response) {
+// 		return response;
+// 	},
+// 	async function (error) {
+// 		const dispatch = useAppDispatch();
 
-		if (error.response.status === 401) {
-			const accessToken = useAppSelector(selectAccessToken);
-			if (accessToken) {
-				dispatch(refreshThunk(accessToken));
-			}
-			return Promise.reject(error);
-		}
-	}
-);
-export { $api };
+// 		if (error.response.status === 401) {
+// 			const accessToken = useAppSelector(selectAccessToken);
+// 			if (accessToken) {
+// 				dispatch(refreshThunk(accessToken));
+// 			}
+// 			return Promise.reject(error);
+// 		}
+// 	}
+// );
+// export { $api };
 
 // $api.interceptors.response.use((response) => {
 // 	const { status, config } = response;
