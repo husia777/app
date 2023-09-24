@@ -4,22 +4,29 @@ import { Button } from "../../../../shared/ui";
 import styles from "./register-form.module.scss";
 import { registerThunk, RegisterParams } from "../models/register-thunk";
 import { useAppDispatch } from "../../../../app/Store/redux-hook";
-import { registerFormSchema } from "../models/register-form-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 type FormFields = "email" | "username" | "password" | "password_repeat";
 
 export const RegisterForm: React.FC = () => {
-	const form = useForm<RegisterParams>({
-		resolver: zodResolver(registerFormSchema),
-	});
+	const form = useForm<RegisterParams>();
 
-	const { register, handleSubmit, formState, watch, reset, trigger } = form;
-	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const fieldName = e.target.name as FormFields;
-		trigger(fieldName);
-	};
+	const { register, handleSubmit, formState, watch, reset } = form;
+
 	const { isSubmitSuccessful, errors, isValid } = formState;
+	const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+	const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+	const usernameRegex = /^[a-zA-Z0-9]{5,}$/;
+	const password = watch("password", "");
+	const validateConfirmPassword = (value: string) => {
+		if (value !== password) {
+			errors["password"] = {
+				type: "validate",
+				message: "Пароли не совпадают",
+			};
+			return "Подтверждение пароля не совпадает";
+		}
+		return true;
+	};
 	const dispatch = useAppDispatch();
 	const onSubmit: SubmitHandler<RegisterParams> = (data: RegisterParams) => {
 		dispatch(registerThunk(data));
@@ -42,8 +49,12 @@ export const RegisterForm: React.FC = () => {
 							placeholder="Введите имя пользователя"
 							{...register("username", {
 								required: { value: true, message: "Поле логин обязательно" },
+								pattern: {
+									value: usernameRegex,
+									message:
+										"Имя пользователя должно содержать только латинские буквы и цифры, и быть не короче 5 символов",
+								},
 							})}
-							onChange={handleInputChange}
 						/>
 						{errors.username && (
 							<p className="error">{errors.username.message}</p>
@@ -58,13 +69,10 @@ export const RegisterForm: React.FC = () => {
 							{...register("email", {
 								required: { value: true, message: "Поле E-mail обязательно" },
 								pattern: {
-									value:
-										true &&
-										/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-									message: "Вы ввели неверный формат электронной почты",
+									value: emailRegex,
+									message: "Неверный формат электронной почты",
 								},
 							})}
-							onChange={handleInputChange}
 						/>
 						{errors.email && <p className="error">{errors.email.message}</p>}
 					</div>
@@ -76,13 +84,18 @@ export const RegisterForm: React.FC = () => {
 							placeholder="Введите пароль"
 							{...register("password", {
 								required: { value: true, message: "Поле пароль обязательно" },
+								pattern: {
+									value: passwordRegex,
+									message:
+										"Пароль должен содержать не менее 8 символов, включая буквы и цифры",
+								},
 							})}
-							onChange={handleInputChange}
 						/>
 						{errors.password && (
 							<p className="error">{errors.password.message}</p>
 						)}
 					</div>
+
 					<div className="form-control">
 						<label htmlFor="password_repeat">Пароль</label>
 						<input
@@ -91,16 +104,23 @@ export const RegisterForm: React.FC = () => {
 							placeholder="Подтвердите пароль"
 							{...register("password_repeat", {
 								required: { value: true, message: "Поле пароль обязательно" },
+								pattern: {
+									value: passwordRegex,
+									message:
+										"Пароль должен содержать не менее 8 символов, включая буквы и цифры",
+								},
+								validate: validateConfirmPassword,
 							})}
-							onChange={handleInputChange}
+							// onChange={(e) => {
+							// 	validateConfirmPassword
+							// }}
 						/>
 						{errors.password && (
 							<p className="error">{errors.password.message}</p>
 						)}
 					</div>
 					<Button
-						// onClick={() => trigger()}
-						disabled={!isValid}
+						disabled={false}
 						content="Зарегистрироваться"
 						className={styles.button}
 					/>

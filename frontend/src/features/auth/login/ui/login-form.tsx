@@ -6,12 +6,10 @@ import styles from "./login-form.modules.scss";
 import { LoginParams } from "../models/login-thunk";
 import { useAppDispatch } from "../../../../app/Store/redux-hook";
 import { useNavigate } from "react-router";
-import { loginFormSchema } from "../models/login-form-schema";
-import { zodResolver } from "@hookform/resolvers/zod";
 type FormFields = "email" | "password";
 
 export const LoginForm: React.FC = () => {
-	const form = useForm<LoginParams>({ resolver: zodResolver(loginFormSchema) });
+	const form = useForm<LoginParams>();
 
 	const { register, handleSubmit, formState, watch, reset, trigger } = form;
 	const navigate = useNavigate();
@@ -22,17 +20,14 @@ export const LoginForm: React.FC = () => {
 		dispatch(loginThunk(data));
 		navigate("/");
 	};
-	const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const fieldName = e.target.name as FormFields;
-		trigger(fieldName);
-	};
-
+	const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+	const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 	useEffect(() => {
 		if (isSubmitSuccessful) {
 			reset();
 		}
 	}, [isSubmitSuccessful, reset]);
-
+	console.log(errors);
 	return (
 		<div className={styles.form}>
 			<div className={styles["form-wrapper"]}>
@@ -46,8 +41,11 @@ export const LoginForm: React.FC = () => {
 							placeholder="Введите свою почту"
 							{...register("email", {
 								required: { value: true, message: "Поле почты обязательно" },
+								pattern: {
+									value: emailRegex,
+									message: "Неверный формат электронной почты",
+								},
 							})}
-							onChange={handleInputChange}
 						/>
 						{errors.email && <p className="error">{errors.email.message}</p>}
 					</div>
@@ -59,20 +57,19 @@ export const LoginForm: React.FC = () => {
 							placeholder="Введите пароль"
 							{...register("password", {
 								required: { value: true, message: "Поле пароль обязательно" },
+								pattern: {
+									value: passwordRegex,
+									message:
+										"Пароль должен содержать не менее 8 символов, включая буквы и цифры",
+								},
 							})}
-							onChange={handleInputChange}
 						/>
 						{errors.password && (
 							<p className="error">{errors.password.message}</p>
 						)}
 					</div>
 
-					<Button
-						onClick={() => trigger()}
-						content="Войти"
-						className={styles.button}
-						disabled={!isValid}
-					/>
+					<Button content="Войти" className={styles.button} disabled={false} />
 				</form>
 			</div>
 		</div>
