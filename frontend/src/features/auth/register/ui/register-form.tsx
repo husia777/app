@@ -111,9 +111,6 @@ export const RegisterForm: React.FC = () => {
 								},
 								validate: validateConfirmPassword,
 							})}
-							// onChange={(e) => {
-							// 	validateConfirmPassword
-							// }}
 						/>
 						{errors.password && (
 							<p className="error">{errors.password.message}</p>
