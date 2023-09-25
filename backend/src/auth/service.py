@@ -1,15 +1,23 @@
-from datetime import datetime, timedelta
 from ..config import settings
 from ..database.database import get_session
+from ..auth import schemas, models
 # from database.database import get_session
+from datetime import datetime, timedelta
+from typing import Annotated
+import random
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends, HTTPException, status, Response, Header
-from ..auth import schemas, models
 from passlib.hash import bcrypt
 from jose import jwt, JWTError
 from pydantic import ValidationError
-from typing import Annotated
+from aiosmtplib import SMTP
+from email.message import EmailMessage
+
+
+def generate_confirmation_code():
+    random_number = random.randint(1000, 9999)
+    return random_number
 
 
 async def get_api_key_header(authorization: Annotated[str | None, Header(...)]) -> str:
@@ -96,7 +104,20 @@ class AuthService:
 
         return user_data
 
-    async def register_new_user(self, user_data: schemas.UserCreate,) -> schemas.BaseUser:
+    @classmethod
+    async def send_confirmation_email(email, code):
+        message = EmailMessage()
+        message["Subject"] = "Подтверждение регистрации"
+        message["From"] = settings.mail_username
+        message["To"] = email
+        message.set_content(f"Код подтверждения: {code}")
+
+        async with SMTP(hostname=settings.mail_host, port=settings.mail_port) as smtp:
+            await smtp.login(settings.mail_username, settings.mail_password)
+            await smtp.send_message(message)
+
+    async def register_new_user(self, user_data: schemas.UserCreate, send_confirmation_email: send_confirmation_email = Depends(),
+                                code: generate_confirmation_code = Depends(), ) -> schemas.BaseUser:
         def exception(detail):
             return HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
@@ -118,6 +139,7 @@ class AuthService:
             email=user_data.email,
             username=user_data.username,
             hashed_password=self.hash_password(user_data.password))
+        await send_confirmation_email(user.email)
         self.session.add(user)
         await self.session.commit()
         return schemas.BaseUser(username=user.username, email=user.email)

@@ -33,3 +33,7 @@ class Token(BaseModel):
 
 class UserLogin(BaseUser):
     password: str
+
+
+class ConfirmUser(BaseModel):
+    email: str

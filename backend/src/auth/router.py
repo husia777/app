@@ -8,8 +8,10 @@ router = APIRouter()
 @router.post('/register/', response_model=BaseUser, status_code=status.HTTP_201_CREATED)
 async def sign_up(
         user_data: UserCreate,
+
         auth_service: AuthService = Depends(),
 ):
+
     return await auth_service.register_new_user(user_data)
 
 
