@@ -1,5 +1,6 @@
 /.idea
 /venv
+./backend/venv
 /__pycache__
 /node_modules
 /.pnp
