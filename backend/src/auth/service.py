@@ -129,7 +129,7 @@ class AuthService:
                 </head>
                 <body>
                 <h1>Привет, ваш код подтверждения аккаунта!</h1>
-                <h1>{code}</h1>
+                <h1>{{code}}</h1>
                 <p>This is a test email with <b>styled HTML</b> content.</p>
                 </body>
                 </html>
