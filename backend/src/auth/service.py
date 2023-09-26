@@ -105,7 +105,7 @@ class AuthService:
         return user_data
 
     @classmethod
-    async def send_confirmation_email(email):
+    async def send_confirmation_email(self, email):
         code = await generate_confirmation_code()
         message = EmailMessage()
         message["Subject"] = "Подтверждение регистрации"
@@ -163,7 +163,8 @@ class AuthService:
             email=user_data.email,
             username=user_data.username,
             hashed_password=self.hash_password(user_data.password))
-        await self.send_confirmation_email(user.email) 
+        print(user.email)
+        await self.send_confirmation_email(user.email)
         self.session.add(user)
         await self.session.commit()
         return schemas.BaseUser(username=user.username, email=user.email)
