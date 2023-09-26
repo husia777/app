@@ -105,7 +105,8 @@ class AuthService:
         return user_data
 
     @classmethod
-    async def send_confirmation_email(email, code: str = Depends(generate_confirmation_code)):
+    async def send_confirmation_email(email):
+        code = await generate_confirmation_code()
         message = EmailMessage()
         message["Subject"] = "Подтверждение регистрации"
         message["From"] = settings.mail_username
