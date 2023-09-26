@@ -116,20 +116,20 @@ class AuthService:
                 <html>
                 <head>
                 <style>
-                    h1 {
+                    h1 {{
                         color: blue;
                         font-size: 24px;
-                    }
+                    }}
                     
-                    p {
+                    p {{
                         color: green;
                         font-size: 16px;
-                    }
+                    }}
                 </style>
                 </head>
                 <body>
                 <h1>Привет, ваш код подтверждения аккаунта!</h1>
-                <h1>{{code}}</h1>
+                <h1>{code}</h1>
                 <p>This is a test email with <b>styled HTML</b> content.</p>
                 </body>
                 </html>
