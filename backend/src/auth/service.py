@@ -15,7 +15,7 @@ from email.message import EmailMessage
 from email.mime.text import MIMEText
 
 
-def generate_confirmation_code():
+async def generate_confirmation_code():
     random_number = random.randint(1000, 9999)
     return random_number
 
