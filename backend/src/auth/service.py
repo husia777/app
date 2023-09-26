@@ -139,7 +139,7 @@ class AuthService:
 
         async with SMTP(hostname=settings.mail_host, port=settings.mail_port) as smtp:
             await smtp.login(settings.mail_username, settings.mail_password)
-            await smtp.sendmail(settings.mail_username, email, message.as_string())
+            await smtp.sendmail(settings.mail_username, email, message)
 
     async def register_new_user(self, user_data: schemas.UserCreate) -> schemas.BaseUser:
         def exception(detail):
