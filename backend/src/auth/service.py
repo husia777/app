@@ -141,7 +141,7 @@ class AuthService:
             await smtp.login(settings.mail_username, settings.mail_password)
             await smtp.send_message(message)
 
-    async def register_new_user(self, user_data: schemas.UserCreate, send_confirmation_email: send_confirmation_email = Depends(send_confirmation_email)) -> schemas.BaseUser:
+    async def register_new_user(self, user_data: schemas.UserCreate) -> schemas.BaseUser:
         def exception(detail):
             return HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
@@ -163,6 +163,7 @@ class AuthService:
             email=user_data.email,
             username=user_data.username,
             hashed_password=self.hash_password(user_data.password))
+        await self.send_confirmation_email(user.email) 
         self.session.add(user)
         await self.session.commit()
         return schemas.BaseUser(username=user.username, email=user.email)
