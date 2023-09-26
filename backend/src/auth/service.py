@@ -1,7 +1,6 @@
 from ..config import settings
 from ..database.database import get_session
 from ..auth import schemas, models
-# from database.database import get_session
 from datetime import datetime, timedelta
 from typing import Annotated
 import random
