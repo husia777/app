@@ -32,7 +32,7 @@ $api.interceptors.response.use(
 		if (error.response && error.response.status === 401) {
 			try {
 				const refreshToken = useAppSelector(selectRefreshToken);
-				console.log(refreshToken);
+				console.log(refreshToken, 'refreshToken');
 
 				const dispatch = useAppDispatch();
 
@@ -40,7 +40,7 @@ $api.interceptors.response.use(
 					await dispatch(refreshThunk(refreshToken));
 					const config = error.config;
 					const token = useAppSelector(selectAccessToken);
-					console.log(token)
+					console.log(token, 'token')
 					config.headers.Authorization = `Bearer ${token}`;
 					return axios.request(config);
 				} else {
