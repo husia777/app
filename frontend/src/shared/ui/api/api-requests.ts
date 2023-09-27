@@ -35,13 +35,14 @@ $api.interceptors.response.use(
 				const dispatch = useAppDispatch();
 
 				if (refreshToken) {
-					dispatch(refreshThunk(refreshToken));
+					await dispatch(refreshThunk(refreshToken));
+					const config = error.config;
+					const token = useAppSelector(selectAccessToken);
+					config.headers.Authorization = `Bearer ${token}`;
+					return axios.request(config);
+				} else {
+					console.error("Refresh token is not available.");
 				}
-				const token = useAppSelector(selectAccessToken);
-
-				const config = error.config;
-				config.headers.Authorization = `Bearer ${token}`;
-				return axios.request(config);
 			} catch (refreshError) {
 				console.error("Failed to refresh access token:", refreshError);
 			}
