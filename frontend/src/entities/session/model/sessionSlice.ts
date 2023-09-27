@@ -43,6 +43,7 @@ export const sessionSlice = createSlice({
 				refreshThunk.fulfilled,
 				(state: SessionSliceState, { payload }) => {
 					state.accessToken = payload.data;
+					state.isAuthorized = true;
 				}
 			);
 	},
