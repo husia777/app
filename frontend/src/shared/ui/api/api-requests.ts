@@ -11,6 +11,10 @@ export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
+	headers: {
+		"Access-Control-Allow-Origin": "http://huseinnaimov.com",
+		"Access-Control-Allow-Credentials": true,
+	},
 });
 
 $api.interceptors.request.use((config) => {
@@ -28,20 +32,16 @@ $api.interceptors.request.use((config) => {
 // 		if (error.response && error.response.status === 401) {
 // 			try {
 // 				const refreshToken = useAppSelector(selectRefreshToken);
-// 				console.log(refreshToken, 'refreshToken');
-
 // 				const dispatch = useAppDispatch();
 
 // 				if (refreshToken) {
-// 					await dispatch(refreshThunk(refreshToken));
-// 					const config = error.config;
-// 					const token = useAppSelector(selectAccessToken);
-// 					console.log(token, 'token')
-// 					config.headers.Authorization = `Bearer ${token}`;
-// 					return axios.request(config);
-// 				} else {
-// 					console.error("Refresh token is not available.");
+// 					dispatch(refreshThunk(refreshToken));
 // 				}
+// 				const token = useAppSelector(selectAccessToken);
+
+// 				const config = error.config;
+// 				config.headers.Authorization = `Bearer ${token}`;
+// 				return axios.request(config);
 // 			} catch (refreshError) {
 // 				console.error("Failed to refresh access token:", refreshError);
 // 			}
