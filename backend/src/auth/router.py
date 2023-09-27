@@ -20,7 +20,7 @@ async def sign_in(response: Response,
                   auth_data: UserLogin,
                   auth_service: AuthService = Depends()):
     data = await auth_service.authenticate_user(
-        auth_data.username,
+        auth_data.email,
         auth_data.password)
     refresh_token = data.get('refreshToken')
     access_token = data.get('accessToken')
