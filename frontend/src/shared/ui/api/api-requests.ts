@@ -26,34 +26,34 @@ $api.interceptors.request.use((config) => {
 	return config;
 });
 
-$api.interceptors.response.use(
-	(response) => response,
-	async (error) => {
-		if (error.response && error.response.status === 401) {
-			try {
-				const refreshToken = useAppSelector(selectRefreshToken);
-				console.log(refreshToken, 'refreshToken');
+// $api.interceptors.response.use(
+// 	(response) => response,
+// 	async (error) => {
+// 		if (error.response && error.response.status === 401) {
+// 			try {
+// 				const refreshToken = useAppSelector(selectRefreshToken);
+// 				console.log(refreshToken, 'refreshToken');
 
-				const dispatch = useAppDispatch();
+// 				const dispatch = useAppDispatch();
 
-				if (refreshToken) {
-					await dispatch(refreshThunk(refreshToken));
-					const config = error.config;
-					const token = useAppSelector(selectAccessToken);
-					console.log(token, 'token')
-					config.headers.Authorization = `Bearer ${token}`;
-					return axios.request(config);
-				} else {
-					console.error("Refresh token is not available.");
-				}
-			} catch (refreshError) {
-				console.error("Failed to refresh access token:", refreshError);
-			}
-		}
+// 				if (refreshToken) {
+// 					await dispatch(refreshThunk(refreshToken));
+// 					const config = error.config;
+// 					const token = useAppSelector(selectAccessToken);
+// 					console.log(token, 'token')
+// 					config.headers.Authorization = `Bearer ${token}`;
+// 					return axios.request(config);
+// 				} else {
+// 					console.error("Refresh token is not available.");
+// 				}
+// 			} catch (refreshError) {
+// 				console.error("Failed to refresh access token:", refreshError);
+// 			}
+// 		}
 
-		throw error;
-	}
-);
+// 		throw error;
+// 	}
+// );
 
 export { $api };
 
