@@ -4,11 +4,11 @@ import { AuthResponse } from "../model/types";
 
 export class AuthService {
 	static async login(
-		username: string,
+		email: string,
 		password: string
 	): Promise<AxiosResponse<AuthResponse>> {
 		const data = await $api.post<AuthResponse>("/login", {
-			username,
+			email,
 			password,
 		});
 		if (data.status === 200) {

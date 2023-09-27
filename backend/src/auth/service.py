@@ -169,12 +169,12 @@ class AuthService:
         await self.session.commit()
         return schemas.BaseUser(username=user.username, email=user.email)
 
-    async def authenticate_user(self, username: str, password: str) -> dict:
+    async def authenticate_user(self, email: str, password: str) -> dict:
         exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Неверно введен логин или пароль.',
             headers={'WWW-Authenticate': 'Bearer'})
-        user = await self.session.execute(select(models.User).where(models.User.username == username))
+        user = await self.session.execute(select(models.User).where(models.User.email == email))
         user = user.scalar()
 
         if not user:
