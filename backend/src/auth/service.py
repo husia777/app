@@ -103,10 +103,7 @@ class AuthService:
         except JWTError:
             raise exception from None
         user_data = payload.get('sub')
-        if user_data:
-            user_data = schemas.User.parse_raw(user_data)
-            return user_data
-        return None
+        return user_data
 
     @classmethod
     async def send_confirmation_email(self, email: schemas.ConfirmUser) -> int:
