@@ -36,7 +36,7 @@ async def sign_in(response: Response,
 
 @router.post("/confirm")
 async def confirm_account(email: ConfirmUser, auth_service: AuthService = Depends()):
-    return auth_service.send_confirmation_email(email)
+    return  await auth_service.send_confirmation_email(email)
 
 
 @router.get("/logout/")
