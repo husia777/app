@@ -15,3 +15,7 @@ export const selectRefreshToken = (state: RootState) => {
 export const selectConfirmCode = (state: RootState) => {
 	return state.session.code;
 };
+
+export const selectUserData = (state: RootState) => {
+	return state.session;
+};

@@ -1,5 +1,8 @@
 import { Button } from "../../../../../shared/ui/button/button";
-import { useAppDispatch } from "../../../../../app/Store/redux-hook";
+import {
+	useAppDispatch,
+	useAppSelector,
+} from "../../../../../app/Store/redux-hook";
 import { useNavigate } from "react-router";
 import React from "react";
 import {
@@ -7,13 +10,14 @@ import {
 	accountConfirmationThunk,
 } from "../../models/account-confirmation-thunk";
 import style from "./account-confirmation-form.module.scss";
+import { selectUserData } from "../../../../../entities/session/model/auth-selectors";
 export const ButtonSendConfirmCodeToEmail = () => {
 	const navigate = useNavigate();
-
+	// const email = useAppSelector(selectUserData);
+	const email = localStorage.getItem("email");
 	const dispatch = useAppDispatch();
 
 	const onSubmit = () => {
-		const email = localStorage.getItem("email") as string;
 		if (email) {
 			dispatch(accountConfirmationThunk(email));
 		}
