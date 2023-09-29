@@ -30,6 +30,7 @@ async def get_api_key_header(authorization: Annotated[str | None, Header(...)]) 
 
 async def get_current_user(token: str = Depends(get_api_key_header), session: AsyncSession = Depends(get_session)) -> schemas.User:
     token_data = AuthService.verify_token(token)
+    id = token_data[id]
     print(token_data)
     print(type(token_data))
     user = await session.execute(select(models.User).where(models.User.id == int(token_data)))
@@ -59,8 +60,7 @@ class AuthService:
             'nbf': now,
             'exp': now + timedelta(seconds=settings.jwt_expires_s),
             'sub': user_data,
-            'id': user_data.id,
-            'email': user_data.email,
+
         }
 
         encoded_jwt = jwt.encode(
@@ -77,7 +77,7 @@ class AuthService:
             'iat': now,
             'nbf': now,
             'exp': now + timedelta(seconds=settings.jwt_expires_s),
-            'sub': str(user_data),
+            'sub': user_data,
         }
         token = jwt.encode(
             payload,
@@ -106,7 +106,6 @@ class AuthService:
         except JWTError:
             raise exception from None
         user_data = payload.get('sub')
-        print(user_data)
         return user_data
 
     @classmethod
