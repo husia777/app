@@ -110,7 +110,7 @@ class AuthService:
         message = EmailMessage()
         message["Subject"] = "Подтверждение регистрации"
         message["From"] = settings.mail_username
-        message["To"] = email
+        message["To"] = email.email
 
         html = """
                 <html>
