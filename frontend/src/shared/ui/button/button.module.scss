@@ -9,6 +9,13 @@
 	&:disabled {
 		background-color: gray;
 	}
+	&:hover {
+		cursor: pointer;
+	}
+	&:active {
+		scale: 1.1;
+		transition: 1ms;
+	}
 	font-size: 1rem;
 	@media (min-width: 768px) {
 		padding: 1rem;
