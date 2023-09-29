@@ -40,7 +40,7 @@ services:
       - 8080:8080
     volumes:
       - ./backend:/app
-    restart: allways
+    restart: unless-stopped
 
   frontend:
     hostname: frontend
@@ -60,7 +60,6 @@ services:
     ports:
       - 80:80
       - 443:443
-    restart: allways
 
 volumes:
   postgres_data:
