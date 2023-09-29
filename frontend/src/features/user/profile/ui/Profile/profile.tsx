@@ -13,7 +13,6 @@ export const Profile: React.FC = () => {
 	const userData = useLoaderData() as AxiosResponse<CurrentUserResponse>;
 	return (
 		<>
-			{console.log(userData)}
 			<h2>Id Пользователя: {userData.data.id}</h2>
 			<h2>Имя Пользователя: {userData.data.username}</h2>
 		</>

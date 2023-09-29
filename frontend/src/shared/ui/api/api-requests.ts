@@ -6,13 +6,15 @@ import {
 	selectRefreshToken,
 } from "../../../entities/session/model/auth-selectors";
 import { refreshThunk } from "../../../features/auth/auth_refresh/models/refresh-thunk";
-export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
+// export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
+export const API_LOCALHOST_URL = `http://localhost:8000`;
 
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
 	headers: {
-		"Access-Control-Allow-Origin": "http://huseinnaimov.com",
+		"Access-Control-Allow-Origin": "http://localhost:8000",
+		// "Access-Control-Allow-Origin": "http://huseinnaimov.com",
 		"Access-Control-Allow-Credentials": true,
 	},
 });

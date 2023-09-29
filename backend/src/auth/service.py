@@ -1,6 +1,6 @@
-from ..config import settings
-from ..database.database import get_session
-from ..auth import schemas, models
+from config import settings
+from database.database import get_session
+from auth import schemas, models
 from datetime import datetime, timedelta
 from typing import Annotated
 import random
@@ -30,6 +30,8 @@ async def get_api_key_header(authorization: Annotated[str | None, Header(...)]) 
 
 async def get_current_user(token: str = Depends(get_api_key_header), session: AsyncSession = Depends(get_session)) -> schemas.User:
     token_data = AuthService.verify_token(token)
+    print(token_data)
+    print(type(token_data))
     user = await session.execute(select(models.User).where(models.User.id == int(token_data)))
     user = user.scalar()
     return user
@@ -101,7 +103,7 @@ class AuthService:
         except JWTError:
             raise exception from None
         user_data = payload.get('sub')
-
+        print(user_data)
         return user_data
 
     @classmethod

@@ -1,4 +1,5 @@
 import { Button } from "../../../../../shared/ui/button/button";
+import { getUserData } from "../../../hooks/get-user-data";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -13,8 +14,9 @@ import style from "./account-confirmation-form.module.scss";
 import { selectUserData } from "../../../../../entities/session/model/auth-selectors";
 export const ButtonSendConfirmCodeToEmail = () => {
 	const navigate = useNavigate();
-	// const email = useAppSelector(selectUserData);
 	const email = localStorage.getItem("email");
+	const userData = getUserData();
+	console.log(userData);
 	const dispatch = useAppDispatch();
 
 	const onSubmit = () => {
