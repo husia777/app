@@ -34,6 +34,11 @@ async def sign_in(response: Response,
     return data
 
 
+@router.post("/confirm")
+async def confirm_account(email: str, auth_service: AuthService = Depends()):
+    return auth_service.send_confirmation_email(email)
+
+
 @router.get("/logout/")
 async def logout():
     response = Response(status_code=status.HTTP_204_NO_CONTENT)

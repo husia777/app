@@ -1,11 +1,14 @@
 import { loginThunk } from "../../../features/auth/login/models/login-thunk";
 import { refreshThunk } from "../../../features/auth/auth_refresh/models/refresh-thunk";
+import { accountConfirmationThunk } from "../../../features/auth/account_confirmation/models/account-confirmation-thunk";
+
 import { createSlice } from "@reduxjs/toolkit";
 export interface SessionSliceState {
 	isAuthorized: boolean;
 	accessToken?: string;
 	refreshToken?: string;
 	userId?: string;
+	code?: number;
 }
 export interface sessionPayload {
 	isAuthorized: boolean;
@@ -44,6 +47,12 @@ export const sessionSlice = createSlice({
 				(state: SessionSliceState, { payload }) => {
 					state.accessToken = payload.data;
 					state.isAuthorized = true;
+				}
+			)
+			.addCase(
+				accountConfirmationThunk.fulfilled,
+				(state: SessionSliceState, { payload }) => {
+					state.code = payload.data;
 				}
 			);
 	},

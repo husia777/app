@@ -5,9 +5,10 @@ import { NotFound } from "../pages/NotFound";
 import { MainPage } from "../pages/MainPage";
 import { RegisterPage } from "../pages/RegisterPage";
 import { LoginPage } from "../pages/LoginPage";
+import { ProfilePage } from "../pages/ProfilePage/profile-page";
+import { AccountConfirmationPage } from "../pages/AccountConfirmationPage/";
 import { useAppSelector } from "./Store/redux-hook";
 import { selectIsAuthorized } from "../entities/session/model/auth-selectors";
-import { ProfilePage } from "../pages/ProfilePage/profile-page";
 import { profileLoader } from "../features/user/profile/ui/Profile/profile";
 import { UserService } from "../entities/user/api/user-api";
 type GuestGuardProps = {
@@ -46,6 +47,14 @@ export const appRouter = createBrowserRouter([
 				loader: () => {
 					return UserService.getCurrentUser();
 				},
+			},
+			{
+				path: "confirm",
+				element: (
+					<>
+						<AccountConfirmationPage />
+					</>
+				),
 			},
 			{
 				path: "*",

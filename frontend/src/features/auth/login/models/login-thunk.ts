@@ -4,7 +4,7 @@ export interface LoginParams {
 }
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthService } from "../../../../entities/session";
-import { RootState } from "app/Store/rootReducer";
+import {RootState} from "../../../../app/Store/rootReducer"
 import { AuthResponse } from "../../../../entities/session/model/types";
 import { AxiosResponse } from "axios";
 

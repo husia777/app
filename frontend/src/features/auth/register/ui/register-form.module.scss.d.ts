@@ -3,7 +3,6 @@
 interface CssExports {
   'button': string;
   'error': string;
-  'form': string;
   'form-wrapper': string;
   'title': string;
   'wrapper': string;

@@ -14,16 +14,13 @@ import { Logout } from "../../../../features/auth/logout/ui/logout-button/logout
 import { ProfileButton } from "../../../../entities/user/ui/Button/profile-button";
 export const Header: React.FC = () => {
 	const navigate = useNavigate();
-	const handleClick = () => {
-		navigate("/");
-	};
 
 	const isAuthorized = useAppSelector(selectIsAuthorized);
 	console.log(isAuthorized);
 	return (
 		<header className={styles.header}>
 			<img
-				onClick={() => handleClick()}
+				onClick={() => navigate("/")}
 				className={styles.header__logo}
 				src={logo}
 				alt=""

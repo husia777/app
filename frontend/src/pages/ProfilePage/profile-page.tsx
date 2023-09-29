@@ -5,7 +5,6 @@ import { Profile } from "../../features/user/profile/ui/Profile/profile";
 export const ProfilePage = () => {
 	return (
 		<>
-            {console.log(111)}
 			<Profile />
 		</>
 	);

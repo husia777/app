@@ -15,7 +15,7 @@ from email.message import EmailMessage
 from email.mime.text import MIMEText
 
 
-async def generate_confirmation_code():
+async def generate_confirmation_code() -> int:
     random_number = random.randint(1000, 9999)
     return random_number
 
@@ -105,7 +105,7 @@ class AuthService:
         return user_data
 
     @classmethod
-    async def send_confirmation_email(self, email):
+    async def send_confirmation_email(self, email: str) -> int:
         code = await generate_confirmation_code()
         message = EmailMessage()
         message["Subject"] = "Подтверждение регистрации"
@@ -140,6 +140,7 @@ class AuthService:
         async with SMTP(hostname=settings.mail_host, port=settings.mail_port) as smtp:
             await smtp.login(settings.mail_username, settings.mail_password)
             await smtp.sendmail(settings.mail_username, email, message.as_string())
+        return code
 
     async def register_new_user(self, user_data: schemas.UserCreate) -> schemas.BaseUser:
         def exception(detail):
@@ -163,8 +164,6 @@ class AuthService:
             email=user_data.email,
             username=user_data.username,
             hashed_password=self.hash_password(user_data.password))
-        print(user.email)
-        await self.send_confirmation_email(user.email)
         self.session.add(user)
         await self.session.commit()
         return schemas.BaseUser(username=user.username, email=user.email)
