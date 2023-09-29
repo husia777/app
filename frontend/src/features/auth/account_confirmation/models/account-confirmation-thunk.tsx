@@ -13,8 +13,8 @@ export interface accountConfirmationCodeParams {
 
 export const accountConfirmationThunk = createAsyncThunk<
 	AxiosResponse<number>,
-	accountConfirmationParams,
+	string,
 	{ state: RootState }
->("auth/accountConfirmation", async (body: accountConfirmationParams) => {
-	return AuthService.confirmAccount(body.email);
+>("auth/accountConfirmation", async (body: string) => {
+	return AuthService.confirmAccount(body);
 });

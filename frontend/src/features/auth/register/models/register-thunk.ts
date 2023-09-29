@@ -11,12 +11,11 @@ export const registerThunk = createAsyncThunk<
 	void,
 	RegisterParams,
 	{ state: RootState }
->("auth/register", async (body: RegisterParams, { dispatch }) => {
-	const data = AuthService.registration(
+>("auth/register", async (body: RegisterParams) => {
+	AuthService.registration(
 		body.username,
 		body.email,
 		body.password,
 		body.password_repeat
 	);
-	console.log(data);
 });

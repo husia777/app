@@ -31,10 +31,11 @@ export class AuthService {
 			password_repeat,
 		});
 	}
-	static async refreshToken(token: string) {
+	static async refreshToken(token: string): Promise<AxiosResponse> {
 		return $api.post<string>("/refresh", { token });
 	}
-	static async confirmAccount(email: string) {
+	static async confirmAccount(email: string): Promise<AxiosResponse> {
+
 		const data = await $api.post<number>("/confirm", { email });
 		if (data.status === 200) {
 			localStorage.setItem("code", data.data.toString());

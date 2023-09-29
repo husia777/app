@@ -13,13 +13,10 @@ export const ButtonSendConfirmCodeToEmail = () => {
 	const dispatch = useAppDispatch();
 
 	const onSubmit = () => {
-		// const email = localStorage.getItem(
-		// 	"email"
-		// ) as unknown as accountConfirmationParams;
-		// if (email) {,,
-		const email = "huseinnaimov@bk.ru" as unknown as accountConfirmationParams;
-		dispatch(accountConfirmationThunk(email));
-		// }
+		const email = localStorage.getItem("email") as string;
+		if (email) {
+			dispatch(accountConfirmationThunk(email));
+		}
 	};
 	return (
 		<Button
