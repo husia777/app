@@ -31,7 +31,6 @@ async def get_api_key_header(authorization: Annotated[str | None, Header(...)]) 
 async def get_current_user(token: str = Depends(get_api_key_header), session: AsyncSession = Depends(get_session)) -> schemas.User:
     token_data = AuthService.verify_token(token)
     user_id = int(token_data.split(" ")[1].split('=')[1])
-    print(user_id)
     user = await session.execute(select(models.User).where(models.User.id == user_id))
     user = user.scalar()
     return user
@@ -79,13 +78,13 @@ class AuthService:
             headers={'WWW-Authenticate': 'Bearer'},
             detail='Не удалось подтвердить учетные данные')
 
-        # try:  	# Достаем данные из токена
-        payload = jwt.decode(
-            token,
-            settings.jwt_secret,
-            algorithms=[settings.jwt_algorithm])
-        # except JWTError:
-        #     raise exception from None
+        try:  	# Достаем данные из токена
+            payload = jwt.decode(
+                token,
+                settings.jwt_secret,
+                algorithms=[settings.jwt_algorithm])
+        except JWTError:
+            raise exception from None
         user_data = str(payload.get('sub'))
         return user_data
 
