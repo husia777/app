@@ -19,7 +19,7 @@ export const ButtonSendConfirmCodeToEmail = () => {
 	console.log(userData);
 	const dispatch = useAppDispatch();
 
-	const onSubmit = () => {
+	const onClick = () => {
 		if (email) {
 			dispatch(accountConfirmationThunk(email));
 		}
@@ -27,7 +27,7 @@ export const ButtonSendConfirmCodeToEmail = () => {
 	return (
 		<Button
 			content="Получить код"
-			onClick={() => onSubmit()}
+			onClick={() => onClick()}
 			type="button"
 			disabled={false}
 			className={style.button}

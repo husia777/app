@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "../../app/Store/redux-hook";
 import { selectConfirmCode } from "../../entities/session/model/auth-selectors";
 export const AccountConfirmationPage = () => {
 	const code = useAppSelector(selectConfirmCode);
-	console.log(code);
 	return (
 		<>{code ? <AccountConfirmationForm /> : <ButtonSendConfirmCodeToEmail />}</>
 	);

@@ -23,6 +23,7 @@ class UserCreate(BaseUser):
 
 class User(BaseUser):
     id: int = Field(primary_key=True)
+    username: str
     model_config = ConfigDict(from_attributes=True)
 
 

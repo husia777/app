@@ -11,10 +11,12 @@ export const profileLoader = () => {
 
 export const Profile: React.FC = () => {
 	const userData = useLoaderData() as AxiosResponse<CurrentUserResponse>;
+	console.log(userData)
 	return (
 		<>
 			<h2>Id Пользователя: {userData.data.id}</h2>
 			<h2>Имя Пользователя: {userData.data.username}</h2>
+			<h2>Почта: {userData.data.email}</h2>
 		</>
 	);
 };
