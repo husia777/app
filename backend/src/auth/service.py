@@ -83,14 +83,16 @@ class AuthService:
             headers={'WWW-Authenticate': 'Bearer'},
             detail='Не удалось подтвердить учетные данные')
 
-        try:  	# Достаем данные из токена
-            payload = jwt.decode(
-                token,
-                settings.jwt_secret,
-                algorithms=[settings.jwt_algorithm])
-        except JWTError:
-            raise exception from None
+        # try:  	# Достаем данные из токена
+        payload = jwt.decode(
+            token,
+            settings.jwt_secret,
+            algorithms=[settings.jwt_algorithm])
+        # except JWTError:
+        #     raise exception from None
+        print(payload)
         user_data = payload.get('sub')
+        print(user_data)
         return user_data
 
     @classmethod
