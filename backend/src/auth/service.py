@@ -51,6 +51,7 @@ class AuthService:
     @classmethod
     def create_refresh_token(cls, user: models.User):
         user_data = schemas.User.model_validate(user)
+        print(user_data)
         now = datetime.utcnow()
         payload = {
             'iat': now,
