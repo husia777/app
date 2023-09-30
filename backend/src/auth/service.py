@@ -187,7 +187,7 @@ class AuthService:
         refresh_token_db_data = models.RefreshToken(**refresh_token_dict)
         self.session.add(refresh_token_db_data)
         await self.session.commit()
-        return {
+        return { 
             "accessToken": access_token,
             "token_type": "bearer",
             "refreshToken": refresh_token,
