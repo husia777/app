@@ -30,7 +30,7 @@ async def get_api_key_header(authorization: Annotated[str | None, Header(...)]) 
 
 async def get_current_user(token: str = Depends(get_api_key_header), session: AsyncSession = Depends(get_session)) -> schemas.User:
     token_data = AuthService.verify_token(token)
-    user_id = int(token_data['sub']['id'])
+    user_id = int(token_data['id'])
     user = await session.execute(select(models.User).where(models.User.id == user_id))
     user = user.scalar()
     return user
