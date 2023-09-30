@@ -89,7 +89,7 @@ class AuthService:
             algorithms=[settings.jwt_algorithm])
         # except JWTError:
         #     raise exception from None
-        user_data = payload.get('sub')
+        user_data = str(payload.get('sub'))
         return user_data
 
     @classmethod
