@@ -57,10 +57,7 @@ class AuthService:
             'iat': now,
             'nbf': now,
             'exp': now + timedelta(seconds=settings.jwt_expires_s),
-            'sub': {
-                "id": str(user_data.id),
-                "email": str(user_data.email),
-            },
+            'sub': str(user_data)
         }
         token = jwt.encode(
             payload,
