@@ -11,7 +11,6 @@ export const profileLoader = () => {
 
 export const Profile: React.FC = () => {
 	const userData = useLoaderData() as AxiosResponse<CurrentUserResponse>;
-	console.log(userData)
 	return (
 		<>
 			<h2>Id Пользователя: {userData.data.id}</h2>
@@ -20,3 +19,4 @@ export const Profile: React.FC = () => {
 		</>
 	);
 };
+ 

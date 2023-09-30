@@ -51,9 +51,9 @@ export const appRouter = createBrowserRouter([
 			{
 				path: "confirm",
 				element: (
-					<>
+					<GuestGuard>
 						<AccountConfirmationPage />
-					</>
+					</GuestGuard>
 				),
 			},
 			{

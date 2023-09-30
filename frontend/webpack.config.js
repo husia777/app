@@ -6,8 +6,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { merge } = require("webpack-merge");
 const common = require("./webpack.config.js");
 const webpack = require("webpack");
-const dotenv = require("dotenv");
-dotenv.config({ path: "./.env" });
+const Dotenv = require("dotenv-webpack");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 module.exports = merge(common, {
 	performance: {
 		hints: false,
@@ -61,12 +61,14 @@ module.exports = merge(common, {
 		],
 	},
 	plugins: [
-		new webpack.DefinePlugin({
-			"process.env": JSON.stringify(dotenv.config().parsed),
-		}),
+		// new webpack.DefinePlugin({
+		// 	"process.env": JSON.stringify(dotenv.config().parsed),
+		// }),
+		new NodePolyfillPlugin(),
 		new HtmlWebpackPlugin({
 			template: "./public/index.html",
 			favicon: "./src/assets/icon/favicon.ico",
 		}),
+		new Dotenv(),
 	],
 });

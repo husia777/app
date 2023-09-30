@@ -14,9 +14,9 @@ import style from "./account-confirmation-form.module.scss";
 import { selectUserData } from "../../../../../entities/session/model/auth-selectors";
 export const ButtonSendConfirmCodeToEmail = () => {
 	const navigate = useNavigate();
-	const email = localStorage.getItem("email");
 	const userData = getUserData();
 	console.log(userData);
+	const email = userData?.email;
 	const dispatch = useAppDispatch();
 
 	const onClick = () => {
