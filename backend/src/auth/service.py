@@ -39,6 +39,7 @@ async def get_current_user(token: str = Depends(get_api_key_header), session: As
     print()
     print(token_data)
     print(token_data.split(" "))
+    print(token_data.split(" ")[1])
     print(dict(token_data))
     print()
     print()
