@@ -83,7 +83,6 @@ class AuthService:
             'sub': {
                 "id": user_data.id,
                 "email": user_data.email,
-                "username": user_data.username
             },
         }
         token = jwt.encode(
