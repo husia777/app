@@ -49,32 +49,11 @@ class AuthService:
     def hash_password(cls, password) -> str:
         return bcrypt.hash(password)
 
-    @classmethod
-    def create_refresh_token(cls, user: models.User):
-        user_data = schemas.User.model_validate(user)
-        print(user_data, 111111111111111111111111111111111111111111111111111)
-        now = datetime.utcnow()
-        payload = {
-            'iat': now,
-            'nbf': now,
-            'exp': now + timedelta(seconds=settings.jwt_expires_s),
-            'sub': {
-                "id": user_data.id,
-                "email": user_data.email,
-            },
-
-        }
-
-        encoded_jwt = jwt.encode(
-            payload, settings.jwt_secret, algorithm=settings.jwt_algorithm)
-
-        return encoded_jwt
-
+    
     @classmethod
     def create_token(cls, user: models.User):
         # превращаем модель орм в модель pydantic
         user_data = schemas.User.model_validate(user)
-        print(user_data)
         now = datetime.utcnow()
         payload = {
             'iat': now,
@@ -192,7 +171,7 @@ class AuthService:
             raise exception
 
         access_token = self.create_token(user)
-        refresh_token = self.create_refresh_token(user)
+        refresh_token = self.create_token(user)
         refresh_token_check = await self.session.execute(
             select(models.RefreshToken).where(models.RefreshToken.user_id == user.id))
 
