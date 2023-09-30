@@ -25,13 +25,13 @@ async def get_api_key_header(authorization: Annotated[str | None, Header(...)]) 
         raise HTTPException(
             status_code=401, detail="Invalid authorization header")
     token = authorization.split(" ")[1]
-    return token
+    return str(token)
 
 
 async def get_current_user(token: str = Depends(get_api_key_header), session: AsyncSession = Depends(get_session)) -> schemas.User:
     token_data = AuthService.verify_token(token)
     print(token_data)
-    user_id = int(token_data['id'])
+    user_id = int(token_data['sub']['id'])
     user = await session.execute(select(models.User).where(models.User.id == user_id))
     user = user.scalar()
     return user
@@ -49,7 +49,6 @@ class AuthService:
     def hash_password(cls, password) -> str:
         return bcrypt.hash(password)
 
-    
     @classmethod
     def create_token(cls, user: models.User):
         # превращаем модель орм в модель pydantic
@@ -90,9 +89,7 @@ class AuthService:
             algorithms=[settings.jwt_algorithm])
         # except JWTError:
         #     raise exception from None
-        print(payload)
         user_data = payload.get('sub')
-        print(user_data)
         return user_data
 
     @classmethod
@@ -189,7 +186,7 @@ class AuthService:
         refresh_token_db_data = models.RefreshToken(**refresh_token_dict)
         self.session.add(refresh_token_db_data)
         await self.session.commit()
-        return { 
+        return {
             "accessToken": access_token,
             "token_type": "bearer",
             "refreshToken": refresh_token,
