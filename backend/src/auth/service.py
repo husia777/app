@@ -46,7 +46,7 @@ async def get_current_user(token: str = Depends(get_api_key_header), session: As
     print()
     print()
 
-    user_id = int(dict(token_data).get("id"))
+    user_id = dict(token_data.split(" ")).get("id")
     print(user_id)
     user = await session.execute(select(models.User).where(models.User.id == user_id))
     user = user.scalar()
