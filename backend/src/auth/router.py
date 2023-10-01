@@ -40,7 +40,7 @@ async def confirm_account(email: ConfirmUser, auth_service: AuthService = Depend
 
 
 @router.post("/activate")
-async def activate_accounr(id: ActivateUser, auth_service: AuthService = Depends()):
+async def activate_account(id: ActivateUser, auth_service: AuthService = Depends()):
     return await auth_service.activate_user(id)
 
 
