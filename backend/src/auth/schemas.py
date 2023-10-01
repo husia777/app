@@ -38,3 +38,7 @@ class UserLogin(BaseUser):
 
 class ConfirmUser(BaseModel):
     email: str
+
+
+class ActivateUser(BaseModel):
+    id: str

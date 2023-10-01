@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status, Response
-from .schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin, ConfirmUser
+from .schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin, ConfirmUser, ActivateUser
 
 from .service import AuthService, get_current_user
 router = APIRouter()
@@ -37,6 +37,11 @@ async def sign_in(response: Response,
 @router.post("/confirm")
 async def confirm_account(email: ConfirmUser, auth_service: AuthService = Depends()):
     return await auth_service.send_confirmation_email(email)
+
+
+@router.post("/activate")
+async def activate_accounr(id: ActivateUser, auth_service: AuthService = Depends()):
+    return await auth_service.activate_user(id)
 
 
 @router.get("/logout/")

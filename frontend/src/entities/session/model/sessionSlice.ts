@@ -1,7 +1,9 @@
 import { loginThunk } from "../../../features/auth/login/models/login-thunk";
 import { refreshThunk } from "../../../features/auth/auth_refresh/models/refresh-thunk";
-import { accountConfirmationThunk } from "../../../features/auth/account_confirmation/models/account-confirmation-thunk";
-
+import {
+	accountConfirmationThunk,
+	accountActivationThunk,
+} from "../../../features/auth/account_confirmation/models/account-confirmation-thunk";
 import { createSlice } from "@reduxjs/toolkit";
 export interface SessionSliceState {
 	isActive?: boolean;
@@ -55,6 +57,12 @@ export const sessionSlice = createSlice({
 				accountConfirmationThunk.fulfilled,
 				(state: SessionSliceState, { payload }) => {
 					state.code = payload.data;
+				}
+			)
+			.addCase(
+				accountActivationThunk.fulfilled,
+				(state: SessionSliceState, { payload }) => {
+					state.isActive = payload.data;
 				}
 			);
 	},

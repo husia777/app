@@ -4,17 +4,33 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { accountConfirmationCodeParams } from "../../models/account-confirmation-thunk";
 import { Button } from "../../../../../shared/ui/button/button";
 import { useNavigate } from "react-router";
-import { useAppSelector } from "../../../../../app/Store/redux-hook";
-import { selectConfirmCode } from "../../../../../entities/session/model/auth-selectors";
+import {
+	useAppSelector,
+	useAppDispatch,
+} from "../../../../../app/Store/redux-hook";
+import {
+	selectConfirmCode,
+	selectUserData,
+} from "../../../../../entities/session/model/auth-selectors";
+import { accountActivationThunk } from "../../models/account-confirmation-thunk";
+
 export const AccountConfirmationForm: React.FC = () => {
+	const userId = useAppSelector(selectUserData).userId;
 	const form = useForm<accountConfirmationCodeParams>();
 	const { register, handleSubmit, formState, reset } = form;
 	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
 	const code = useAppSelector(selectConfirmCode);
 	const { isSubmitSuccessful, errors } = formState;
-	const onSubmit = () => {};
 
-	useEffect(() => {}, []);
+	const onSubmit = (data: accountConfirmationCodeParams) => {
+		console.log(data.code);
+		console.log(code);
+		if (data.code === code && userId) {
+			dispatch(accountActivationThunk(userId));
+		}
+	};
+
 	return (
 		<>
 			<div className={styles["form-wrapper"]}>

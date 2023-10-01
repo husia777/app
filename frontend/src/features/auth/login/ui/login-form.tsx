@@ -14,18 +14,22 @@ export const LoginForm: React.FC = () => {
 	const navigate = useNavigate();
 
 	const { isSubmitSuccessful, errors } = formState;
+
 	const dispatch = useAppDispatch();
+
 	const onSubmit: SubmitHandler<LoginParams> = (data: LoginParams) => {
 		dispatch(loginThunk(data));
 		navigate("/");
 	};
 	const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 	const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
 	useEffect(() => {
 		if (isSubmitSuccessful) {
 			reset();
 		}
 	}, [isSubmitSuccessful, reset]);
+
 	return (
 		<div className={styles["form-wrapper"]}>
 			<div className={styles.title}>Добро пожаловать</div>

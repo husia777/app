@@ -18,6 +18,15 @@ export class AuthService {
 
 		return data;
 	}
+
+	static async activateAccount(id: string): Promise<AxiosResponse<boolean>> {
+		const data = await $api.post<boolean>("/activate", { id });
+		if (data.status === 200) {
+			localStorage.setItem("isActive", String(data.data));
+		}
+		return data;
+	}
+
 	static async registration(
 		username: string,
 		email: string,
@@ -41,6 +50,7 @@ export class AuthService {
 		}
 		return data;
 	}
+
 	static async logout() {
 		return $api.get("/logout");
 	}
