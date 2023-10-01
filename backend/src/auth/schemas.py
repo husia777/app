@@ -41,4 +41,4 @@ class ConfirmUser(BaseModel):
 
 
 class ActivateUser(BaseModel):
-    id: str
+    id: int

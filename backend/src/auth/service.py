@@ -192,7 +192,8 @@ class AuthService:
 
     async def activate_user(self, id: schemas.ActivateUser) -> bool:
         # try:
-        user = await self.session.execute(select(models.User).where(models.User.id == int(id)))
+
+        user = await self.session.execute(select(models.User).where(models.User.id == id))
         user = user.scalar()
         user.is_active = True
         self.session.add(user)
