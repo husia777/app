@@ -1,9 +1,14 @@
-import React, { useEffect, ChangeEvent } from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../../../shared/ui";
 import styles from "./register-form.module.scss";
 import { registerThunk, RegisterParams } from "../models/register-thunk";
 import { useAppDispatch } from "../../../../app/Store/redux-hook";
+import { useNavigate } from "react-router";
+import {
+	successAlert,
+	CustomToastContainer,
+} from "../../../../shared/ui/customAlert/custom-alert";
 
 type FormFields = "email" | "username" | "password" | "password_repeat";
 
@@ -28,14 +33,22 @@ export const RegisterForm: React.FC = () => {
 		return true;
 	};
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const onSubmit: SubmitHandler<RegisterParams> = (data: RegisterParams) => {
 		dispatch(registerThunk(data));
 	};
 	useEffect(() => {
 		if (isSubmitSuccessful) {
-			reset();
+			successAlert("Регистрация прошла успешно");
+
+			const timeoutId = setTimeout(() => {
+				navigate("/login");
+			}, 5000);
+			return () => {
+				reset(), clearTimeout(timeoutId);
+			};
 		}
-	}, [isSubmitSuccessful, reset]);
+	}, [isSubmitSuccessful, navigate, reset]);
 	return (
 		<div className={styles["form-wrapper"]}>
 			<div className={styles.title}>Добро пожаловать</div>
@@ -62,7 +75,7 @@ export const RegisterForm: React.FC = () => {
 				<div className="form-control">
 					<label htmlFor="email">Почта</label>
 					<input
-						type="text"
+						type="email"
 						id="email"
 						placeholder="Введите  E-mail"
 						{...register("email", {
@@ -121,6 +134,7 @@ export const RegisterForm: React.FC = () => {
 					className={styles.button}
 				/>
 			</form>
+			<CustomToastContainer />
 		</div>
 	);
 };

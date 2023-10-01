@@ -1,11 +1,11 @@
 import axios from "axios";
 import { config } from "dotenv";
-import { useAppDispatch, useAppSelector } from "../../../app/Store/redux-hook";
+import { useAppDispatch, useAppSelector } from "../../app/Store/redux-hook";
 import {
 	selectAccessToken,
 	selectRefreshToken,
-} from "../../../entities/session/model/auth-selectors";
-import { refreshThunk } from "../../../features/auth/auth_refresh/models/refresh-thunk";
+} from "../../entities/session/model/auth-selectors";
+import { refreshThunk } from "../../features/auth/auth_refresh/models/refresh-thunk";
 export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
 
 const $api = axios.create({

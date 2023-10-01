@@ -35,6 +35,10 @@ module.exports = merge(common, {
 	module: {
 		rules: [
 			{
+				test: /\.css$/i,
+				use: ["style-loader", "css-loader"],
+			},
+			{
 				test: [/\.s[ac]ss$/i],
 				use: [
 					{ loader: "style-loader" }, // to inject the result into the DOM as a style block

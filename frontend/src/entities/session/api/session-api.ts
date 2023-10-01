@@ -1,4 +1,4 @@
-import { $api } from "../../../shared/ui/api";
+import { $api } from "../../../shared/api";
 import { AxiosResponse } from "axios";
 import { AuthResponse } from "../model/types";
 
@@ -14,7 +14,6 @@ export class AuthService {
 		if (data.status === 200) {
 			localStorage.setItem("accessToken", data.data.accessToken);
 			localStorage.setItem("refreshToken", data.data.refreshToken);
-			
 		}
 
 		return data;
@@ -36,7 +35,6 @@ export class AuthService {
 		return $api.post<string>("/refresh", { token });
 	}
 	static async confirmAccount(email: string): Promise<AxiosResponse> {
-
 		const data = await $api.post<number>("/confirm", { email });
 		if (data.status === 200) {
 			localStorage.setItem("code", data.data.toString());

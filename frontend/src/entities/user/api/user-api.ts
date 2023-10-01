@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { $api } from "../../../shared/ui/api";
+import { $api } from "../../../shared/api";
 import { CurrentUserResponse } from "../model/types";
 export class UserService {
 	static async getCurrentUser(): Promise<AxiosResponse<CurrentUserResponse>> {
