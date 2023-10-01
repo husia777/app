@@ -4,6 +4,7 @@ import { accountConfirmationThunk } from "../../../features/auth/account_confirm
 
 import { createSlice } from "@reduxjs/toolkit";
 export interface SessionSliceState {
+	isActive?: boolean;
 	isAuthorized: boolean;
 	accessToken?: string;
 	refreshToken?: string;
@@ -28,7 +29,7 @@ export const sessionSlice = createSlice({
 			state.isAuthorized = false;
 			state.refreshToken = undefined;
 			state.userId = undefined;
-			state.code = undefined
+			state.code = undefined;
 		},
 	},
 	extraReducers: (builder) => {

@@ -1,6 +1,6 @@
 import { Root } from "../pages/RootPage";
-import { Navigate, createBrowserRouter } from "react-router-dom";
-import React, { Component, ReactElement } from "react";
+import { useNavigate, createBrowserRouter } from "react-router-dom";
+import React, { Component, ReactElement, useEffect, useState } from "react";
 import { NotFound } from "../pages/NotFound";
 import { MainPage } from "../pages/MainPage";
 import { RegisterPage } from "../pages/RegisterPage";
@@ -8,19 +8,64 @@ import { LoginPage } from "../pages/LoginPage";
 import { ProfilePage } from "../pages/ProfilePage/profile-page";
 import { AccountConfirmationPage } from "../pages/AccountConfirmationPage/";
 import { useAppSelector } from "./Store/redux-hook";
-import { selectIsAuthorized } from "../entities/session/model/auth-selectors";
+import {
+	selectIsAuthorized,
+	selectIsActive,
+} from "../entities/session/model/auth-selectors";
 import { profileLoader } from "../features/user/profile/ui/Profile/profile";
 import { UserService } from "../entities/user/api/user-api";
+import {
+	infoAlert,
+	CustomToastContainer,
+} from "../shared/ui/customAlert/custom-alert";
 type GuestGuardProps = {
 	children: ReactElement;
 };
 
 function GuestGuard({ children }: GuestGuardProps) {
+	const [isShownAuthAlert, setShownAuthAlert] = useState(false);
+	const [isShownActiveAlert, setShownActiveAlert] = useState(false);
 	const isAuthorized = useAppSelector(selectIsAuthorized);
+	const isActive = useAppSelector(selectIsActive);
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (!isAuthorized && !isShownAuthAlert) {
+			const timeoutAuthAlert = setTimeout(() => {
+				infoAlert(
+					"Пользоваться нашими сервисами могут только авторизованные пользователи, подтвердившие свой аккаунт."
+				);
+			}, 1200);
+			setShownAuthAlert(true);
+			const timeoutNavigateLogin = setTimeout(() => {
+				navigate("/login");
+			}, 5000);
+			return () => {
+				clearTimeout(timeoutAuthAlert);
+				clearTimeout(timeoutNavigateLogin);
+			};
+		}
+		if (!isActive && !isShownActiveAlert) {
+			const timeoutActiveAlert = setTimeout(() => {
+				infoAlert("Подтвердите свой аккаунт.");
+			}, 1200);
+			setShownActiveAlert(true);
 
-	if (!isAuthorized) return <Navigate to="/login" />;
+			const timeoutNavigateConfirm = setTimeout(() => {
+				navigate("/confirm");
+			}, 3000);
+			return () => {
+				clearTimeout(timeoutActiveAlert);
+				clearTimeout(timeoutNavigateConfirm);
+			};
+		}
+	}, [isAuthorized, navigate, isActive]);
 
-	return children;
+	return (
+		<>
+			{children}
+			<CustomToastContainer />
+		</>
+	);
 }
 export const appRouter = createBrowserRouter([
 	{
@@ -39,22 +84,14 @@ export const appRouter = createBrowserRouter([
 			{ path: "login", element: <LoginPage /> },
 			{
 				path: "profile",
-				element: (
-					<GuestGuard>
-						<ProfilePage />
-					</GuestGuard>
-				),
+				element: <ProfilePage />,
 				loader: () => {
 					return UserService.getCurrentUser();
 				},
 			},
 			{
 				path: "confirm",
-				element: (
-					<GuestGuard>
-						<AccountConfirmationPage />
-					</GuestGuard>
-				),
+				element: <AccountConfirmationPage />,
 			},
 			{
 				path: "*",

@@ -19,3 +19,7 @@ export const selectConfirmCode = (state: RootState) => {
 export const selectUserData = (state: RootState) => {
 	return state.session;
 };
+
+export const selectIsActive = (state: RootState) => {
+	return state.session.isActive;
+};
