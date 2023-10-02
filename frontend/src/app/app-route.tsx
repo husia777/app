@@ -28,13 +28,18 @@ function GuestGuard({ children }: GuestGuardProps) {
 	const isAuthorized = useAppSelector(selectIsAuthorized);
 	const isVerified = userData.isVerified;
 	const navigate = useNavigate();
-	const token = localStorage.getItem("accessToken") as string;
 	useEffect(() => {
-		if (token) {
-			dispatch(refreshThunk(token));
-			dispatch(setUserData(getUserData()));
+		if (isAuthorized) {
+			const token = localStorage.getItem("accessToken") as string;
+			console.log(token, "token");
+			if (token) {
+				dispatch(refreshThunk(token));
+				dispatch(setUserData(getUserData()));
+			}
+			console.log(token);
+			console.log(isAuthorized);
+			console.log(isVerified);
 		}
-
 		if (!isAuthorized) {
 			const timeoutAuthAlert = setTimeout(() => {
 				infoAlert(
@@ -88,7 +93,11 @@ export const appRouter = createBrowserRouter([
 			{ path: "login", element: <LoginPage /> },
 			{
 				path: "profile",
-				element: <ProfilePage />,
+				element: (
+					<GuestGuard>
+						<ProfilePage />
+					</GuestGuard>
+				),
 				loader: () => {
 					return getUserData();
 				},

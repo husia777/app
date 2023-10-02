@@ -13,7 +13,6 @@ export const getUserData = () => {
 	const isVerified = userData.is_verified;
 	const hashedPassword = userData.hashed_password;
 	const surname = userData.surname;
-	console.log(registeredAt)
 	return {
 		email,
 		id,
