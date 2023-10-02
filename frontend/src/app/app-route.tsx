@@ -7,25 +7,29 @@ import { RegisterPage } from "../pages/RegisterPage";
 import { LoginPage } from "../pages/LoginPage";
 import { ProfilePage } from "../pages/ProfilePage/profile-page";
 import { AccountConfirmationPage } from "../pages/AccountConfirmationPage/";
-import { useAppSelector } from "./Store/redux-hook";
-import {
-	selectIsAuthorized,
-	selectIsActive,
-} from "../entities/session/model/auth-selectors";
+import { useAppDispatch, useAppSelector } from "./Store/redux-hook";
+import { setUserData } from "../entities/user/model/user-slice";
+import { selectIsAuthorized } from "../entities/session/model/auth-selectors";
 import {
 	infoAlert,
 	CustomToastContainer,
 } from "../shared/ui/customAlert/custom-alert";
 import { getUserData } from "../features/auth/hooks/get-user-data";
+import { selectUserData } from "../entities/user/model/user-selectors";
 type GuestGuardProps = {
 	children: ReactElement;
 };
 
 function GuestGuard({ children }: GuestGuardProps) {
+	const dispatch = useAppDispatch();
+	const userData = useAppSelector(selectUserData);
+
 	const isAuthorized = useAppSelector(selectIsAuthorized);
-	const isActive = useAppSelector(selectIsActive);
+	const isVerified = userData.isVerified;
 	const navigate = useNavigate();
 	useEffect(() => {
+		dispatch(setUserData(getUserData()));
+
 		if (!isAuthorized) {
 			const timeoutAuthAlert = setTimeout(() => {
 				infoAlert(
@@ -40,7 +44,7 @@ function GuestGuard({ children }: GuestGuardProps) {
 				clearTimeout(timeoutNavigateLogin);
 			};
 		}
-		if (!isActive) {
+		if (!isVerified) {
 			const timeoutActiveAlert = setTimeout(() => {
 				infoAlert("Подтвердите свой аккаунт.");
 			}, 1200);
@@ -53,7 +57,7 @@ function GuestGuard({ children }: GuestGuardProps) {
 				clearTimeout(timeoutNavigateConfirm);
 			};
 		}
-	}, [isAuthorized, navigate, isActive]);
+	}, [isAuthorized, navigate, isVerified, dispatch]);
 
 	return (
 		<>

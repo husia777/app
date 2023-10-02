@@ -16,10 +16,4 @@ export const selectConfirmCode = (state: RootState) => {
 	return state.session.code;
 };
 
-export const selectUserData = (state: RootState) => {
-	return state.session;
-};
 
-export const selectIsActive = (state: RootState) => {
-	return state.session.isActive;
-};
