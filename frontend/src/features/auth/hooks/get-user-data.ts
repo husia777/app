@@ -13,6 +13,7 @@ export const getUserData = () => {
 	if (accessToken) {
 		const encodedPayload = accessToken.split(".")[1];
 		const decodedPayload = atob(encodedPayload);
+		console.log(decodedPayload);
 		const userData = JSON.parse(decodedPayload);
 		const emailRegex = /email='([^']+)'/;
 		const idRegex = /id=(\d+)/;
