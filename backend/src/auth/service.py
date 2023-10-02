@@ -127,11 +127,11 @@ class AuthService:
             await smtp.sendmail(settings.mail_username, email.email, message.as_string())
         return code
 
-    def get_new_access_token(self, token: str):
+    async def get_new_access_token(self, token: str):
         token_data = self.verify_token(token)
         token_data = json.loads(token_data)
         user_id = token_data.get("id")
-        user = self.session.execute(
+        user = await self.session.execute(
             select(models.User).where(models.User.id == user_id))
         return self.create_token(user)
 
