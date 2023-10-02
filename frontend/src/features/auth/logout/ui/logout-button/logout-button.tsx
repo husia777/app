@@ -12,6 +12,7 @@ interface ILogout {
 export const Logout: React.FC<ILogout> = (props) => {
 	const dispatch = useAppDispatch();
 	const handleLogout = () => {
+		localStorage.clear()
 		dispatch(clearSessionData());
 		dispatch(clearUserData());
 	};

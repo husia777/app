@@ -30,8 +30,10 @@ function GuestGuard({ children }: GuestGuardProps) {
 	const navigate = useNavigate();
 	const token = localStorage.getItem("accessToken") as string;
 	useEffect(() => {
-		dispatch(refreshThunk(token));
-		dispatch(setUserData(getUserData()));
+		if (token) {
+			dispatch(refreshThunk(token));
+			dispatch(setUserData(getUserData()));
+		}
 
 		if (!isAuthorized) {
 			const timeoutAuthAlert = setTimeout(() => {
