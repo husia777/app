@@ -24,9 +24,14 @@ type GuestGuardProps = {
 function GuestGuard({ children }: GuestGuardProps) {
 	const [isShownAuthAlert, setShownAuthAlert] = useState(false);
 	const [isShownActiveAlert, setShownActiveAlert] = useState(false);
-
 	const isAuthorized = useAppSelector(selectIsAuthorized);
 	const isActive = useAppSelector(selectIsActive);
+
+	console.log(isActive, "isActive");
+	console.log(isAuthorized, "isAuthorized");
+	console.log(isShownAuthAlert, "isShownAuthAlert");
+	console.log(isShownActiveAlert, "isShownActiveAlert");
+
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (!isAuthorized && !isShownAuthAlert) {

@@ -13,6 +13,7 @@ from pydantic import ValidationError
 from aiosmtplib import SMTP
 from email.message import EmailMessage
 from email.mime.text import MIMEText
+import json
 
 
 async def generate_confirmation_code() -> int:
@@ -51,13 +52,14 @@ class AuthService:
     @classmethod
     def create_token(cls, user: models.User):
         # превращаем модель орм в модель pydantic
-        user_data = schemas.User.model_validate(user)
+        user_data = user.__dict__
+        print(user_data)
         now = datetime.utcnow()
         payload = {
             'iat': now,
             'nbf': now,
             'exp': now + timedelta(seconds=settings.jwt_expires_s),
-            'sub': str(user_data)
+            'sub': json.dumps(user_data)  # Преобразуем словарь в строку JSON
         }
         token = jwt.encode(
             payload,
