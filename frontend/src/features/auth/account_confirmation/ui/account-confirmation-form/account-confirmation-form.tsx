@@ -6,6 +6,7 @@ import { Button } from "../../../../../shared/ui/button/button";
 import {
 	CustomToastContainer,
 	successAlert,
+	errorAlert,
 } from "../../../../../shared/ui/customAlert/custom-alert";
 import { useNavigate } from "react-router";
 import {
@@ -18,7 +19,6 @@ import { getUserData } from "../../../../../features/auth/hooks/get-user-data";
 
 export const AccountConfirmationForm: React.FC = () => {
 	const userId = String(getUserData()?.id);
-
 	const form = useForm<accountConfirmationCodeParams>();
 	const { register, handleSubmit, formState, reset } = form;
 	const navigate = useNavigate();
@@ -26,14 +26,13 @@ export const AccountConfirmationForm: React.FC = () => {
 	const code = useAppSelector(selectConfirmCode);
 	const { isSubmitSuccessful, errors } = formState;
 
-	const onSubmit = (data: accountConfirmationCodeParams) => {
-		console.log(code)
-		console.log(data.code);
-		console.log(userId, "userId");
-		if (data.code === code) {
-			dispatch(accountActivationThunk(userId)).then(() =>
-				successAlert("Аккаунт успешно подтвержден")
-			);
+	const onSubmit = async (data: accountConfirmationCodeParams) => {
+		try {
+			await dispatch(accountActivationThunk(userId));
+
+			successAlert("Аккаунт успешно подтвержден");
+		} catch (error) {
+			errorAlert("Ошибка");
 		}
 	};
 

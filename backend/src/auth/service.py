@@ -201,7 +201,7 @@ class AuthService:
 
         user = await self.session.execute(select(models.User).where(models.User.id == id.id))
         user = user.scalar()
-        user.is_active = True
+        user.is_verified = True
         self.session.add(user)
         await self.session.commit()
         return True
