@@ -3,27 +3,33 @@ import jwt from "jsonwebtoken";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/Store/redux-hook";
 import { selectUserData } from "../../../entities/session/model/auth-selectors";
-interface AccessToken {
-	sub: string;
-}
 
 export const getUserData = () => {
 	const accessToken = localStorage.getItem("accessToken") as string;
+	const encodedPayload = accessToken.split(".")[1];
+	const decodedPayload = atob(encodedPayload);
+	const userData = JSON.parse(JSON.parse(decodedPayload).sub);
+	const email = userData.email;
+	const id = userData.id;
+	const username = userData.username;
+	const registeredAt = new Date(userData.registered_at);
+	const name = userData.name;
+	const isActive = userData.is_active;
+	const isSuperuser = userData.is_superuser;
+	const isVerified = userData.is_verified;
+	const hashedPassword = userData.hashed_password;
+	const surname = userData.surname;
 
-	if (accessToken) {
-		const encodedPayload = accessToken.split(".")[1];
-		const decodedPayload = atob(encodedPayload);
-		console.log(decodedPayload);
-		const userData = JSON.parse(decodedPayload);
-		const emailRegex = /email='([^']+)'/;
-		const idRegex = /id=(\d+)/;
-
-		const emailMatch = emailRegex.exec(userData.sub);
-		const idMatch = idRegex.exec(userData.sub);
-
-		const email = emailMatch ? emailMatch[1] : "";
-		const id = idMatch ? parseInt(idMatch[1], 10) : 0;
-
-		return { email, id };
-	}
+	return {
+		email,
+		id,
+		username,
+		registeredAt,
+		name,
+		isActive,
+		isSuperuser,
+		isVerified,
+		hashedPassword,
+		surname,
+	};
 };

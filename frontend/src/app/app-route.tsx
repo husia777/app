@@ -12,11 +12,11 @@ import {
 	selectIsAuthorized,
 	selectIsActive,
 } from "../entities/session/model/auth-selectors";
-import { UserService } from "../entities/user/api/user-api";
 import {
 	infoAlert,
 	CustomToastContainer,
 } from "../shared/ui/customAlert/custom-alert";
+import { getUserData } from "../features/auth/hooks/get-user-data";
 type GuestGuardProps = {
 	children: ReactElement;
 };
@@ -26,12 +26,10 @@ function GuestGuard({ children }: GuestGuardProps) {
 	const [isShownActiveAlert, setShownActiveAlert] = useState(false);
 	const isAuthorized = useAppSelector(selectIsAuthorized);
 	const isActive = useAppSelector(selectIsActive);
-
 	console.log(isActive, "isActive");
 	console.log(isAuthorized, "isAuthorized");
 	console.log(isShownAuthAlert, "isShownAuthAlert");
 	console.log(isShownActiveAlert, "isShownActiveAlert");
-
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (!isAuthorized && !isShownAuthAlert) {
@@ -91,7 +89,7 @@ export const appRouter = createBrowserRouter([
 				path: "profile",
 				element: <ProfilePage />,
 				loader: () => {
-					return UserService.getCurrentUser();
+					return getUserData();
 				},
 			},
 			{
