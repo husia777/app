@@ -16,6 +16,7 @@ import {
 } from "../shared/ui/customAlert/custom-alert";
 import { getUserData } from "../features/auth/hooks/get-user-data";
 import { selectUserData } from "../entities/user/model/user-selectors";
+import { refreshThunk } from "../features/auth/auth_refresh/models/refresh-thunk";
 type GuestGuardProps = {
 	children: ReactElement;
 };
@@ -27,7 +28,9 @@ function GuestGuard({ children }: GuestGuardProps) {
 	const isAuthorized = useAppSelector(selectIsAuthorized);
 	const isVerified = userData.isVerified;
 	const navigate = useNavigate();
+	const token = localStorage.getItem("accessToken") as string;
 	useEffect(() => {
+		dispatch(refreshThunk(token));
 		dispatch(setUserData(getUserData()));
 
 		if (!isAuthorized) {
