@@ -39,7 +39,7 @@ const userSlice = createSlice({
 		surname: "",
 	},
 	reducers: {
-		clearSessionData: (state) => {
+		clearUserData: (state) => {
 			state.email = "";
 			state.id = "";
 			state.username = "";
@@ -62,5 +62,5 @@ const userSlice = createSlice({
 	},
 });
 
-export const { setUserData } = userSlice.actions;
+export const { setUserData, clearUserData } = userSlice.actions;
 export const userReducer = userSlice.reducer;
