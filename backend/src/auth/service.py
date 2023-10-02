@@ -72,11 +72,6 @@ class AuthService:
         return token
 
     @classmethod
-    def get_new_access_token(cls, token: str):
-        token_data = cls.verify_token(token)
-        return cls.create_token(token_data)
-
-    @classmethod
     def verify_token(cls, token):
 
         exception = HTTPException(
@@ -131,6 +126,14 @@ class AuthService:
             await smtp.login(settings.mail_username, settings.mail_password)
             await smtp.sendmail(settings.mail_username, email.email, message.as_string())
         return code
+
+    def get_new_access_token(self, token: str):
+        token_data = self.verify_token(token)
+        token_data = json.loads(token_data)
+        user_id = token_data.get("id")
+        user = self.session.execute(
+            select(models.User).where(models.User.id == user_id))
+        return self.create_token(user)
 
     async def register_new_user(self, user_data: schemas.UserCreate) -> schemas.BaseUser:
         def exception(detail):

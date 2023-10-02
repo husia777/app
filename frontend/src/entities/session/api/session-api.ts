@@ -37,7 +37,13 @@ export class AuthService {
 		});
 	}
 	static async refreshToken(token: string): Promise<AxiosResponse> {
-		return $api.post<string>("/refresh", { token });
+		const data = await $api.post<string>("/refresh", { token });
+		if (data.status === 200) {
+			// localStorage.removeItem("accessToken")
+			localStorage.setItem("accessToken", data.data)
+		}
+		return data
+		
 	}
 	static async confirmAccount(email: string): Promise<AxiosResponse> {
 		const data = await $api.post<number>("/confirm", { email });

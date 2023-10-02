@@ -58,14 +58,13 @@ export const sessionSlice = createSlice({
 				(state: SessionSliceState, { payload }) => {
 					state.code = payload.data;
 				}
-			)
-			.addCase(
-				accountActivationThunk.fulfilled,
-				(state: SessionSliceState, { payload }) => {
-					state.isActive = payload.data;
-					console.log(state.isActive);
-				}
 			);
+		// .addCase(
+		// 	accountActivationThunk.fulfilled,
+		// 	(state: SessionSliceState, { payload }) => {
+		// 		state.isActive = payload.data;
+		// 	}
+		// );
 	},
 });
 

@@ -51,15 +51,9 @@ async def logout():
     return response
 
 
-@router.get("/refresh/", status_code=status.HTTP_200_OK)
+@router.post("/refresh/", status_code=status.HTTP_200_OK)
 async def get_new_access_token(token: Token, auth_service: AuthService = Depends()):
-
-    refresh_data = await auth_service.get_new_access_token(token)
-
-    new_access_token = await auth_service.create_token(refresh_data.dict())
-    return {
-        "access_token": new_access_token,
-    }
+    return await auth_service.get_new_access_token(token)
 
 
 @router.get('/profile/', response_model=User)
