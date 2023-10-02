@@ -27,11 +27,13 @@ export const AccountConfirmationForm: React.FC = () => {
 	const { isSubmitSuccessful, errors } = formState;
 
 	const onSubmit = (data: accountConfirmationCodeParams) => {
-		console.log(code);
+		console.log(code)
 		console.log(data.code);
 		console.log(userId);
 		if (data.code === code) {
-			dispatch(accountActivationThunk(userId));
+			dispatch(accountActivationThunk(userId)).then(() =>
+				successAlert("Аккаунт успешно подтвержден")
+			);
 		}
 	};
 
