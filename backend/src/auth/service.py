@@ -128,7 +128,7 @@ class AuthService:
 
     async def get_new_access_token(self, token: schemas.RefreshToken):
 
-        token_data = self.verify_token(token.access_token)
+        token_data = self.verify_token(token.token)
         token_data = json.loads(token_data)
         user_id = token_data.get("id")
         user = await self.session.execute(
