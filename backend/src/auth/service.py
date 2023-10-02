@@ -7,6 +7,7 @@ import random
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends, HTTPException, status, Response, Header
+from fastapi.encoders import jsonable_encoder
 from passlib.hash import bcrypt
 from jose import jwt, JWTError
 from pydantic import ValidationError
@@ -52,7 +53,7 @@ class AuthService:
     @classmethod
     def create_token(cls, user: models.User):
         # превращаем модель орм в модель pydantic
-        user_data = user.__dict__
+        user_data = jsonable_encoder(user.__dict__)
         print(user_data)
         now = datetime.utcnow()
         payload = {
