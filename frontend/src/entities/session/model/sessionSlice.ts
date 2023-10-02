@@ -63,6 +63,7 @@ export const sessionSlice = createSlice({
 				accountActivationThunk.fulfilled,
 				(state: SessionSliceState, { payload }) => {
 					state.isActive = payload.data;
+					console.log(state.isActive)
 				}
 			);
 	},

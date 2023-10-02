@@ -1,6 +1,6 @@
 import { Root } from "../pages/RootPage";
 import { useNavigate, createBrowserRouter } from "react-router-dom";
-import React, { Component, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { NotFound } from "../pages/NotFound";
 import { MainPage } from "../pages/MainPage";
 import { RegisterPage } from "../pages/RegisterPage";
@@ -12,7 +12,6 @@ import {
 	selectIsAuthorized,
 	selectIsActive,
 } from "../entities/session/model/auth-selectors";
-import { profileLoader } from "../features/user/profile/ui/Profile/profile";
 import { UserService } from "../entities/user/api/user-api";
 import {
 	infoAlert,
@@ -25,6 +24,7 @@ type GuestGuardProps = {
 function GuestGuard({ children }: GuestGuardProps) {
 	const [isShownAuthAlert, setShownAuthAlert] = useState(false);
 	const [isShownActiveAlert, setShownActiveAlert] = useState(false);
+
 	const isAuthorized = useAppSelector(selectIsAuthorized);
 	const isActive = useAppSelector(selectIsActive);
 	const navigate = useNavigate();
@@ -58,7 +58,7 @@ function GuestGuard({ children }: GuestGuardProps) {
 				clearTimeout(timeoutNavigateConfirm);
 			};
 		}
-	}, [isAuthorized, navigate, isActive]);
+	}, [isAuthorized, navigate, isActive, isShownActiveAlert, isShownAuthAlert]);
 
 	return (
 		<>
@@ -91,7 +91,11 @@ export const appRouter = createBrowserRouter([
 			},
 			{
 				path: "confirm",
-				element: <AccountConfirmationPage />,
+				element: (
+					<GuestGuard>
+						<AccountConfirmationPage />
+					</GuestGuard>
+				),
 			},
 			{
 				path: "*",

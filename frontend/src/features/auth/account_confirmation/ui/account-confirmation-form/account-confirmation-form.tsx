@@ -1,21 +1,24 @@
 import React, { useEffect } from "react";
 import styles from "./account-confirmation-form.module.scss";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { accountConfirmationCodeParams } from "../../models/account-confirmation-thunk";
 import { Button } from "../../../../../shared/ui/button/button";
+import {
+	CustomToastContainer,
+	successAlert,
+} from "../../../../../shared/ui/customAlert/custom-alert";
 import { useNavigate } from "react-router";
 import {
 	useAppSelector,
 	useAppDispatch,
 } from "../../../../../app/Store/redux-hook";
-import {
-	selectConfirmCode,
-	selectUserData,
-} from "../../../../../entities/session/model/auth-selectors";
+import { selectConfirmCode } from "../../../../../entities/session/model/auth-selectors";
 import { accountActivationThunk } from "../../models/account-confirmation-thunk";
+import { getUserData } from "../../../../../features/auth/hooks/get-user-data";
 
 export const AccountConfirmationForm: React.FC = () => {
-	const userId = useAppSelector(selectUserData).userId;
+	const userId = String(getUserData()?.id);
+
 	const form = useForm<accountConfirmationCodeParams>();
 	const { register, handleSubmit, formState, reset } = form;
 	const navigate = useNavigate();
@@ -24,9 +27,10 @@ export const AccountConfirmationForm: React.FC = () => {
 	const { isSubmitSuccessful, errors } = formState;
 
 	const onSubmit = (data: accountConfirmationCodeParams) => {
-		console.log(data.code);
 		console.log(code);
-		if (data.code === code && userId) {
+		console.log(data.code);
+		console.log(userId);
+		if (data.code === code) {
 			dispatch(accountActivationThunk(userId));
 		}
 	};
@@ -57,6 +61,7 @@ export const AccountConfirmationForm: React.FC = () => {
 						className={styles.button}
 					/>
 				</form>
+				<CustomToastContainer />
 			</div>
 		</>
 	);

@@ -21,8 +21,10 @@ export const userSlice = createSlice({
 			getCurrentUserThunk.fulfilled,
 			(state: userSliceState, { payload }) => {
 				state.userId = payload.data.id;
+				console.log(state.userId, 'userId')
 				state.username = payload.data.username;
 				state.email = payload.data.email
+				
 			}
 		);
 	},

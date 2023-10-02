@@ -1,7 +1,6 @@
 import { $api } from "../../../shared/api";
 import { AxiosResponse } from "axios";
 import { AuthResponse } from "../model/types";
-
 export class AuthService {
 	static async login(
 		email: string,
@@ -21,9 +20,6 @@ export class AuthService {
 
 	static async activateAccount(id: string): Promise<AxiosResponse<boolean>> {
 		const data = await $api.post<boolean>("/activate", { id });
-		if (data.status === 200) {
-			localStorage.setItem("isActive", String(data.data));
-		}
 		return data;
 	}
 
