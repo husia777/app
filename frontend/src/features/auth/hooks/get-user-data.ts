@@ -6,14 +6,14 @@ export const getUserData = () => {
 	const email = userData.email;
 	const id = userData.id;
 	const username = userData.username;
-	const registeredAt = new Date(userData.registered_at);
+	const registeredAt = new Date(userData.registered_at).toLocaleDateString();
 	const name = userData.name;
 	const isActive = userData.is_active;
 	const isSuperuser = userData.is_superuser;
 	const isVerified = userData.is_verified;
 	const hashedPassword = userData.hashed_password;
 	const surname = userData.surname;
-
+	console.log(registeredAt)
 	return {
 		email,
 		id,

@@ -1,15 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCurrentUserThunk } from "../../../features/user/profile/models/user-thunk";
 export interface userSliceState {
-	userId: string;
-	username?: string;
 	email: string;
+	id: string;
+	username: string;
+	registeredAt: string;
+	name: string;
+	isActive: boolean;
+	isSuperuser: boolean;
+	isVerified: boolean;
+	hashedPassword: string;
+	surname: string;
 }
 
 const initialState: userSliceState = {
-	userId: "",
-	username: "",
 	email: "",
+	id: "",
+	username: "",
+	registeredAt: "",
+	name: "",
+	isActive: false,
+	isSuperuser: false,
+	isVerified: false,
+	hashedPassword: "",
+	surname: "",
 };
 
 const userSlice = createSlice({
@@ -18,7 +32,7 @@ const userSlice = createSlice({
 		email: "",
 		id: "",
 		username: "",
-		registeredAt: null,
+		registeredAt: "",
 		name: "",
 		isActive: false,
 		isSuperuser: false,
