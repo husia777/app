@@ -29,8 +29,8 @@ export const AccountConfirmationForm: React.FC = () => {
 	const onSubmit = async (data: accountConfirmationCodeParams) => {
 		try {
 			await dispatch(accountActivationThunk(userId));
-
 			successAlert("Аккаунт успешно подтвержден");
+			setTimeout(() => navigate("/"), 5000);
 		} catch (error) {
 			errorAlert("Ошибка");
 		}

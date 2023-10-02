@@ -1,8 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .auth.router import router as auth_router
-app = FastAPI()
+from .auth.models import User
+from starlette_admin import StarletteAdmin
+from starlette_admin.views import ModelAdminView
+from starlette_admin.templates import templates
 
+app = FastAPI()
+admin = StarletteAdmin(app=app)
+
+
+class UserAdmin(ModelAdminView):
+    model = User
+
+
+admin.add_view(UserAdmin(name='Users', endpoint='users',
+               url='/admin/users', base_template=templates.DEFAULT_BASE_TEMPLATE))
 
 app.include_router(router=auth_router)
 origins = [
