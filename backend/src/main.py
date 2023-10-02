@@ -17,6 +17,7 @@ class UserAdmin(ModelAdminView):
 admin.add_view(UserAdmin(name='Users', endpoint='users',
                url='/admin/users', base_template=templates.DEFAULT_BASE_TEMPLATE))
 
+
 app.include_router(router=auth_router)
 origins = [
     "http://localhost",
