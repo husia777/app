@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status, Response
-from .schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin, ConfirmUser, ActivateUser
+from .schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin, ConfirmUser, ActivateUser, RefreshToken
 
 from .service import AuthService, get_current_user
 router = APIRouter()
@@ -52,7 +52,7 @@ async def logout():
 
 
 @router.post("/refresh/", status_code=status.HTTP_200_OK)
-async def get_new_access_token(token: Token.access_token, auth_service: AuthService = Depends()):
+async def get_new_access_token(token: RefreshToken, auth_service: AuthService = Depends()):
     return await auth_service.get_new_access_token(token)
 
 

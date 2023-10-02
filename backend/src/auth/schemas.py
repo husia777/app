@@ -42,3 +42,6 @@ class ConfirmUser(BaseModel):
 
 class ActivateUser(BaseModel):
     id: int
+
+class RefreshToken(BaseModel):
+    access_token: str
