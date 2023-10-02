@@ -2,21 +2,17 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .auth.router import router as auth_router
 from .auth.models import User
-from starlette_admin import StarletteAdmin
-from starlette_admin.views import ModelAdminView
-from starlette_admin.templates import templates
+from .database.database import engine
+from starlette_admin.contrib.sqla import Admin, ModelView
 
 app = FastAPI()
-admin = StarletteAdmin(app=app)
+admin = Admin(engine, title="Example: SQLAlchemy")
 
 
-class UserAdmin(ModelAdminView):
-    model = User
+admin = Admin(engine, title="Example: SQLAlchemy")
+admin.add_view(ModelView(User))
 
-
-admin.add_view(UserAdmin(name='Users', endpoint='users',
-               url='/admin/users', base_template=templates.DEFAULT_BASE_TEMPLATE))
-
+admin.mount_to(app)
 
 app.include_router(router=auth_router)
 origins = [
