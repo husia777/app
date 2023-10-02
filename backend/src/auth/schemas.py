@@ -44,4 +44,4 @@ class ActivateUser(BaseModel):
     id: int
 
 class RefreshToken(BaseModel):
-    access_token: str
+    token: str

@@ -6,7 +6,6 @@ import { refreshThunk } from "../../../../../features/auth/auth_refresh/models/r
 export const Profile: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const token = localStorage.getItem("accessToken") as string;
-	
 	useEffect(() => {
 		dispatch(refreshThunk(token));
 	});

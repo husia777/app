@@ -4,7 +4,7 @@ import { AxiosResponse } from "axios";
 
 export const refreshThunk = createAsyncThunk<AxiosResponse<string>, string>(
 	"auth/refreshToken",
-	async (token: string) => {
-		return AuthService.refreshToken(token);
+	async (body: string) => {
+		return AuthService.refreshToken(body);
 	}
 );
