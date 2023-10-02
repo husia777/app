@@ -57,7 +57,6 @@ class AuthService:
     def create_token(cls, user: models.User):
         # превращаем модель орм в модель pydantic
         user_data = jsonable_encoder(user.__dict__)
-        print(user_data)
         now = datetime.utcnow()
         payload = {
             'iat': now,
@@ -128,21 +127,8 @@ class AuthService:
         return code
 
     async def get_new_access_token(self, token: schemas.RefreshToken):
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
-        print(token.access_token)
- 
-        token_data = self.verify_token(token)
+
+        token_data = self.verify_token(token.access_token)
         token_data = json.loads(token_data)
         user_id = token_data.get("id")
         user = await self.session.execute(
