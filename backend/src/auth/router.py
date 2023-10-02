@@ -52,7 +52,7 @@ async def logout():
 
 
 @router.post("/refresh/", status_code=status.HTTP_200_OK)
-async def get_new_access_token(token: Token, auth_service: AuthService = Depends()):
+async def get_new_access_token(token: Token.access_token, auth_service: AuthService = Depends()):
     return await auth_service.get_new_access_token(token.access_token)
 
 
