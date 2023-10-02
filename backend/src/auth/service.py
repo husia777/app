@@ -133,6 +133,8 @@ class AuthService:
         user_id = token_data.get("id")
         user = await self.session.execute(
             select(models.User).where(models.User.id == user_id))
+        user = user.scalar()
+
         return self.create_token(user)
 
     async def register_new_user(self, user_data: schemas.UserCreate) -> schemas.BaseUser:
