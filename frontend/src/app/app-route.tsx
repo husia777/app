@@ -36,9 +36,6 @@ function GuestGuard({ children }: GuestGuardProps) {
 				dispatch(refreshThunk(token));
 				dispatch(setUserData(getUserData()));
 			}
-			console.log(token);
-			console.log(isAuthorized);
-			console.log(isVerified);
 		}
 		if (!isAuthorized) {
 			const timeoutAuthAlert = setTimeout(() => {
