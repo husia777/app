@@ -35,12 +35,20 @@ const userSlice = createSlice({
 		registeredAt: "",
 		name: "",
 		isActive: false,
-		isSuperuser: false,
 		isVerified: false,
-		hashedPassword: "",
 		surname: "",
 	},
 	reducers: {
+		clearSessionData: (state) => {
+			state.email = "";
+			state.id = "";
+			state.username = "";
+			state.registeredAt = "";
+			state.name = "";
+			state.surname = "";
+			state.isActive = false;
+			state.isVerified = false;
+		},
 		setUserData: (state, action) => {
 			state.email = action.payload.email;
 			state.id = action.payload.id;
@@ -48,9 +56,7 @@ const userSlice = createSlice({
 			state.registeredAt = action.payload.registeredAt;
 			state.name = action.payload.name;
 			state.isActive = action.payload.isActive;
-			state.isSuperuser = action.payload.isSuperuser;
 			state.isVerified = action.payload.isVerified;
-			state.hashedPassword = action.payload.hashedPassword;
 			state.surname = action.payload.surname;
 		},
 	},

@@ -3,7 +3,7 @@
 
 .button {
 	@extend .button;
-	margin-top: 20px;
+	margin: 5%;
 	background-color: #ffffff;
 	color: #407bff;
 	border: none;
@@ -69,9 +69,9 @@ input {
 .title {
 	color: white;
 	font-family: sans-serif;
-	font-size: 2.2rem;
+	font-size: 2rem;
 	font-weight: 600;
-	padding: 15px 20px;
+	padding: 15px 5px;
 }
 .error {
 	color: white;

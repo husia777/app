@@ -32,6 +32,7 @@ export const sessionSlice = createSlice({
 			state.refreshToken = undefined;
 			state.userId = undefined;
 			state.code = undefined;
+			
 		},
 	},
 	extraReducers: (builder) => {
