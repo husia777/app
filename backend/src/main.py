@@ -6,7 +6,6 @@ from .database.database import engine
 from starlette_admin.contrib.sqla import Admin, ModelView
 
 app = FastAPI()
-admin = Admin(engine, title="Example: SQLAlchemy")
 
 
 admin = Admin(engine, title="Example: SQLAlchemy")

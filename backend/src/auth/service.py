@@ -202,16 +202,16 @@ class AuthService:
         }
 
     async def activate_user(self, id: schemas.ActivateUser) -> bool:
-        # try:
+        try:
 
-        user = await self.session.execute(select(models.User).where(models.User.id == id.id))
-        user = user.scalar()
-        user.is_verified = True
-        self.session.add(user)
-        await self.session.commit()
-        return True
-        # except:
-        # return False
+            user = await self.session.execute(select(models.User).where(models.User.id == id.id))
+            user = user.scalar()
+            user.is_verified = True
+            self.session.add(user)
+            await self.session.commit()
+            return True
+        except:
+            return False
 
     async def change_user(self, data_user: schemas.UserUpdate, user: schemas.User) -> schemas.BaseUser:
         user = await self.session.execute(select(models.User).where(models.User.username == user.username))

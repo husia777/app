@@ -40,10 +40,9 @@ export class AuthService {
 		const data = await $api.post<string>("/refresh", { token });
 		if (data.status === 200) {
 			// localStorage.removeItem("accessToken")
-			localStorage.setItem("accessToken", data.data)
+			localStorage.setItem("accessToken", data.data);
 		}
-		return data
-		
+		return data;
 	}
 	static async confirmAccount(email: string): Promise<AxiosResponse> {
 		const data = await $api.post<number>("/confirm", { email });

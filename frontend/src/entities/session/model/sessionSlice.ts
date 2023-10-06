@@ -32,7 +32,6 @@ export const sessionSlice = createSlice({
 			state.refreshToken = undefined;
 			state.userId = undefined;
 			state.code = undefined;
-			
 		},
 	},
 	extraReducers: (builder) => {
@@ -60,12 +59,6 @@ export const sessionSlice = createSlice({
 					state.code = payload.data;
 				}
 			);
-		// .addCase(
-		// 	accountActivationThunk.fulfilled,
-		// 	(state: SessionSliceState, { payload }) => {
-		// 		state.isActive = payload.data;
-		// 	}
-		// );
 	},
 });
 
