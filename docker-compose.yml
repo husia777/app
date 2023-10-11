@@ -30,11 +30,8 @@ services:
       dockerfile: Dockerfile
     command: bash -c "alembic upgrade head && uvicorn src.main:app --host 0.0.0.0  --port 8080"
 
-    # command:   uvicorn src.main:app --host 0.0.0.0  --port 8080
     depends_on:
       - postgres
-    # command: uvicorn src.main:app --host 0.0.0.0  --port 443 --ssl-certfile=./0.0.0.0.crt --ssl-keyfile=./0.0.0.0.key
-    # command: ls
     ports:
       # - 443:443
       - 8080:8080
@@ -49,7 +46,6 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      # - "80:80"
       - "3000:3000"
   nginx:
     hostname: nginx
@@ -60,6 +56,19 @@ services:
     ports:
       - 80:80
       - 443:443
+  # rabbitmq:
+  #   image: rabbitmq:3.10.7-management
+  # hostname: rabbitmq
+  # environment:
+  #     - RABBITMQ_DEFAULT_USER=admin
+  #     - RABBITMQ_DEFAULT_PASS=admin
+  # - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit disk_free_limit 2147483648
+  # volumes:
+  # - ./rabbitmq:/var/lib/rabbitmq
+
+  # restart: always
+  #   ports:
+  #     - 5672:5672
 
 volumes:
   postgres_data:

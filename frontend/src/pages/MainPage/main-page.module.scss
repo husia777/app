@@ -1,6 +1,7 @@
 .main {
-	display: block;
-	color: red;
-	// flex-grow: 1;
-	// flex-shrink: 0;
+	flex: 1 0 auto;
+}
+.container {
+	min-width: 100%;
+	min-height: 100%;
 }

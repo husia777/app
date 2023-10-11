@@ -6,14 +6,12 @@ from typing import Annotated
 import random
 from sqlalchemy import delete, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import Depends, HTTPException, status, Response, Header
+from fastapi import Depends, HTTPException, status, Header
 from fastapi.encoders import jsonable_encoder
 from passlib.hash import bcrypt
 from jose import jwt, JWTError
-from pydantic import ValidationError
 from aiosmtplib import SMTP
 from email.message import EmailMessage
-from email.mime.text import MIMEText
 import json
 
 
