@@ -10,11 +10,10 @@ const Dotenv = require("dotenv-webpack");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = merge(common, {
-	mode: "production",
+	mode: "development",
 	performance: {
 		hints: false,
 	},
-
 	devServer: {
 		watchFiles: ["./build/"],
 		historyApiFallback: true,
@@ -32,7 +31,6 @@ module.exports = merge(common, {
 		path: BUILD_DIR,
 		filename: "index.js",
 	},
-
 	resolve: {
 		extensions: [".js", ".jsx", ".tsx", ".ts", ".html", ".scss", ".css"],
 	},
@@ -78,7 +76,7 @@ module.exports = merge(common, {
 			favicon: "./src/assets/icon/favicon.ico",
 		}),
 		new Dotenv({
-			path: get_env(),
+			path: "./.env.dev",
 		}),
 	],
 });
