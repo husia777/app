@@ -1,6 +1,6 @@
 from src.infrastructure.config import settings
 from src.infrastructure.database.database import AsyncSession, get_session
-from auth import schemas
+from src.auth import schemas
 from datetime import datetime, timedelta
 from typing import Annotated
 import random
@@ -13,7 +13,7 @@ from aiosmtplib import SMTP
 from email.message import EmailMessage
 import json
 
-from src.infrastructure.database.models import User
+from ..infrastructure.database.models.user import User 
 
 
 async def generate_confirmation_code() -> int:

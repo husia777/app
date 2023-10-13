@@ -1,9 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from auth.router import router as auth_router
-from infrastructure.database.models.user import User
-from infrastructure.database.database import engine
+from src.auth.router import router as auth_router
+from src.infrastructure.database.models.user import User
+from src.infrastructure.database.database import engine
 from starlette_admin.contrib.sqla import Admin, ModelView
+from alembic import command
+from alembic.config import Config
 
 app = FastAPI()
 
@@ -31,3 +33,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+
+    
+# def apply_migrations():
+#     alembic_cfg = Config("alembic.ini")
+#     command.revision(alembic_cfg, autogenerate=True, message="New migration")
+#     command.upgrade(alembic_cfg, "head")
+
+# @app.on_event("startup")
+# async def startup_event():
+#     apply_migrations()
