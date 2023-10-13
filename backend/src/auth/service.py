@@ -1,11 +1,10 @@
-from ..config import settings
-from ..database.database import get_session
-from ..auth import schemas, models
+from src.infrastructure.config import settings
+from src.infrastructure.database.database import AsyncSession, get_session
+from auth import schemas
 from datetime import datetime, timedelta
 from typing import Annotated
 import random
 from sqlalchemy import delete, select
-from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends, HTTPException, status, Header
 from fastapi.encoders import jsonable_encoder
 from passlib.hash import bcrypt
@@ -13,6 +12,8 @@ from jose import jwt, JWTError
 from aiosmtplib import SMTP
 from email.message import EmailMessage
 import json
+
+from src.infrastructure.database.models import User
 
 
 async def generate_confirmation_code() -> int:
@@ -34,7 +35,7 @@ async def get_current_user(token: str = Depends(get_api_key_header), session: As
 
     user_id = token_data.get("id")
 
-    user = await session.execute(select(models.User).where(models.User.id == user_id))
+    user = await session.execute(select(User).where(User.id == user_id))
     user = user.scalar()
     return user
 
@@ -52,7 +53,7 @@ class AuthService:
         return bcrypt.hash(password)
 
     @classmethod
-    def create_token(cls, user: models.User):
+    def create_token(cls, user: User):
         # превращаем модель орм в модель pydantic
         user_data = jsonable_encoder(user.__dict__)
         now = datetime.utcnow()
@@ -130,7 +131,7 @@ class AuthService:
         token_data = json.loads(token_data)
         user_id = token_data.get("id")
         user = await self.session.execute(
-            select(models.User).where(models.User.id == user_id))
+            select(User).where(User.id == user_id))
         user = user.scalar()
 
         return self.create_token(user)
@@ -141,8 +142,8 @@ class AuthService:
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail=detail,
                 headers={'WWW-Authenticate': 'Bearer'})
-        check_username = await self.session.execute(select(models.User).where(models.User.username == user_data.username))
-        check_email = await self.session.execute(select(models.User).where(models.User.email == user_data.email))
+        check_username = await self.session.execute(select(User).where(User.username == user_data.username))
+        check_email = await self.session.execute(select(User).where(User.email == user_data.email))
         if user_data.password != user_data.password_repeat:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
@@ -153,7 +154,7 @@ class AuthService:
         if check_email.scalar():
             raise exception('Пользователь с таким email  уже существует')
 
-        user = models.User(
+        user = User(
             email=user_data.email,
             username=user_data.username,
             hashed_password=self.hash_password(user_data.password))
@@ -166,7 +167,7 @@ class AuthService:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Неверно введен логин или пароль.',
             headers={'WWW-Authenticate': 'Bearer'})
-        user = await self.session.execute(select(models.User).where(models.User.email == email))
+        user = await self.session.execute(select(User).where(User.email == email))
         user = user.scalar()
 
         if not user:
@@ -177,10 +178,10 @@ class AuthService:
         access_token = self.create_token(user)
         refresh_token = self.create_token(user)
         refresh_token_check = await self.session.execute(
-            select(models.RefreshToken).where(models.RefreshToken.user_id == user.id))
+            select(user.RefreshToken).where(user.RefreshToken.user_id == user.id))
 
         if refresh_token_check.first():
-            await self.session.execute(delete(models.RefreshToken).where(models.RefreshToken.user_id == user.id))
+            await self.session.execute(delete(user.RefreshToken).where(user.RefreshToken.user_id == user.id))
             await self.session.commit()
 
         refresh_token_dict = {
@@ -188,7 +189,7 @@ class AuthService:
             "refresh_token": str(refresh_token),
         }
 
-        refresh_token_db_data = models.RefreshToken(**refresh_token_dict)
+        refresh_token_db_data = user.RefreshToken(**refresh_token_dict)
         self.session.add(refresh_token_db_data)
         await self.session.commit()
         return {
@@ -202,7 +203,7 @@ class AuthService:
     async def activate_user(self, id: schemas.ActivateUser) -> bool:
         try:
 
-            user = await self.session.execute(select(models.User).where(models.User.id == id.id))
+            user = await self.session.execute(select(User).where(User.id == id.id))
             user = user.scalar()
             user.is_verified = True
             self.session.add(user)
@@ -212,7 +213,7 @@ class AuthService:
             return False
 
     async def change_user(self, data_user: schemas.UserUpdate, user: schemas.User) -> schemas.BaseUser:
-        user = await self.session.execute(select(models.User).where(models.User.username == user.username))
+        user = await self.session.execute(select(User).where(User.username == user.username))
         user = user.scalar()
         user.email = data_user.email
         user.username = data_user.username

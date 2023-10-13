@@ -1,11 +1,13 @@
 from fastapi import APIRouter, Depends, status, Response
-from .schemas import Token, UserCreate, User, BaseUser, UserUpdate, UserLogin, ConfirmUser, ActivateUser, RefreshToken
+from .schemas import (UserCreate, User, BaseUser, UserUpdate,
+                      UserLogin, ConfirmUser, ActivateUser, RefreshToken)
 
 from .service import AuthService, get_current_user
 router = APIRouter()
 
 
-@router.post('/register/', response_model=BaseUser, status_code=status.HTTP_201_CREATED)
+@router.post('/register/', response_model=BaseUser,
+             status_code=status.HTTP_201_CREATED)
 async def sign_up(
         user_data: UserCreate,
 
@@ -35,12 +37,14 @@ async def sign_in(response: Response,
 
 
 @router.post("/confirm")
-async def confirm_account(email: ConfirmUser, auth_service: AuthService = Depends()):
+async def confirm_account(email: ConfirmUser,
+                          auth_service: AuthService = Depends()):
     return await auth_service.send_confirmation_email(email)
 
 
 @router.post("/activate")
-async def activate_account(id: ActivateUser, auth_service: AuthService = Depends()):
+async def activate_account(id: ActivateUser,
+                           auth_service: AuthService = Depends()):
     return await auth_service.activate_user(id)
 
 
@@ -52,7 +56,8 @@ async def logout():
 
 
 @router.post("/refresh/", status_code=status.HTTP_200_OK)
-async def get_new_access_token(token: RefreshToken, auth_service: AuthService = Depends()):
+async def get_new_access_token(token: RefreshToken,
+                               auth_service: AuthService = Depends()):
     return await auth_service.get_new_access_token(token)
 
 
@@ -62,6 +67,7 @@ async def get_user(user: User = Depends(get_current_user)):
 
 
 @router.put('/profile/', response_model=User)
-async def update_user(user_data: UserUpdate, user: User = Depends(get_current_user),
+async def update_user(user_data: UserUpdate,
+                      user: User = Depends(get_current_user),
                       auth_service: AuthService = Depends()):
     return await auth_service.change_user(user_data, user)

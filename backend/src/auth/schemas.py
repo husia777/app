@@ -43,5 +43,6 @@ class ConfirmUser(BaseModel):
 class ActivateUser(BaseModel):
     id: int
 
+
 class RefreshToken(BaseModel):
     token: str

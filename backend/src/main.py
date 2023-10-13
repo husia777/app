@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .auth.router import router as auth_router
-from .auth.models import User
-from .database.database import engine
+from auth.router import router as auth_router
+from infrastructure.database.models.user import User
+from infrastructure.database.database import engine
 from starlette_admin.contrib.sqla import Admin, ModelView
 
 app = FastAPI()
