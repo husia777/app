@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.auth.router import router as auth_router
 from src.infrastructure.database.models.user import User
+from src.infrastructure.database.models.article import ArticleModel
 from src.infrastructure.database.database import engine
 from starlette_admin.contrib.sqla import Admin, ModelView
 
@@ -11,6 +12,7 @@ app = FastAPI()
 
 admin = Admin(engine, title="Example: SQLAlchemy")
 admin.add_view(ModelView(User))
+admin.add_view(ModelView(ArticleModel))
 
 admin.mount_to(app)
 
