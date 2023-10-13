@@ -13,7 +13,7 @@ from aiosmtplib import SMTP
 from email.message import EmailMessage
 import json
 
-from ..infrastructure.database.models.user import User 
+from ..infrastructure.database.models.user import User, RefreshToken
 
 
 async def generate_confirmation_code() -> int:
@@ -168,7 +168,7 @@ class AuthService:
             detail='Неверно введен логин или пароль.',
             headers={'WWW-Authenticate': 'Bearer'})
         user = await self.session.execute(select(User).where(User.email == email))
-        user = user.scalar()
+        user: User | None = user.scalar()
 
         if not user:
             raise exception
@@ -178,10 +178,10 @@ class AuthService:
         access_token = self.create_token(user)
         refresh_token = self.create_token(user)
         refresh_token_check = await self.session.execute(
-            select(user.RefreshToken).where(user.RefreshToken.user_id == user.id))
+            select(RefreshToken).where(RefreshToken.user_id == user.id))
 
         if refresh_token_check.first():
-            await self.session.execute(delete(user.RefreshToken).where(user.RefreshToken.user_id == user.id))
+            await self.session.execute(delete(RefreshToken).where(RefreshToken.user_id == user.id))
             await self.session.commit()
 
         refresh_token_dict = {
@@ -189,7 +189,7 @@ class AuthService:
             "refresh_token": str(refresh_token),
         }
 
-        refresh_token_db_data = user.RefreshToken(**refresh_token_dict)
+        refresh_token_db_data = RefreshToken(**refresh_token_dict)
         self.session.add(refresh_token_db_data)
         await self.session.commit()
         return {
