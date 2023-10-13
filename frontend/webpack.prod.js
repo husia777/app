@@ -4,17 +4,14 @@ console.log(BUILD_DIR);
 var APP_DIR = path.resolve(__dirname, "src/app");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { merge } = require("webpack-merge");
-const common = require("./webpack.config.js");
+const common = require("./webpack.prod.js");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
-
 module.exports = merge(common, {
-	mode: "production",
 	performance: {
 		hints: false,
 	},
-
 	devServer: {
 		watchFiles: ["./build/"],
 		historyApiFallback: true,
@@ -25,14 +22,13 @@ module.exports = merge(common, {
 		compress: true,
 		port: 3000,
 	},
-
+	mode: "production",
 	entry: APP_DIR + "/index.tsx",
 	output: {
 		publicPath: "/",
 		path: BUILD_DIR,
 		filename: "index.js",
 	},
-
 	resolve: {
 		extensions: [".js", ".jsx", ".tsx", ".ts", ".html", ".scss", ".css"],
 	},
@@ -78,7 +74,7 @@ module.exports = merge(common, {
 			favicon: "./src/assets/icon/favicon.ico",
 		}),
 		new Dotenv({
-			path: get_env(),
+			path: "./.env",
 		}),
 	],
 });

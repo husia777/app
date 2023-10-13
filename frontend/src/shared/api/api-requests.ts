@@ -3,12 +3,8 @@ import { config } from "dotenv";
 
 export const API_LOCALHOST_URL = process.env.API_LOCALHOST_URL;
 const ACCESS_CONTROL_ALLOW_ORIGIN = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
-const WEBPACK_MODE = process.env.WEBPACK_MODE;
 
-console.log(WEBPACK_MODE, "WEBPACK_MODE");
 
-console.log(API_LOCALHOST_URL, "API_LOCALHOST_URL");
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN, "ACCESS_CONTROL_ALLOW_ORIGIN");
 
 const $api = axios.create({
 	withCredentials: true,

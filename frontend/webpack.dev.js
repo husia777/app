@@ -4,13 +4,11 @@ console.log(BUILD_DIR);
 var APP_DIR = path.resolve(__dirname, "src/app");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { merge } = require("webpack-merge");
-const common = require("./webpack.config.js");
+const common = require("./webpack.dev.js");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
-
 module.exports = merge(common, {
-	mode: "development",
 	performance: {
 		hints: false,
 	},
@@ -24,7 +22,7 @@ module.exports = merge(common, {
 		compress: true,
 		port: 3000,
 	},
-
+	mode: "production",
 	entry: APP_DIR + "/index.tsx",
 	output: {
 		publicPath: "/",

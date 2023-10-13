@@ -9,6 +9,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
+    env_file:
+      - ./backend/src/.env
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -27,12 +29,13 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     command: bash -c "cd src/infrastructure/database && alembic upgrade head && cd ../../ &&  uvicorn main:app --host 0.0.0.0  --port 8080"
+
     depends_on:
       - postgres
     ports:
+      # - 443:443
       - 8080:8080
-    env_file:
-      - ./backend/src/.env
+
     restart: unless-stopped
 
   frontend:
@@ -41,9 +44,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    
-    environment:
-      - WEBPACK_MODE=development
     ports:
       - "3000:3000"
   nginx:

@@ -4,9 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "webpack-dev-server --open --mode development --config=webpack.config.js",
-		"build": "webpack --mode production",
-		"dev": "webpack --mode=development",
+		"start": "webpack-dev-server --open --mode development --config webpack.config.js",
+		"build": "webpack --mode production --config webpack.prod.js",
+		"dev": "webpack --mode production --config webpack.dev.js",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"lint": "npx eslint ./src"
