@@ -8,6 +8,16 @@ const common = require("./webpack.config.js");
 const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
+
+const get_env = () => {
+	console.log(module.exports.mode);
+	if (module.exports.mode == "development") {
+		return "./.env.dev";
+	} else {
+		return "./.env";
+	}
+};
+
 module.exports = merge(common, {
 	performance: {
 		hints: false,
@@ -22,7 +32,8 @@ module.exports = merge(common, {
 		compress: true,
 		port: 3000,
 	},
-	mode: "production",
+
+	mode: process.env.WEBPACK_MODE,
 	entry: APP_DIR + "/index.tsx",
 	output: {
 		publicPath: "/",
@@ -73,6 +84,8 @@ module.exports = merge(common, {
 			template: "./public/index.html",
 			favicon: "./src/assets/icon/favicon.ico",
 		}),
-		new Dotenv(),
+		new Dotenv({
+			path: get_env(),
+		}),
 	],
 });

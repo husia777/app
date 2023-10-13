@@ -16,7 +16,6 @@ export const Header: React.FC = () => {
 	const navigate = useNavigate();
 
 	const isAuthorized = useAppSelector(selectIsAuthorized);
-	console.log(isAuthorized);
 	return (
 		<header className={styles.header}>
 			<img

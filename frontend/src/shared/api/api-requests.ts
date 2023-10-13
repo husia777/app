@@ -1,19 +1,20 @@
 import axios from "axios";
 import { config } from "dotenv";
-import { useAppDispatch, useAppSelector } from "../../app/Store/redux-hook";
-import {
-	selectAccessToken,
-	selectRefreshToken,
-} from "../../entities/session/model/auth-selectors";
-import { refreshThunk } from "../../features/auth/auth_refresh/models/refresh-thunk";
-export const API_LOCALHOST_URL = `http://huseinnaimov.com:8080`;
+
+export const API_LOCALHOST_URL = process.env.API_LOCALHOST_URL;
+const ACCESS_CONTROL_ALLOW_ORIGIN = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
+const WEBPACK_MODE = process.env.WEBPACK_MODE;
+
+console.log(WEBPACK_MODE, "WEBPACK_MODE");
+
+console.log(API_LOCALHOST_URL, "API_LOCALHOST_URL");
+console.log(ACCESS_CONTROL_ALLOW_ORIGIN, "ACCESS_CONTROL_ALLOW_ORIGIN");
 
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
 	headers: {
-		"Access-Control-Allow-Origin": "http://localhost:3000",
-		// "Access-Control-Allow-Origin": "http://huseinnaimov.com",
+		"Access-Control-Allow-Origin": ACCESS_CONTROL_ALLOW_ORIGIN,
 		"Access-Control-Allow-Credentials": true,
 	},
 });
