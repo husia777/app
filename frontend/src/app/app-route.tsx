@@ -2,7 +2,7 @@ import { Root } from "../pages/RootPage";
 import { useNavigate, createBrowserRouter } from "react-router-dom";
 import React, { ReactElement, useEffect, useState } from "react";
 import { NotFound } from "../pages/NotFound";
-import { MainPage } from "../pages/MainPage";
+import { ArticlesPage } from "../pages/ArticlesPage";
 import { RegisterPage } from "../pages/RegisterPage";
 import { LoginPage } from "../pages/LoginPage";
 import { ProfilePage } from "../pages/ProfilePage/profile-page";
@@ -81,7 +81,7 @@ export const appRouter = createBrowserRouter([
 				index: true,
 				element: (
 					<GuestGuard>
-						<MainPage />
+						<ArticlesPage />
 					</GuestGuard>
 				),
 			},

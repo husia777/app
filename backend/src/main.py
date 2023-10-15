@@ -22,6 +22,7 @@ app.include_router(router=article_router)
 origins = [
     "http://localhost",
     "http://localhost:3000",
+    "http://localhost:3030",
     "http://huseinnaimov.com",
     "http://huseinnaimov.com/api",
     "http://huseinnaimov.com:8080/api",

@@ -10,7 +10,8 @@ const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
 	headers: {
-		"Access-Control-Allow-Origin": ACCESS_CONTROL_ALLOW_ORIGIN,
+		// "Access-Control-Allow-Origin": ACCESS_CONTROL_ALLOW_ORIGIN,
+		"Access-Control-Allow-Origin": "http://localhost:3030",
 		"Access-Control-Allow-Credentials": true,
 	},
 });
