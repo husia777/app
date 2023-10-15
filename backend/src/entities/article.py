@@ -4,11 +4,9 @@ from datetime import datetime
 
 @dataclasses.dataclass
 class Article:
-    id:  int | None = None
     title: str
     body: str
-    author: str
-    created_at: datetime
+    author_id: int
 
     @classmethod
     def from_dict(self, data):

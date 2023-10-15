@@ -31,7 +31,6 @@ function GuestGuard({ children }: GuestGuardProps) {
 	useEffect(() => {
 		if (isAuthorized) {
 			const token = localStorage.getItem("accessToken") as string;
-			console.log(token, "token");
 			if (token) {
 				dispatch(refreshThunk(token));
 				dispatch(setUserData(getUserData()));

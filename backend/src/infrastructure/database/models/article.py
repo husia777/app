@@ -6,7 +6,7 @@ from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.sql import func
 
 
-class ArticleModel(Base):
+class ArticleDBModel(Base):
     __tablename__ = "article"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     title: Mapped[str] = mapped_column(nullable=False)
@@ -16,5 +16,3 @@ class ArticleModel(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now())
     likes: Mapped[int] = mapped_column(default=0)
-
- 

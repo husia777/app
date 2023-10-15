@@ -1,8 +1,8 @@
 import asyncio
 from logging.config import fileConfig
-from src.infrastructure.database.database import Base
 from src.infrastructure.database.models.user import User, RefreshToken
-from src.infrastructure.database.models.article import ArticleModel
+from src.infrastructure.database.database import Base
+from src.infrastructure.database.models.article import ArticleDBModel
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config

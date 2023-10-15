@@ -3,7 +3,7 @@ from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy.sql import func
 from src.infrastructure.database.database import Base
-from src.infrastructure.database.models.article import ArticleModel
+from src.infrastructure.database.models.article import ArticleDBModel
 
 class User(Base):
     __tablename__ = 'user'
@@ -19,7 +19,7 @@ class User(Base):
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
     is_superuser: Mapped[bool] = mapped_column(default=False, nullable=False)
     is_verified: Mapped[bool] = mapped_column(default=False, nullable=False)
-    articles: Mapped[list["ArticleModel"]
+    articles: Mapped[list["ArticleDBModel"]
                      ] = relationship(back_populates="author")
 
 
