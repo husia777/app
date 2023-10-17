@@ -1,7 +1,19 @@
-.articles__li {
+.articles {
+	color: blue;
+	margin: 5%;
+}
+.article {
+	padding: 1%;
 	margin-top: 15px;
 	color: #000000;
 	list-style: none;
 	background-color: hsla(212, 80%, 86%, 0.87);
 	border-radius: 25px;
+}
+
+.article__date {
+    
+    display: block;
+	color: blue;
+    margin: 5px 5px 0 0;
 }

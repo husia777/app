@@ -18,12 +18,12 @@ export const Articles = () => {
 	return (
 		<>
 			<h1>Статьи</h1>
-			<ul>
+			<ul className={styles.articles}>
 				{[data][0] != undefined ? (
 					data.map((article, index) => {
 						console.log(article, "index");
 						return (
-							<li className={styles.articles__li} key={article.ArticleDBModel.id}>
+							<li className={styles.article} key={article.ArticleDBModel.id}>
 								<a href={`htt ${article.ArticleDBModel.author_id}`}>Автор</a>{" "}
 								<br />
 								<h3>
@@ -31,7 +31,7 @@ export const Articles = () => {
 										Заголовок {article.ArticleDBModel.title} <br />
 									</a>
 								</h3>
-								<p>
+								<p className={styles.article__date}>
 									Дата создания{" "}
 									{new Date(
 										article.ArticleDBModel.created_at
