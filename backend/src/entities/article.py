@@ -12,5 +12,6 @@ class Article:
     def from_dict(self, data):
         return self(**data)
 
+    @classmethod
     def to_dict(self):
         return dataclasses.asdict(self)

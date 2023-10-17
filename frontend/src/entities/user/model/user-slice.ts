@@ -28,16 +28,7 @@ const initialState: userSliceState = {
 
 const userSlice = createSlice({
 	name: "user",
-	initialState: {
-		email: "",
-		id: "",
-		username: "",
-		registeredAt: "",
-		name: "",
-		isActive: false,
-		isVerified: false,
-		surname: "",
-	},
+	initialState,
 	reducers: {
 		clearUserData: (state) => {
 			state.email = "";

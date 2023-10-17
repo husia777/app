@@ -12,7 +12,7 @@ class ArticleDBModel(Base):
     title: Mapped[str] = mapped_column(nullable=False)
     body: Mapped[str] = mapped_column(nullable=False)
     author_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
-    author: Mapped["User"] = relationship(back_populates="articles")
+    author: Mapped["UserDbModel"] = relationship(back_populates="articles")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now())
     likes: Mapped[int] = mapped_column(default=0)

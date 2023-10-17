@@ -5,7 +5,6 @@ export interface CurrentUserResponse {
 	isActive: boolean;
 	registeredAt: Date;
 	name: string;
-
 	isVerified: boolean;
 	surname: string;
 }

@@ -17,6 +17,8 @@ import {
 import { getUserData } from "../features/auth/hooks/get-user-data";
 import { selectUserData } from "../entities/user/model/user-selectors";
 import { refreshThunk } from "../features/auth/auth_refresh/models/refresh-thunk";
+import { getAllArticleThunk } from "../features/article/AllArticles/models/get-all-article-thunk";
+
 type GuestGuardProps = {
 	children: ReactElement;
 };
@@ -84,6 +86,9 @@ export const appRouter = createBrowserRouter([
 						<ArticlesPage />
 					</GuestGuard>
 				),
+				loader: () => {
+					return getAllArticleThunk(null);
+				},
 			},
 			{ path: "register", element: <RegisterPage /> },
 			{ path: "login", element: <LoginPage /> },
@@ -94,9 +99,6 @@ export const appRouter = createBrowserRouter([
 						<ProfilePage />
 					</GuestGuard>
 				),
-				loader: () => {
-					return getUserData();
-				},
 			},
 			{
 				path: "confirm",

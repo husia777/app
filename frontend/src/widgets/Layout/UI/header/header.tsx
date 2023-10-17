@@ -5,7 +5,6 @@ import logo from "../../../../assets/logo/logo.jpg";
 import { Button } from "../../../../shared/ui";
 import cx from "classnames";
 import {
-	useAppDispatch,
 	useAppSelector,
 } from "../../../../app/Store/redux-hook";
 import { selectIsAuthorized } from "../../../../entities/session/model/auth-selectors";

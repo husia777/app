@@ -5,7 +5,7 @@ from sqlalchemy.sql import func
 from src.infrastructure.database.database import Base
 from src.infrastructure.database.models.article import ArticleDBModel
 
-class User(Base):
+class UserDbModel(Base):
     __tablename__ = 'user'
     id: Mapped[int] = mapped_column(
         primary_key=True, autoincrement=True)
@@ -23,7 +23,7 @@ class User(Base):
                      ] = relationship(back_populates="author")
 
 
-class RefreshToken(Base):
+class RefreshTokenDbModel(Base):
     __tablename__ = "refresh_token"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(
@@ -31,4 +31,4 @@ class RefreshToken(Base):
     refresh_token: Mapped[str] = mapped_column(nullable=False)
     date_created: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now())
-    user = relationship("User")
+    user = relationship("UserDbModel")

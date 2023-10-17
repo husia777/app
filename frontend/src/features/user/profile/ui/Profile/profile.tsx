@@ -1,11 +1,7 @@
-import { useLoaderData } from "react-router";
-import React, { useEffect } from "react";
-import { CurrentUserResponse } from "../../../../../entities/user/model/types";
+import React from "react";
 import {
-	useAppDispatch,
 	useAppSelector,
 } from "../../../../../app/Store/redux-hook";
-import { refreshThunk } from "../../../../../features/auth/auth_refresh/models/refresh-thunk";
 import { selectUserData } from "../../../../../entities/user/model/user-selectors";
 export const Profile: React.FC = () => {
 	const userData = useAppSelector(selectUserData);

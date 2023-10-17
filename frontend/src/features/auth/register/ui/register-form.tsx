@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 import {
 	successAlert,
 	CustomToastContainer,
+	errorAlert,
 } from "../../../../shared/ui/customAlert/custom-alert";
 
 type FormFields = "email" | "username" | "password" | "password_repeat";
@@ -34,8 +35,17 @@ export const RegisterForm: React.FC = () => {
 	};
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const onSubmit: SubmitHandler<RegisterParams> = (data: RegisterParams) => {
-		dispatch(registerThunk(data));
+
+	const onSubmit: SubmitHandler<RegisterParams> = async (
+		data: RegisterParams
+	) => {
+		try {
+			await dispatch(registerThunk(data));
+			successAlert("Аккаунт успешно подтвержден");
+			setTimeout(() => navigate("/"), 5000);
+		} catch (error) {
+			errorAlert("Ошибка");
+		}
 	};
 	useEffect(() => {
 		if (isSubmitSuccessful) {
