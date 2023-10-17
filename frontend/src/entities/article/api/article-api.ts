@@ -33,7 +33,6 @@ export class ArticleService {
 	}
 	static async get_all(): Promise<AxiosResponse> {
 		const articles = await $api.get("/articles");
-		console.log(articles, 'articles')
 		return articles;
 	}
 }

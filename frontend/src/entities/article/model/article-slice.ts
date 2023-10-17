@@ -22,6 +22,7 @@ export const articleSlice = createSlice({
 		builder.addCase(getAllArticleThunk.fulfilled, (state, { payload }) => {
 			state.listArticles = [];
 			state.listArticles.push(...payload.data);
+			console.log(payload.data, 'payload')
 			console.log(state.listArticles, "list");
 		});
 	},
