@@ -2,8 +2,11 @@
 // Please do not change this file!
 interface CssExports {
   'article': string;
+  'article__button': string;
   'article__date': string;
   'articles': string;
+  'articles__title': string;
+  'button': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

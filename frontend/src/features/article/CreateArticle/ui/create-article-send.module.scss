@@ -1,0 +1,20 @@
+@import "../../../../shared/ui/button/button.module.scss";
+.article__button {
+	@extend .button;
+    position: absolute;
+    right: 10%;
+    top: 10%;
+	margin-top: 20px;
+	background-color: #407bff;
+	color: #ffffff;
+	border: none;
+	border: 1px solid #ffffff;
+	&:hover {
+		cursor: pointer;
+		background-color: #407bff;
+	}
+	&:active {
+		scale: 1.1;
+		transition: 1ms;
+	}
+}

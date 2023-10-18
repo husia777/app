@@ -1,6 +1,10 @@
 import { AxiosResponse } from "axios";
 import { $api } from "../../../shared/api";
-import { ArticleResponse, ArticleCreate, ArticleUpdateResponse } from "../model/types";
+import {
+	ArticleResponse,
+	ArticleCreate,
+	ArticleUpdateResponse,
+} from "../model/types";
 
 export class ArticleService {
 	static async create(
@@ -8,6 +12,7 @@ export class ArticleService {
 		body: string,
 		author_id: number
 	): Promise<AxiosResponse> {
+		console.log(title, body, author_id);
 		return $api.post<ArticleCreate>("/article/create", {
 			title,
 			body,

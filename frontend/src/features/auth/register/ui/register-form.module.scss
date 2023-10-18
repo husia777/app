@@ -18,10 +18,7 @@
 		transition: 1ms;
 	}
 }
-body {
-	@extend .wrapper;
-	text-align: center;
-}
+
 .form-wrapper {
 	background-color: #407bff;
 	width: 80%;

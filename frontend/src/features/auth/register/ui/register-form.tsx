@@ -11,8 +11,6 @@ import {
 	errorAlert,
 } from "../../../../shared/ui/customAlert/custom-alert";
 
-type FormFields = "email" | "username" | "password" | "password_repeat";
-
 export const RegisterForm: React.FC = () => {
 	const form = useForm<RegisterParams>();
 

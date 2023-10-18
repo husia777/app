@@ -1,10 +1,42 @@
+@import "../../../../shared/ui/button/button.module.scss";
+.article__button {
+	@extend .button;
+	position: absolute;
+	right: 10%;
+	top: 10%;
+	margin-top: 20px;
+	background-color: #407bff;
+	color: #ffffff;
+	border: none;
+	border: 1px solid #ffffff;
+	&:hover {
+		cursor: pointer;
+		background-color: #407bff;
+	}
+	&:active {
+		scale: 1.1;
+		transition: 1ms;
+	}
+	&:disabled {
+		&:hover {
+			cursor: pointer;
+			background-color: grey;
+		}
+		&:active {
+			scale: 1.1;
+			transition: 1ms;
+		}
+	}
+}
+
 .articles {
-	color: blue;
+	color: #407bff;
 	margin: 5%;
 }
 .article {
-	padding: 1%;
-	margin-top: 15px;
+	padding-top: 10%;
+	padding-bottom: 10%;
+	margin-top: 15%;
 	color: #000000;
 	list-style: none;
 	background-color: hsla(212, 80%, 86%, 0.87);
@@ -12,8 +44,10 @@
 }
 
 .article__date {
-    
-    display: block;
-	color: blue;
-    margin: 5px 5px 0 0;
+	display: block;
+	color: #407bff;
+	margin: 5px 5px 0 0;
+}
+.articles__title {
+	color: #407bff;
 }

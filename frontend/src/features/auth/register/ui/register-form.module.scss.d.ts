@@ -5,7 +5,6 @@ interface CssExports {
   'error': string;
   'form-wrapper': string;
   'title': string;
-  'wrapper': string;
 }
 export const cssExports: CssExports;
 export default cssExports;
