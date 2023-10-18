@@ -34,6 +34,7 @@
 	margin: 5%;
 }
 .article {
+	display: inline-block;
 	padding-top: 10%;
 	padding-bottom: 10%;
 	margin-top: 15%;
@@ -41,6 +42,7 @@
 	list-style: none;
 	background-color: hsla(212, 80%, 86%, 0.87);
 	border-radius: 25px;
+	width: 60%;
 }
 
 .article__date {
