@@ -5,7 +5,6 @@ interface CssExports {
   'button': string;
   'header': string;
   'header__button': string;
-  'header__button-color-white': string;
   'header__logo': string;
   'header__navlink': string;
 }

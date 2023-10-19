@@ -5,6 +5,7 @@ import logo from "../../../../assets/logo/logo.jpg";
 import { Button } from "../../../../shared/ui";
 import cx from "classnames";
 import {
+	useAppDispatch,
 	useAppSelector,
 } from "../../../../app/Store/redux-hook";
 import { selectIsAuthorized } from "../../../../entities/session/model/auth-selectors";
@@ -35,19 +36,13 @@ export const Header: React.FC = () => {
 				</NavLink>
 				{isAuthorized ? (
 					<Logout
-						className={cx(
-							styles["header__button-color-white"],
-							styles.header__navlink
-						)}
+						className={cx(styles.header__button, styles.header__navlink)}
 					/>
 				) : (
 					<Button
 						type="button"
 						onClick={() => navigate("/login")}
-						className={cx(
-							styles["header__button-color-white"],
-							styles.header__navlink
-						)}
+						className={cx(styles.header__button, styles.header__navlink)}
 						content="Вход"
 						disabled={false}
 					/>
