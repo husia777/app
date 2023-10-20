@@ -19,6 +19,7 @@ import { selectUserData } from "../entities/user/model/user-selectors";
 import { refreshThunk } from "../features/auth/auth_refresh/models/refresh-thunk";
 import { getAllArticleThunk } from "../features/article/AllArticles/models/get-all-article-thunk";
 import { CreateArticlePage } from "../pages/CreateArticlePage/create-article-page";
+import { RootProfilePage } from "../pages/RootProfilePage/root-profile-page";
 
 type GuestGuardProps = {
 	children: ReactElement;
@@ -94,12 +95,13 @@ export const appRouter = createBrowserRouter([
 			{ path: "register", element: <RegisterPage /> },
 			{ path: "login", element: <LoginPage /> },
 			{
-				path: "profile",
+				path: "profile/",
 				element: (
 					<GuestGuard>
-						<ProfilePage />
+						<RootProfilePage />
 					</GuestGuard>
 				),
+				children: [{ path: "personal", element: <ProfilePage /> }],
 			},
 			{
 				path: "confirm",

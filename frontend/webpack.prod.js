@@ -64,9 +64,6 @@ module.exports = merge(common, {
 		],
 	},
 	plugins: [
-		// new webpack.DefinePlugin({
-		// 	"process.env": JSON.stringify(dotenv.config().parsed),
-		// }),
 		new NodePolyfillPlugin(),
 		new HtmlWebpackPlugin({
 			template: "./public/index.html",

@@ -1,0 +1,19 @@
+.panel {
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.panel__link {
+	text-decoration: none;
+}
+
+.panel__title {
+	color: white;
+}
+
+.panel__icon {
+	margin-top: 80%;
+	align-self: flex-start;
+	justify-content: flex-start;
+}
