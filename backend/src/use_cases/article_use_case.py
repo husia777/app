@@ -22,3 +22,6 @@ class ArticleService:
 
     async def edit(self, article_id: int, article: Article):
         return await self.repository.edit(article_id, article)
+
+    async def get_user_articles(self, user_id: int):
+        return await self.repository.get_user_articles(user_id)

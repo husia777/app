@@ -53,6 +53,12 @@ class ArticleDbRepository(AbstractArticleUseCases):
 
         return all_articles, columns
 
+    async def get_user_articles(self, user_id: int):
+        article = await self.session.execute(
+            select(ArticleDBModel).where(ArticleDBModel.author_id == user_id))
+
+        return article.scalars().all()
+
     async def delete(self, article_id: int):
         stmt = delete(ArticleDBModel).where(ArticleDBModel.id == article_id)
         await self.session.execute(stmt)
@@ -61,7 +67,8 @@ class ArticleDbRepository(AbstractArticleUseCases):
         return {"status": "ok"}
 
     async def edit(self, article_id: int, article: Article):
-        stmt = update(ArticleDBModel).where(ArticleDBModel.id == article_id).values(title=article.title, body=article.body).returning(ArticleDBModel)
+        stmt = update(ArticleDBModel).where(ArticleDBModel.id == article_id).values(
+            title=article.title, body=article.body).returning(ArticleDBModel)
         result = await self.session.execute(stmt)
         await self.session.commit()  # примените изменения в базе данных
         return result.scalar_one()

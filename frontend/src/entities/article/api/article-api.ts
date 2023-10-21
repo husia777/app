@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import { $api } from "../../../shared/api";
 import {
 	ArticleResponse,
+	UserArticleResponse,
 	ArticleCreate,
 	ArticleUpdateResponse,
 } from "../model/types";
@@ -12,7 +13,6 @@ export class ArticleService {
 		body: string,
 		author_id: number
 	): Promise<AxiosResponse> {
-		console.log(title, body, author_id);
 		return $api.post<ArticleCreate>("/article/create", {
 			title,
 			body,
@@ -41,7 +41,9 @@ export class ArticleService {
 		return articles;
 	}
 	static async getUserArticles(userId: number): Promise<AxiosResponse> {
-		const myArticles = await $api.get(`user/${userId}/articles/`);
+		const myArticles = await $api.get<UserArticleResponse[]>(
+			`articles/user/${userId}`
+		);
 		return myArticles;
 	}
 }

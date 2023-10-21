@@ -4,7 +4,6 @@ import { useAppSelector } from "../../../../../app/Store/redux-hook";
 import { selectUserData } from "../../../../../entities/user/model/user-selectors";
 export const ProfilePersonal: React.FC = () => {
 	const userData = useAppSelector(selectUserData);
-	console.log(userData.username);
 	return (
 		<div className={styles.profile}>
 			<h2 className={styles.profile__username}>

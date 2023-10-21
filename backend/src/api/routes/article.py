@@ -33,3 +33,7 @@ async def delete_article(article_id: int, article_service: ArticleService = Depe
 async def edit_article(article_id: int, article: ArticleUpdateSchema, article_service: ArticleService = Depends()):
     return await article_service.edit(article_id, article)
 
+
+@router.get("/articles/user/{user_id}")
+async def get_user_articles(user_id: int, article_service: ArticleService = Depends()):
+    return await article_service.get_user_articles(user_id)

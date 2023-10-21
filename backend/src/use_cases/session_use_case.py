@@ -2,6 +2,7 @@ import crypt
 from passlib.hash import bcrypt
 import random
 from fastapi.encoders import jsonable_encoder
+from src.repositories.session.session_db_repository import SessionDbRepository
 from src.infrastructure.config import settings
 from datetime import datetime, timedelta
 from typing import Annotated
@@ -11,9 +12,8 @@ from aiosmtplib import SMTP
 from email.message import EmailMessage
 import json
 
-from backend.src.api.schemas.session_schema import ConfirmUser, RefreshToken, User, BaseUser, UserCreate, ActivateUser, UserUpdate
+from src.api.schemas.session_schema import ConfirmUser, RefreshToken, User, BaseUser, UserCreate, ActivateUser, UserUpdate
 from src.infrastructure.database.models.user import UserDbModel, RefreshTokenDbModel
-from backend.src.repositories.user.session_db_repository import SessionDbRepository
 
 
 class AuthService:
@@ -69,7 +69,7 @@ class AuthService:
         return await self.repository.activate_user(id)
 
     async def get_current_user(self, token: str = Depends(get_api_key_header)) -> User:
-        token_data =  self.verify_token(token)
+        token_data = self.verify_token(token)
         token_data = json.loads(token_data)
         user_id = token_data.get("id")
         user = await self.repository.get_current_user(user_id=user_id)
@@ -136,7 +136,7 @@ class AuthService:
 
     async def get_new_access_token(self, token: RefreshToken):
 
-        token_data =  self.verify_token(token.token)
+        token_data = self.verify_token(token.token)
         token_data = json.loads(token_data)
         user_id = token_data.get("id")
         user = await self.repository.get_current_user(user_id=user_id)

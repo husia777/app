@@ -8,6 +8,14 @@ export interface ArticleResponse {
 		likes: number;
 	};
 }
+export interface UserArticleResponse {
+	id: number;
+	body: string;
+	title: string;
+	author_id: number;
+	created_at: Date;
+	likes: number;
+}
 
 // export interface ArticleViewResponse {
 // 	[key: number]: {

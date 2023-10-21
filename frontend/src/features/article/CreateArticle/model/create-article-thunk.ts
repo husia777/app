@@ -17,6 +17,5 @@ export const createArticleThunk = createAsyncThunk<
 	CreateArticleParamsBackend,
 	{ state: RootState }
 >("article/create", async (body: CreateArticleParamsBackend) => {
-	console.log(body,'body')
 	ArticleService.create(body.body, body.title, body.author_id);
 });

@@ -20,6 +20,7 @@ import { refreshThunk } from "../features/auth/auth_refresh/models/refresh-thunk
 import { getAllArticleThunk } from "../features/article/AllArticles/models/get-all-article-thunk";
 import { CreateArticlePage } from "../pages/CreateArticlePage/create-article-page";
 import { RootProfilePage } from "../pages/RootProfilePage/root-profile-page";
+import { MyArticlesPage } from "../pages/MyArticlesPage/my-articles";
 
 type GuestGuardProps = {
 	children: ReactElement;
@@ -101,7 +102,10 @@ export const appRouter = createBrowserRouter([
 						<RootProfilePage />
 					</GuestGuard>
 				),
-				children: [{ path: "personal", element: <ProfilePage /> }],
+				children: [
+					{ path: "personal", element: <ProfilePage /> },
+					{ path: "articles", element: <MyArticlesPage/> },
+				],
 			},
 			{
 				path: "confirm",

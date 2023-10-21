@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCurrentUserThunk } from "../../../features/user/profile/models/user-thunk";
 export interface userSliceState {
 	email: string;
 	id: string;
