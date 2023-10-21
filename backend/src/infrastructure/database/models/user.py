@@ -28,7 +28,7 @@ class RefreshTokenDbModel(Base):
     __tablename__ = "refresh_token"
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[int] = mapped_column(
-        ForeignKey("user.id", ondelete="CASCADE"), unique=True)
+        ForeignKey("user.id", ondelete="CASCADE", name="fk_refresh_token_user_id"), unique=True)
     refresh_token: Mapped[str] = mapped_column(nullable=False)
     date_created: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now())
