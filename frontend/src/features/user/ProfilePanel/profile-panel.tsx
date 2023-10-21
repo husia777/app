@@ -3,12 +3,12 @@ import styles from "./profile-panel.module.scss";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RiArticleLine } from "react-icons/ri";
 import { BsPersonLinesFill } from "react-icons/bs";
-import { Button } from "../../../../../shared/ui";
+import { Button } from "../../../shared/ui";
 export const ProfilePanel = () => {
 	return (
 		<>
 			<div className={styles.panel}>
-				<a className={styles.panel__link} href="/profile/personal">
+				<a className={styles.panel__link} href="/me/personal">
 					<IoSettingsOutline
 						display="21"
 						// color="white"
@@ -18,7 +18,7 @@ export const ProfilePanel = () => {
 					/>
 					<h2 className={styles.panel__title}>Личные данные</h2>
 				</a>
-				<a className={styles.panel__link} href="/profile/">
+				<a className={styles.panel__link} href="/me/articles">
 					<RiArticleLine
 						color="white"
 						size={40}
@@ -26,7 +26,7 @@ export const ProfilePanel = () => {
 					/>
 					<h2 className={styles.panel__title}>Статьи</h2>
 				</a>
-				<a className={styles.panel__link} href="/profile/">
+				<a className={styles.panel__link} href="/me/">
 					<BsPersonLinesFill
 						color="white"
 						size={40}

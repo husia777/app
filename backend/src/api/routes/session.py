@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, status, Response
-from src.api.schemas.user_schema import (UserCreate, User, BaseUser, UserUpdate,
+from backend.src.api.schemas.session_schema import (UserCreate, User, BaseUser, UserUpdate,
                                          UserLogin, ConfirmUser, ActivateUser, RefreshToken)
 
 from src.use_cases.session_use_case import AuthService

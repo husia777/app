@@ -95,7 +95,7 @@ export const appRouter = createBrowserRouter([
 			{ path: "register", element: <RegisterPage /> },
 			{ path: "login", element: <LoginPage /> },
 			{
-				path: "profile/",
+				path: "me/",
 				element: (
 					<GuestGuard>
 						<RootProfilePage />

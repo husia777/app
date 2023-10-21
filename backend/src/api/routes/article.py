@@ -32,3 +32,4 @@ async def delete_article(article_id: int, article_service: ArticleService = Depe
 @router.patch("/article/{article_id}/edit")
 async def edit_article(article_id: int, article: ArticleUpdateSchema, article_service: ArticleService = Depends()):
     return await article_service.edit(article_id, article)
+

@@ -11,9 +11,9 @@ from aiosmtplib import SMTP
 from email.message import EmailMessage
 import json
 
-from src.api.schemas.user_schema import ConfirmUser, RefreshToken, User, BaseUser, UserCreate, ActivateUser, UserUpdate
+from backend.src.api.schemas.session_schema import ConfirmUser, RefreshToken, User, BaseUser, UserCreate, ActivateUser, UserUpdate
 from src.infrastructure.database.models.user import UserDbModel, RefreshTokenDbModel
-from src.repositories.user.user_db_repository import SessionDbRepository
+from backend.src.repositories.user.session_db_repository import SessionDbRepository
 
 
 class AuthService:

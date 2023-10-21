@@ -40,4 +40,8 @@ export class ArticleService {
 		const articles = await $api.get("/articles");
 		return articles;
 	}
+	static async getUserArticles(userId: number): Promise<AxiosResponse> {
+		const myArticles = await $api.get(`user/${userId}/articles/`);
+		return myArticles;
+	}
 }

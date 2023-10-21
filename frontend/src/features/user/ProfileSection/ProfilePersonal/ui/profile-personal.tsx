@@ -1,7 +1,7 @@
 import React from "react";
-import { useAppSelector } from "../../../../../../app/Store/redux-hook";
-import { selectUserData } from "../../../../../../entities/user/model/user-selectors";
 import styles from "./profile-personal.module.scss";
+import { useAppSelector } from "../../../../../app/Store/redux-hook";
+import { selectUserData } from "../../../../../entities/user/model/user-selectors";
 export const ProfilePersonal: React.FC = () => {
 	const userData = useAppSelector(selectUserData);
 	console.log(userData.username);
