@@ -14,7 +14,7 @@ console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
 console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
 console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
 console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);v
+console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
