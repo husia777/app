@@ -31,7 +31,7 @@ export const Header: React.FC = () => {
 				<NavLink className={styles.header__navlink} to="/about">
 					Вакансии
 				</NavLink>
-				<NavLink className={styles.header__navlink} to="/me">
+				<NavLink className={styles.header__navlink} to="/">
 					Курсы
 				</NavLink>
 				{isAuthorized ? (
@@ -50,7 +50,7 @@ export const Header: React.FC = () => {
 				{isAuthorized ? (
 					<ProfileButton
 						onClick={() => {
-							navigate("/profile");
+							navigate("/me");
 						}}
 						className={cx(styles.header__button, styles.header__navlink)}
 					/>
