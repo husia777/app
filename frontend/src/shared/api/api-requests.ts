@@ -3,18 +3,7 @@ import { config } from "dotenv";
 
 export const API_LOCALHOST_URL = process.env.API_LOCALHOST_URL;
 const ACCESS_CONTROL_ALLOW_ORIGIN = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
-console.log(ACCESS_CONTROL_ALLOW_ORIGIN);
+
 const $api = axios.create({
 	withCredentials: true,
 	baseURL: API_LOCALHOST_URL,
