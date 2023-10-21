@@ -31,7 +31,7 @@ export const MyArticles = () => {
 	return (
 		<>
 			<ul className={styles.articles}>
-				{data[0] != undefined ? (
+				{data.length >= 1 ? (
 					data.map((article) => {
 						return (
 							<li className={styles.article} key={article.id}>
