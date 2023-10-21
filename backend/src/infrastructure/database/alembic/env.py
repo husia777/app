@@ -1,7 +1,7 @@
 import asyncio
 from logging.config import fileConfig
-from src.infrastructure.database.models.user import UserDbModel, RefreshTokenDbModel
 from src.infrastructure.database.database import Base
+from src.infrastructure.database.models.user import UserDbModel, RefreshTokenDbModel
 from src.infrastructure.database.models.article import ArticleDBModel
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
