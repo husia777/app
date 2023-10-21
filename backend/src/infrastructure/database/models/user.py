@@ -32,3 +32,4 @@ class RefreshTokenDbModel(Base):
     refresh_token: Mapped[str] = mapped_column(nullable=False)
     date_created: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now())
+    user = relationship("UserDbModel")
