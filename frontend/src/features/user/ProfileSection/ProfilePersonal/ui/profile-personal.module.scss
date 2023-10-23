@@ -1,0 +1,25 @@
+.profile {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-color: hsl(221, 94%, 96%);
+}
+
+.profile__username {
+	flex-grow: 1;
+}
+
+.profile__email {
+	flex-grow: 2;
+}
+.profile__date {
+	flex-grow: 4;
+}
+
+.profile__isactiv {
+	flex-grow: 4;
+}
+
+.profile__name {
+	flex-grow: 4;
+}

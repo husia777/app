@@ -1,0 +1,17 @@
+.profile__container {
+	display: flex;
+	height: 70vh;
+	margin-top: 1%;
+}
+
+.profile__panel {
+	background-color: hsl(221, 94%, 68%);
+	flex-shrink: 0;
+
+	padding: 15px;
+	border-radius: 15px;
+}
+.profile__content {
+	width: 100%;
+	color: #407bff;
+}

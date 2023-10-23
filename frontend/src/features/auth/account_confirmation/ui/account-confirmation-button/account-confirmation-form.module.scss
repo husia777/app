@@ -1,0 +1,9 @@
+@import "../../../../../shared/ui/button/button.module.scss";
+
+.button {
+	@extend .button;
+	margin-top: 20px;
+	color: #ffffff;
+	border: none;
+	margin-top: 20%;
+}

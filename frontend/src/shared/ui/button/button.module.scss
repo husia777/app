@@ -1,0 +1,29 @@
+.button {
+	background-color: #407bff;
+	display: inline-block;
+	color: white;
+	border-radius: 10px;
+	text-align: center;
+	padding: 0.6rem;
+	border: none;
+	&:disabled {
+		background-color: gray;
+	}
+	&:hover {
+		cursor: pointer;
+	}
+	&:active {
+		scale: 1.1;
+		transition: 1ms;
+	}
+	font-size: 1rem;
+	@media (min-width: 768px) {
+		padding: 1rem;
+	}
+	@media (min-width: 1024px) {
+		padding: 1.2rem;
+	}
+	@media (min-width: 1400px) {
+		padding: 1.4rem;
+	}
+}

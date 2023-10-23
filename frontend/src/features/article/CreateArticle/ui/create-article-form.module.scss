@@ -1,0 +1,51 @@
+@import "../../../../shared//ui//button//button.module.scss";
+.form-control {
+	color: blueviolet;
+	margin-top: 10px;
+	// align-self: center;
+
+}
+
+.title {
+	color: #407bff;
+	text-align: center;
+}
+.article__title {
+	border: 1px solid #407bff;
+}
+
+.error {
+	color: red;
+}
+.article__body {
+	border: 1px solid #407bff;
+	margin-bottom: 2%;
+	border-radius: 10px;
+	height: 200px;
+	width: 60%;
+}
+.form-wrapper {
+	color: #407bff;
+
+	&:last-child {
+		margin-top: 100px;
+	}
+}
+.article__button {
+	@extend .button;
+	align-items: center;
+
+	margin-top: 10%;
+	background-color: #407bff;
+	color: #ffffff;
+	border: none;
+	border: 1px solid #ffffff;
+	&:hover {
+		cursor: pointer;
+		background-color: #407bff;
+	}
+	&:active {
+		scale: 1.1;
+		transition: 1ms;
+	}
+}

@@ -1,0 +1,79 @@
+version: "3.6"
+
+services:
+  postgres:
+    hostname: postgres
+    container_name: postgres
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    env_file:
+      - ./backend/src/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+  api:
+    hostname: api
+    container_name: "api"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: bash -c "cd src/infrastructure/database && alembic upgrade head --sql && cd ../../ &&  uvicorn main:app --host 0.0.0.0  --port 8080"
+
+    depends_on:
+      - postgres
+    ports:
+      # - 443:443
+      - 8080:8080
+
+    restart: unless-stopped
+
+  frontend:
+    hostname: frontend
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+  nginx:
+    hostname: nginx
+    container_name: nginx-front
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 81:81
+      - 443:443
+  # rabbitmq:
+  #   image: rabbitmq:3.10.7-management
+  # hostname: rabbitmq
+  # environment:
+  #     - RABBITMQ_DEFAULT_USER=admin
+  #     - RABBITMQ_DEFAULT_PASS=admin
+  # - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit disk_free_limit 2147483648
+  # volumes:
+  # - ./rabbitmq:/var/lib/rabbitmq
+
+  # restart: always
+  #   ports:
+  #     - 5672:5672
+
+volumes:
+  postgres_data:
+
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - ./certs:/etc/letsencrypt
+  #   command: certonly --webroot --webroot-path=/var/www/html --email huseinnaimov@bk.ru --agree-tos --no-eff-email --staging -d huseinnaimov.com

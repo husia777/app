@@ -1,0 +1,102 @@
+@import "../../../../../../shared/ui/button/button.module.scss";
+.article__button {
+	@extend .button;
+	display: none;
+	position: absolute;
+	right: 10%;
+	top: 10%;
+
+	margin: -7%;
+	font-size: 0.7rem;
+	padding: 1rem;
+	&:last-child {
+		margin: 1rem 1rem 0 1rem;
+	}
+
+	&:hover {
+		cursor: pointer;
+		background-color: #407bff;
+	}
+	&:active {
+		scale: 1.1;
+		transition: 1ms;
+	}
+	&:disabled {
+		&:hover {
+			cursor: pointer;
+			background-color: grey;
+		}
+		&:active {
+			scale: 1.1;
+			transition: 1ms;
+		}
+	}
+	@media (min-width: 768px) {
+		display: block;
+		position: absolute;
+		right: 10%;
+		top: 12%;
+
+		font-size: 1.1rem;
+	}
+	@media (min-width: 1024px) {
+		position: absolute;
+		right: 10%;
+		top: 15%;
+		font-size: 1.1rem;
+	}
+	@media (min-width: 1400px) {
+		position: absolute;
+		right: 15%;
+		top: 15%;
+		margin-top: -1%;
+		background-color: #407bff;
+		color: #ffffff;
+		border: none;
+		border: 1px solid #ffffff;
+	}
+}
+
+.articles {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.article {
+	flex-direction: row;
+	flex-wrap: wrap;
+	position: relative;
+	display: flex;
+	margin: 5%;
+	margin-right: 5%;
+	padding: 25% 100%;
+	margin-top: 5%;
+	list-style: none;
+	background-color: hsla(212, 80%, 86%, 0.87);
+	border-radius: 25px;
+}
+
+.article__date {
+	flex-grow: 1;
+}
+.articles__title {
+	text-decoration: none;
+	font-size: 1.5rem;
+
+	color: #407bff;
+}
+.article__delete {
+	cursor: pointer;
+	position: absolute;
+	top: 6%;
+	right: 4%;
+}
+
+.title {
+	width: 100%;	
+	text-align: center;
+	white-space: nowrap;
+	font-size: 1.8rem;
+}
