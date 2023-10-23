@@ -27,12 +27,20 @@ export const MyArticles = () => {
 			successAlert("Статья успешно удалена");
 		}
 	};
+<<<<<<< HEAD
 
 	const data = useAppSelector(selectMyArticles);
 	return (
 		<div className={styles.articles}>
 			<ul className={styles.articles}>
 				{[data][0].length >= 1 ? (
+=======
+	const data = useAppSelector(selectMyArticles);
+	return (
+		<>
+			<ul className={styles.articles}>
+				{[data].length > 1 ? (
+>>>>>>> 49cd3a4b6579b6c39544701c69581ace98fe7347
 					data.map((article) => {
 						return (
 							<li className={styles.article} key={article.id}>
@@ -67,6 +75,10 @@ export const MyArticles = () => {
 					<h2 className={styles.title}>Вы еще не создали ни одной статьи </h2>
 				)}
 			</ul>
+<<<<<<< HEAD
 		</div>
+=======
+		</>
+>>>>>>> 49cd3a4b6579b6c39544701c69581ace98fe7347
 	);
 };

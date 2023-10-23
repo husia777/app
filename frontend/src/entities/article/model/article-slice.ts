@@ -26,7 +26,7 @@ export const articleSlice = createSlice({
 				(article) => article.id !== action.payload
 			);
 		},
-	}, 
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getAllArticleThunk.fulfilled, (state, { payload }) => {
