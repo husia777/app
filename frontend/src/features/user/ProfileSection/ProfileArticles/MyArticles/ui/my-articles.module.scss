@@ -73,7 +73,6 @@
 	margin-right: 5%;
 	padding: 25% 100%;
 	margin-top: 5%;
-
 	list-style: none;
 	background-color: hsla(212, 80%, 86%, 0.87);
 	border-radius: 25px;
@@ -85,7 +84,6 @@
 .articles__title {
 	text-decoration: none;
 	font-size: 1.5rem;
-
 
 	color: #407bff;
 }
@@ -101,8 +99,4 @@
 	text-align: center;
 	white-space: nowrap;
 	font-size: 1.8rem;
-	@extend .articles__title;
-	white-space: nowrap;
-	font-size: 1.8rem;
-	margin-left: 140%;
 }

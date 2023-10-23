@@ -27,58 +27,49 @@ export const MyArticles = () => {
 			successAlert("Статья успешно удалена");
 		}
 	};
-<<<<<<< HEAD
 
 	const data = useAppSelector(selectMyArticles);
 	return (
-		<div className={styles.articles}>
-			<ul className={styles.articles}>
-				{[data][0].length >= 1 ? (
-=======
-	const data = useAppSelector(selectMyArticles);
-	return (
 		<>
-			<ul className={styles.articles}>
-				{[data].length > 1 ? (
->>>>>>> 49cd3a4b6579b6c39544701c69581ace98fe7347
-					data.map((article) => {
-						return (
-							<li className={styles.article} key={article.id}>
-								<a href={`http/users/${article.author_id}`}>Автор вы</a> <br />
-								<h3>
-									<a className={styles.articles__title} href="">
-										{article.title} <br />
-									</a>
-								</h3>
-								<p className={styles.article__date}>
-									Дата создания{" "}
-									{new Date(article.created_at).toLocaleDateString()}{" "}
-								</p>
-								<br />
-								Количество лайков {article.likes} <br />
-								Содержание {article.body} <br />
-								<div className={styles.article__delete}>
-									{userId === article.author_id ? (
-										<MdDelete
-											size={40}
-											color="red"
-											onClick={() => {
-												deleteArticle(article);
-											}}
-										/>
-									) : null}
-								</div>
-							</li>
-						);
-					})
-				) : (
-					<h2 className={styles.title}>Вы еще не создали ни одной статьи </h2>
-				)}
-			</ul>
-<<<<<<< HEAD
-		</div>
-=======
+			<div className={styles.articles}>
+				<ul className={styles.articles}>
+					{[data][0].length >= 1 ? (
+						data.map((article) => {
+							return (
+								<li className={styles.article} key={article.id}>
+									<a href={`http/users/${article.author_id}`}>Автор вы</a>{" "}
+									<br />
+									<h3>
+										<a className={styles.articles__title} href="">
+											{article.title} <br />
+										</a>
+									</h3>
+									<p className={styles.article__date}>
+										Дата создания{" "}
+										{new Date(article.created_at).toLocaleDateString()}{" "}
+									</p>
+									<br />
+									Количество лайков {article.likes} <br />
+									Содержание {article.body} <br />
+									<div className={styles.article__delete}>
+										{userId === article.author_id ? (
+											<MdDelete
+												size={40}
+												color="red"
+												onClick={() => {
+													deleteArticle(article);
+												}}
+											/>
+										) : null}
+									</div>
+								</li>
+							);
+						})
+					) : (
+						<h2 className={styles.title}>Вы еще не создали ни одной статьи </h2>
+					)}
+				</ul>
+			</div>
 		</>
->>>>>>> 49cd3a4b6579b6c39544701c69581ace98fe7347
 	);
 };
