@@ -14,7 +14,6 @@ class ArticleService:
         return await self.repository.get_all()
 
     async def save(self, article: Article):
-        print(article)
         return await self.repository.save(article)
 
     async def delete(self, article_id: int):

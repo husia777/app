@@ -1,6 +1,5 @@
-import crypt
-from passlib.hash import bcrypt
 import random
+from passlib.hash import bcrypt
 from fastapi.encoders import jsonable_encoder
 from src.repositories.session.session_db_repository import SessionDbRepository
 from src.infrastructure.config import settings
