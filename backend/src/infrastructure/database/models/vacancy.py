@@ -1,7 +1,8 @@
 from datetime import datetime
 import enum
 from src.infrastructure.database.database import Base
-from sqlalchemy import DateTime, ForeignKey, func, Enum
+from sqlalchemy import DateTime, ForeignKey, Enum
+from sqlalchemy.sql import func
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy.orm import relationship
 

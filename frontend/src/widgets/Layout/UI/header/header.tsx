@@ -28,7 +28,7 @@ export const Header: React.FC = () => {
 				<NavLink className={styles.header__navlink} to="/">
 					Статьи
 				</NavLink>
-				<NavLink className={styles.header__navlink} to="/about">
+				<NavLink className={styles.header__navlink} to="/vacancies">
 					Вакансии
 				</NavLink>
 				<NavLink className={styles.header__navlink} to="/">

@@ -21,6 +21,7 @@ import { getAllArticleThunk } from "../features/article/AllArticles/models/get-a
 import { CreateArticlePage } from "../pages/CreateArticlePage/create-article-page";
 import { RootProfilePage } from "../pages/RootProfilePage/root-profile-page";
 import { MyArticlesPage } from "../pages/MyArticlesPage/my-articles";
+import { VacanciesPage } from "../pages/VacanciesPage/vacancies-page";
 
 type GuestGuardProps = {
 	children: ReactElement;
@@ -104,7 +105,7 @@ export const appRouter = createBrowserRouter([
 				),
 				children: [
 					{ path: "personal", element: <ProfilePage /> },
-					{ path: "articles", element: <MyArticlesPage/> },
+					{ path: "articles", element: <MyArticlesPage /> },
 				],
 			},
 			{
@@ -120,6 +121,14 @@ export const appRouter = createBrowserRouter([
 				element: (
 					<GuestGuard>
 						<CreateArticlePage />
+					</GuestGuard>
+				),
+			},
+			{
+				path: "vacancies",
+				element: (
+					<GuestGuard>
+						<VacanciesPage />
 					</GuestGuard>
 				),
 			},
