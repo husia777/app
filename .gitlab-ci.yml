@@ -1,0 +1,25 @@
+stages:
+  - build
+  - test
+  - cleanup
+  - deploy
+
+build:
+  stage: build
+  image:
+    name: docker/compose:1.23.2
+    entrypoint: [""]
+  script:
+    - docker compose  up --build
+
+test:
+  stage: test
+
+cleanup:
+  stage: cleanup
+  image:
+    name: docker/compose:1.23.2
+    entrypoint: [""]
+  script:
+    - docker compose down
+  when: always

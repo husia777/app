@@ -27,6 +27,10 @@ class AbstractArticleUseCases(ABC):
     def delete(self, article):
         pass
 
+    @abstractmethod
+    def edit(self, article_id, article):
+        pass
+
 
 class ArticleDbRepository(AbstractArticleUseCases):
     def __init__(self,

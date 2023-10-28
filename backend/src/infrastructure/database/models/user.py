@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy.sql import func
+from src.infrastructure.database.models.vacancy import VacancyDbModel
 from src.infrastructure.database.database import Base
 from src.infrastructure.database.models.article import ArticleDBModel
 
@@ -22,6 +23,8 @@ class UserDbModel(Base):
     is_verified: Mapped[bool] = mapped_column(default=False, nullable=False)
     articles: Mapped[list["ArticleDBModel"]
                      ] = relationship(back_populates="author")
+    vacancies: Mapped[list[VacancyDbModel]
+                      ] = relationship(back_populates="author")
 
 
 class RefreshTokenDbModel(Base):
