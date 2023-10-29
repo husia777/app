@@ -33,7 +33,7 @@ export const Vacancies = () => {
 				type="button"
 			/>{" "}
 			<ul className={styles.vacancies}>
-				{data.length > 1 ? (
+				{data.length >= 1 ? (
 					data.map((vacancy) => {
 						return (
 							<li className={styles.vacancy} key={vacancy.id}>
