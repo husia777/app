@@ -4,42 +4,43 @@ import {
 } from "../../../../app/Store/redux-hook";
 import React, { useEffect } from "react";
 
-import { selectAllVacancies } from "../../../../entities/vacancy/model/vacansy-selectors";
 import { getAllVacanciesThunk } from "../models/get-all-vacancies-thunk";
 import styles from "./all-vacancies.module.scss";
 import { useNavigate } from "react-router";
 import { Button } from "../../../../shared/ui";
 import { selectIsAuthorized } from "../../../../entities/session/model/auth-selectors";
+import { selectAllVacancies } from "../../../../entities/vacancy/model/vacancy-selectors";
+import { Link } from "react-router-dom";
 
 export const Vacancies = () => {
+	const dispatch = useAppDispatch();
 	const isAuthorized = useAppSelector(selectIsAuthorized);
 	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(getAllVacanciesThunk(null));
 	}, [dispatch]);
 
 	const data = useAppSelector(selectAllVacancies);
-
+	console.log(data);
 	return (
-		<>
+		<div>
 			<h1 className={styles.articles__title}>Вакансии</h1>
 			<Button
 				content="Опубликовать вакансию"
 				disabled={isAuthorized ? false : true}
 				className={styles.button}
-				onClick={() => navigate("/vacancy/create")}
+				onClick={() => navigate("#")}
 				type="button"
 			/>{" "}
 			<ul className={styles.vacancies}>
-				{data.length >= 1 ? (
+				{data.length > 1 ? (
 					data.map((vacancy) => {
 						return (
 							<li className={styles.vacancy} key={vacancy.id}>
 								<h3>
-									<a href="#">
+									<Link to={`/vacancy/${vacancy.id}`}>
 										{vacancy.title} <br />
-									</a>
+									</Link>
 								</h3>
 								<a href={"#"}> {vacancy.author_id}</a> <br />
 								<p>Описание {vacancy.body}</p>
@@ -66,6 +67,6 @@ export const Vacancies = () => {
 					<h1>Нету вакансий</h1>
 				)}
 			</ul>
-		</>
+		</div>
 	);
 };

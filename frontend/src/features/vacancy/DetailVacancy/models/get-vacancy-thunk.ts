@@ -3,11 +3,10 @@ import { RootState } from "../../../../app/Store/rootReducer";
 import { AxiosResponse } from "axios";
 import { VacancyService } from "../../../../entities/vacancy/api/vacancy-api";
 
-export const getAllVacanciesThunk = createAsyncThunk<
+export const getVacancyThunk = createAsyncThunk<
 	AxiosResponse,
-	null,
+	number,
 	{ state: RootState }
->("vacancy/getAll", async (_) => {
-	console.log('111111111111111')
-	return await VacancyService.getAll();
+>("vacancy/get", async (vacancyId: number) => {
+	return await VacancyService.get(vacancyId);
 });

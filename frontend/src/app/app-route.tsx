@@ -22,6 +22,8 @@ import { CreateArticlePage } from "../pages/CreateArticlePage/create-article-pag
 import { RootProfilePage } from "../pages/RootProfilePage/root-profile-page";
 import { MyArticlesPage } from "../pages/MyArticlesPage/my-articles";
 import { VacanciesPage } from "../pages/VacanciesPage/vacancies-page";
+import { VacancyPage } from "../pages/VacancyPage/vacancy-page";
+import { getAllVacanciesThunk } from "../features/vacancy/AllVacancies/models/get-all-vacancies-thunk";
 
 type GuestGuardProps = {
 	children: ReactElement;
@@ -40,6 +42,7 @@ function GuestGuard({ children }: GuestGuardProps) {
 			if (token) {
 				dispatch(refreshThunk(token));
 				dispatch(setUserData(getUserData()));
+				// dispatch(getAllVacanciesThunk(null))
 			}
 		}
 		if (!isAuthorized) {
@@ -78,6 +81,7 @@ function GuestGuard({ children }: GuestGuardProps) {
 		</>
 	);
 }
+
 export const appRouter = createBrowserRouter([
 	{
 		path: "/",
@@ -129,6 +133,14 @@ export const appRouter = createBrowserRouter([
 				element: (
 					<GuestGuard>
 						<VacanciesPage />
+					</GuestGuard>
+				),
+			},
+			{
+				path: "vacancy/:vacancyId",
+				element: (
+					<GuestGuard>
+						<VacancyPage />
 					</GuestGuard>
 				),
 			},

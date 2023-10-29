@@ -11,7 +11,7 @@ export class VacancyService {
 		salary_to: number,
 		form_of_work: FormatOfWorkEnum,
 		author_id: number
-	) { 
+	) {
 		$api.post<Vacancy>("/vacancy/create", {
 			title,
 			description,
@@ -27,8 +27,7 @@ export class VacancyService {
 		return vacancy;
 	}
 	static async getAll() {
-		const vacancies = await $api.get("/vacancies");
-		return vacancies;
+		return await $api.get("/vacancies");
 	}
 	static async delete(vacancyId: number): Promise<AxiosResponse> {
 		return $api.delete(`vacancy/${vacancyId}/delete`);
