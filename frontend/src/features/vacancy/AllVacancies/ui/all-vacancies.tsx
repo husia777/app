@@ -25,33 +25,40 @@ export const Vacancies = () => {
 		<>
 			<h1 className={styles.articles__title}>Вакансии</h1>
 			<Button
-				content="Создать вакансию"
+				content="Опубликовать вакансию"
 				disabled={isAuthorized ? false : true}
-				className={styles.article__button}
+				className={styles.button}
 				onClick={() => navigate("/vacancy/create")}
 				type="button"
 			/>{" "}
-			<ul className={styles.articles}>
+			<ul className={styles.vacancies}>
 				{data.length >= 1 ? (
-					[data[0]].map((vacancy) => {
-						{
-							console.log(vacancy.created_at);
-						}
+					data.map((vacancy) => {
 						return (
-							<li className={styles.article} key={vacancy.id}>
-								<a href={"#"}>Автор</a> <br />
+							<li className={styles.vacancy} key={vacancy.id}>
 								<h3>
 									<a href="#">
-										Заголовок {vacancy.title} <br />
+										{vacancy.title} <br />
 									</a>
 								</h3>
+								<a href={"#"}> {vacancy.author_id}</a> <br />
 								<p>Описание {vacancy.body}</p>
 								<p className={styles.article__date}>
 									Дата создания
 									{new Date(vacancy.created_at).toLocaleDateString()}{" "}
 								</p>
 								<br />
-								Содержание {vacancy.description} <br />
+								{vacancy.description} <br />
+								<p className={styles.salary}>
+									Зарплата от {vacancy.salary_from} до {vacancy.salary_to} ₽
+								</p>
+								<Button
+									content="Откликнуться"
+									disabled={isAuthorized ? false : true}
+									className={styles.vacancy__button}
+									onClick={() => navigate(`/vacancy/${vacancy.id}`)}
+									type="button"
+								/>
 							</li>
 						);
 					})

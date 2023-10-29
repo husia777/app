@@ -1,8 +1,8 @@
 @import "../../../../shared/ui/button/button.module.scss";
-.article__button {
+.button {
 	@extend .button;
 	display: none;
-	position: absolute;
+	position: relative;
 	right: 10%;
 	top: 10%;
 
@@ -57,21 +57,23 @@
 	}
 }
 
-.articles {
+.vacancies {
+	display: flex;
+	flex-direction: column;
 	color: #407bff;
 	margin: 5%;
+	align-items: center;
 }
-.article {
-	display: inline-block;
+.vacancy {
+	display: flex;
+	flex-direction: column;
 	padding-top: 5%;
 	padding-bottom: 5%;
 	margin-top: 1%;
-	color: #000000;
 	list-style: none;
-	// background-color: hsla(212, 80%, 86%, 0.87);
 	border: 1px solid #407bff;
 	border-radius: 25px;
-	width: 60%;
+	width: 55%;
 }
 
 .article__date {
@@ -82,4 +84,53 @@
 .articles__title {
 	font-size: 2rem;
 	color: #407bff;
+}
+
+.vacancy__button {
+	@extend .button;
+	position: relative;
+
+	&:last-child {
+		margin: 1rem 1rem 0 1rem;
+	}
+
+	&:hover {
+		cursor: pointer;
+		background-color: #407bff;
+	}
+	&:active {
+		scale: 1.1;
+		transition: 1ms;
+	}
+	&:disabled {
+		&:hover {
+			cursor: pointer;
+			background-color: grey;
+		}
+		&:active {
+			scale: 1.1;
+			transition: 1ms;
+		}
+	}
+	@media (min-width: 768px) {
+		left: 0.4%;
+		font-size: 1.1rem;
+	}
+	@media (min-width: 1024px) {
+		font-size: 1.1rem;
+		align-self: flex-end;
+		top: 10px;
+		right: 20px;
+	}
+	@media (min-width: 1400px) {
+		align-self: end;
+		top: 60px;
+		left: -50px;
+	}
+}
+
+.salary {
+	font-weight: bold;
+	font-size: 1.4rem;
+	
 }

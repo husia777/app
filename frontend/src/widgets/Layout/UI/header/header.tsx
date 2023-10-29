@@ -34,6 +34,9 @@ export const Header: React.FC = () => {
 				<NavLink className={styles.header__navlink} to="/">
 					Курсы
 				</NavLink>
+				<NavLink className={styles.header__navlink} to="/">
+					Тренажеры
+				</NavLink>
 				{isAuthorized ? (
 					<Logout
 						className={cx(styles.header__button, styles.header__navlink)}
